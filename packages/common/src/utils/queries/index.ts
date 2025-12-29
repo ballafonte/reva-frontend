@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import type { State } from '../../types';
-import { getStates } from '../../api/mockStates';
+import { getStates } from '../../api/states.api';
 
 export const useStatesQuery = () => {
   return useQuery<State[]>({

@@ -1,0 +1,11 @@
+export const CA = { name: 'California', nameAbbr: 'CA' };
+export const NY = { name: 'New York', nameAbbr: 'NY' };
+export const TX = { name: 'Texas', nameAbbr: 'TX' };
+export const FL = { name: 'Florida', nameAbbr: 'FL' };
+export const IL = { name: 'Illinois', nameAbbr: 'IL' };
+export const PA = { name: 'Pennsylvania', nameAbbr: 'PA' };
+export const OH = { name: 'Ohio', nameAbbr: 'OH' };
+export const GA = { name: 'Georgia', nameAbbr: 'GA' };
+export const NC = { name: 'North Carolina', nameAbbr: 'NC' };
+export const MI = { name: 'Michigan', nameAbbr: 'MI' };
+export const mockStates = [CA, NY, TX, FL, IL, PA, OH, GA, NC, MI];

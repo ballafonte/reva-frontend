@@ -1,5 +1,5 @@
 import type { State } from '../types';
-import { mockStates } from '../mocks/states';
+import { mockStates } from '../../tests/mockData';
 
 export const getStates = async (): Promise<State[]> => {
   // Simulate API call delay
