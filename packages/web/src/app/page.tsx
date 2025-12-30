@@ -24,6 +24,7 @@ import {
 } from '@reva-frontend/common';
 import EditJurisdictionDialog from '@/components/EditJurisdictionDialog/EditJurisdictionDialog';
 import AddJurisdictionDialog from '@/components/AddJurisdictionDialog/AddJurisdictionDialog';
+import ConfirmDialog from '@/components/ConfirmDialog/ConfirmDialog';
 
 export default function Home() {
   const { data: jurisdictions, isLoading, error } = useJurisdictionsQuery();
@@ -32,7 +33,9 @@ export default function Home() {
   const createMutation = useCreateJurisdictionMutation();
   const editDisclosure = useDisclosure();
   const createDisclosure = useDisclosure();
+  const deleteDisclosure = useDisclosure();
   const [editingJurisdiction, setEditingJurisdiction] = useState<Jurisdiction | null>(null);
+  const [jurisdictionToDelete, setJurisdictionToDelete] = useState<string | null>(null);
 
   const handleEditClick = (jurisdiction: Jurisdiction) => {
     setEditingJurisdiction(jurisdiction);
@@ -64,9 +67,20 @@ export default function Home() {
   };
 
   const handleDeleteClick = (id: string) => {
-    if (window.confirm('Are you sure you want to delete this jurisdiction?')) {
-      deleteMutation.mutate(id);
+    setJurisdictionToDelete(id);
+    deleteDisclosure.onOpen();
+  };
+
+  const handleDeleteConfirm = () => {
+    if (jurisdictionToDelete) {
+      deleteMutation.mutate(jurisdictionToDelete);
+      setJurisdictionToDelete(null);
     }
+  };
+
+  const handleDeleteClose = () => {
+    deleteDisclosure.onClose();
+    setJurisdictionToDelete(null);
   };
 
   const handleCreateClick = () => {
@@ -161,6 +175,18 @@ export default function Home() {
         onClose={handleCreateClose}
         onSubmit={handleCreateSubmit}
         isPending={createMutation.isPending}
+      />
+
+      <ConfirmDialog
+        open={deleteDisclosure.open}
+        onClose={handleDeleteClose}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Jurisdiction"
+        message="Are you sure you want to delete this jurisdiction?"
+        confirmText="Delete"
+        cancelText="Cancel"
+        confirmColor="error"
+        isPending={deleteMutation.isPending}
       />
     </Container>
   );
