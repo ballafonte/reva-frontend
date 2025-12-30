@@ -10,10 +10,12 @@ import { useEffect } from 'react';
 export const initializeApp = () => {
   // Get the URL from environment variable, ensuring it's not empty
   const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL || '/').trim();
-  
+
   // Ensure URL ends with a slash for proper URL construction
-  const normalizedUrl = apiBaseUrl.endsWith('/') ? apiBaseUrl : `${apiBaseUrl}/`;
-  
+  const normalizedUrl = apiBaseUrl.endsWith('/')
+    ? apiBaseUrl
+    : `${apiBaseUrl}/`;
+
   setApiBaseUrl(normalizedUrl);
 };
 

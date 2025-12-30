@@ -6,4 +6,3 @@ export {
   updateJurisdiction,
   deleteJurisdiction,
 } from './jurisdictions.api';
-

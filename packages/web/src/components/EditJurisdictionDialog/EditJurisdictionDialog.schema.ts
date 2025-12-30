@@ -6,4 +6,3 @@ export const editJurisdictionSchema = z.object({
 });
 
 export type EditJurisdictionFormData = z.infer<typeof editJurisdictionSchema>;
-

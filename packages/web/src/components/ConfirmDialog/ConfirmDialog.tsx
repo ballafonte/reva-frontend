@@ -17,7 +17,13 @@ export interface ConfirmDialogProps {
   message: string;
   confirmText?: string;
   cancelText?: string;
-  confirmColor?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success';
+  confirmColor?:
+    | 'primary'
+    | 'secondary'
+    | 'error'
+    | 'warning'
+    | 'info'
+    | 'success';
   isPending?: boolean;
 }
 
@@ -59,4 +65,3 @@ export default function ConfirmDialog({
     </Dialog>
   );
 }
-

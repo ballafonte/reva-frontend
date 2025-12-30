@@ -12,7 +12,10 @@ import {
   Button,
   Box,
 } from '@mui/material';
-import { editJurisdictionSchema, type EditJurisdictionFormData } from './EditJurisdictionDialog.schema';
+import {
+  editJurisdictionSchema,
+  type EditJurisdictionFormData,
+} from './EditJurisdictionDialog.schema';
 
 export interface EditJurisdictionDialogProps {
   open: boolean;
@@ -101,4 +104,3 @@ export default function EditJurisdictionDialog({
     </Dialog>
   );
 }
-

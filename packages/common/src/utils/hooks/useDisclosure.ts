@@ -1,11 +1,11 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from 'react';
 
 export type DisclosureCloseReason =
-  | "confirm"
-  | "cancel"
-  | "backdrop"
-  | "escape"
-  | "programmatic";
+  | 'confirm'
+  | 'cancel'
+  | 'backdrop'
+  | 'escape'
+  | 'programmatic';
 
 export interface UseDisclosureOptions {
   initialOpen?: boolean;
@@ -15,13 +15,8 @@ export interface UseDisclosureOptions {
   disableCloseWhileBusy?: boolean;
 }
 
-export function useDisclosure(
-  options: UseDisclosureOptions = {}
-) {
-  const {
-    initialOpen = false,
-    disableCloseWhileBusy = true,
-  } = options;
+export function useDisclosure(options: UseDisclosureOptions = {}) {
+  const { initialOpen = false, disableCloseWhileBusy = true } = options;
 
   const [open, setOpen] = useState(initialOpen);
   const [busy, setBusy] = useState(false);
@@ -34,7 +29,7 @@ export function useDisclosure(
   }, []);
 
   const onClose = useCallback(
-    (reason: DisclosureCloseReason = "programmatic") => {
+    (reason: DisclosureCloseReason = 'programmatic') => {
       if (busy && disableCloseWhileBusy) return;
 
       lastCloseReason.current = reason;
@@ -45,7 +40,7 @@ export function useDisclosure(
 
   const onToggle = useCallback(() => {
     if (open) {
-      onClose("programmatic");
+      onClose('programmatic');
     } else {
       onOpen();
     }
@@ -56,16 +51,13 @@ export function useDisclosure(
    */
   const dialogProps = {
     open,
-    onClose: (
-      _event?: unknown,
-      reason?: "backdropClick" | "escapeKeyDown"
-    ) => {
-      if (reason === "backdropClick") {
-        onClose("backdrop");
-      } else if (reason === "escapeKeyDown") {
-        onClose("escape");
+    onClose: (_event?: unknown, reason?: 'backdropClick' | 'escapeKeyDown') => {
+      if (reason === 'backdropClick') {
+        onClose('backdrop');
+      } else if (reason === 'escapeKeyDown') {
+        onClose('escape');
       } else {
-        onClose("programmatic");
+        onClose('programmatic');
       }
     },
   };

@@ -4,6 +4,8 @@ export type { components };
 
 export type Jurisdiction = components['schemas']['Jurisdiction'];
 
-export type PostJurisdictionRequestBody = components['schemas']['PostJurisdictionRequestBody'];
+export type PostJurisdictionRequestBody =
+  components['schemas']['PostJurisdictionRequestBody'];
 
-export type PatchJurisdictionRequestBody = components['schemas']['PatchJurisdictionRequestBody'];
+export type PatchJurisdictionRequestBody =
+  components['schemas']['PatchJurisdictionRequestBody'];

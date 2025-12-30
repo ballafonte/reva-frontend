@@ -12,7 +12,10 @@ import {
   Button,
   Box,
 } from '@mui/material';
-import { addJurisdictionSchema, type AddJurisdictionFormData } from './AddJurisdictionDialog.schema';
+import {
+  addJurisdictionSchema,
+  type AddJurisdictionFormData,
+} from './AddJurisdictionDialog.schema';
 
 export interface AddJurisdictionDialogProps {
   open: boolean;
