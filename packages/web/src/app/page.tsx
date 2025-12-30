@@ -19,10 +19,12 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
 import {
   useJurisdictionsQuery,
   useDeleteJurisdictionMutation,
   useUpdateJurisdictionMutation,
+  useCreateJurisdictionMutation,
   type Jurisdiction,
 } from '@reva-frontend/common';
 
@@ -30,9 +32,12 @@ export default function Home() {
   const { data: jurisdictions, isLoading, error } = useJurisdictionsQuery();
   const deleteMutation = useDeleteJurisdictionMutation();
   const updateMutation = useUpdateJurisdictionMutation();
+  const createMutation = useCreateJurisdictionMutation();
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editingJurisdiction, setEditingJurisdiction] = useState<Jurisdiction | null>(null);
   const [editFormData, setEditFormData] = useState({ name: '', nameAbbreviation: '' });
+  const [createFormData, setCreateFormData] = useState({ name: '', nameAbbreviation: '' });
 
   const handleEditClick = (jurisdiction: Jurisdiction) => {
     setEditingJurisdiction(jurisdiction);
@@ -74,12 +79,46 @@ export default function Home() {
     }
   };
 
+  const handleCreateClick = () => {
+    setCreateFormData({ name: '', nameAbbreviation: '' });
+    setCreateModalOpen(true);
+  };
+
+  const handleCreateClose = () => {
+    setCreateModalOpen(false);
+    setCreateFormData({ name: '', nameAbbreviation: '' });
+  };
+
+  const handleCreateSave = () => {
+    createMutation.mutate(
+      {
+        name: createFormData.name,
+        nameAbbreviation: createFormData.nameAbbreviation,
+      },
+      {
+        onSuccess: () => {
+          handleCreateClose();
+        },
+      }
+    );
+  };
+
   return (
     <Container maxWidth="md">
       <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Jurisdictions
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+          <Typography variant="h4" component="h1">
+            Jurisdictions
+          </Typography>
+          <IconButton
+            aria-label="add jurisdiction"
+            onClick={handleCreateClick}
+            color="primary"
+            sx={{ ml: 1 }}
+          >
+            <AddIcon />
+          </IconButton>
+        </Box>
         {isLoading && <Typography>Loading jurisdictions...</Typography>}
         {error && (
           <Typography color="error">
@@ -146,6 +185,38 @@ export default function Home() {
             disabled={updateMutation.isPending}
           >
             {updateMutation.isPending ? 'Saving...' : 'Save'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={createModalOpen} onClose={handleCreateClose} maxWidth="sm" fullWidth>
+        <DialogTitle>Add New Jurisdiction</DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
+            <TextField
+              label="Name"
+              value={createFormData.name}
+              onChange={(e) => setCreateFormData({ ...createFormData, name: e.target.value })}
+              fullWidth
+            />
+            <TextField
+              label="Name Abbreviation"
+              value={createFormData.nameAbbreviation}
+              onChange={(e) =>
+                setCreateFormData({ ...createFormData, nameAbbreviation: e.target.value })
+              }
+              fullWidth
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCreateClose}>Cancel</Button>
+          <Button
+            onClick={handleCreateSave}
+            variant="contained"
+            disabled={createMutation.isPending}
+          >
+            {createMutation.isPending ? 'Creating...' : 'Create'}
           </Button>
         </DialogActions>
       </Dialog>
