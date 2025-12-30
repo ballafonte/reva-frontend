@@ -1,3 +1,3 @@
 // Export hooks
-export * from './hooks/useDisclosure';
+export * from './hooks';
 

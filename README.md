@@ -59,6 +59,7 @@ npm run format:check
 ### @reva-frontend/common
 
 Shared package containing:
+
 - TypeScript types (`src/types`)
 - API endpoints (`src/api`)
 - React Query queries (`src/utils/queries`)
@@ -68,4 +69,3 @@ Shared package containing:
 ### @reva-frontend/web
 
 Next.js application that uses resources from the common package.
-

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import {
   Container,
   Typography,
@@ -25,17 +26,28 @@ import {
 import EditJurisdictionDialog from '@/components/EditJurisdictionDialog/EditJurisdictionDialog';
 import AddJurisdictionDialog from '@/components/AddJurisdictionDialog/AddJurisdictionDialog';
 import ConfirmDialog from '@/components/ConfirmDialog/ConfirmDialog';
+import SearchBar from '@/components/SearchBar/SearchBar';
 
 export default function Home() {
-  const { data: jurisdictions, isLoading, error } = useJurisdictionsQuery();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const searchText = searchParams.get('searchText') || undefined;
+  const {
+    data: jurisdictions,
+    isLoading,
+    error,
+  } = useJurisdictionsQuery({ searchText });
   const deleteMutation = useDeleteJurisdictionMutation();
   const updateMutation = useUpdateJurisdictionMutation();
   const createMutation = useCreateJurisdictionMutation();
   const editDisclosure = useDisclosure();
   const createDisclosure = useDisclosure();
   const deleteDisclosure = useDisclosure();
-  const [editingJurisdiction, setEditingJurisdiction] = useState<Jurisdiction | null>(null);
-  const [jurisdictionToDelete, setJurisdictionToDelete] = useState<string | null>(null);
+  const [editingJurisdiction, setEditingJurisdiction] =
+    useState<Jurisdiction | null>(null);
+  const [jurisdictionToDelete, setJurisdictionToDelete] = useState<
+    string | null
+  >(null);
 
   const handleEditClick = (jurisdiction: Jurisdiction) => {
     setEditingJurisdiction(jurisdiction);
@@ -47,7 +59,10 @@ export default function Home() {
     setEditingJurisdiction(null);
   };
 
-  const handleEditSubmit = (data: { name: string; nameAbbreviation: string }) => {
+  const handleEditSubmit = (data: {
+    name: string;
+    nameAbbreviation: string;
+  }) => {
     if (editingJurisdiction?.id) {
       updateMutation.mutate(
         {
@@ -91,7 +106,10 @@ export default function Home() {
     createDisclosure.onClose();
   };
 
-  const handleCreateSubmit = (data: { name: string; nameAbbreviation: string }) => {
+  const handleCreateSubmit = (data: {
+    name: string;
+    nameAbbreviation: string;
+  }) => {
     createMutation.mutate(
       {
         name: data.name,
@@ -103,6 +121,16 @@ export default function Home() {
         },
       }
     );
+  };
+
+  const handleSearchChange = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value.trim()) {
+      params.set('searchText', value.trim());
+    } else {
+      params.delete('searchText');
+    }
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   return (
@@ -121,10 +149,20 @@ export default function Home() {
             <AddIcon />
           </IconButton>
         </Box>
+        <Box sx={{ mb: 3 }}>
+          <SearchBar
+            value={searchText || ''}
+            onChange={handleSearchChange}
+            placeholder="Search jurisdictions by name or abbreviation..."
+            label="Search Jurisdictions"
+            autoApply={true}
+          />
+        </Box>
         {isLoading && <Typography>Loading jurisdictions...</Typography>}
         {error && (
           <Typography color="error">
-            Error loading jurisdictions: {error instanceof Error ? error.message : 'Unknown error'}
+            Error loading jurisdictions:{' '}
+            {error instanceof Error ? error.message : 'Unknown error'}
           </Typography>
         )}
         {jurisdictions && (
@@ -147,7 +185,9 @@ export default function Home() {
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => jurisdiction.id && handleDeleteClick(jurisdiction.id)}
+                    onClick={() =>
+                      jurisdiction.id && handleDeleteClick(jurisdiction.id)
+                    }
                     color="error"
                   >
                     <DeleteIcon />
@@ -191,4 +231,3 @@ export default function Home() {
     </Container>
   );
 }
-
