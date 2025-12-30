@@ -17,6 +17,7 @@
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
+    "@revassurance/api": "git+https://github.com/ballafonte/reva-api.git",
     "@tanstack/react-query": "^5.0.0"
   },
   "devDependencies": {

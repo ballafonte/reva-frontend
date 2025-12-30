@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
+import { initializeApp, useInitializedApp } from '@/utils/initialization';
 
 const theme = createTheme({
   palette: {
@@ -12,6 +13,16 @@ const theme = createTheme({
 });
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  // Initialize API configuration synchronously before anything else
+  useState(() => {
+    // Run initialization immediately when component initializes
+    initializeApp();
+    return true;
+  });
+
+  // Also use the hook as a backup (runs in useEffect)
+  useInitializedApp();
+
   const [queryClient] = useState(
     () =>
       new QueryClient({

@@ -1,15 +1,86 @@
-import type { State } from '../../src/types';
+import type { Jurisdiction } from '../../src/types';
 
-export const CA = { name: 'California', nameAbbr: 'CA' } as const satisfies State;
-export const NY = { name: 'New York', nameAbbr: 'NY' } as const satisfies State;
-export const TX = { name: 'Texas', nameAbbr: 'TX' } as const satisfies State;
-export const FL = { name: 'Florida', nameAbbr: 'FL' } as const satisfies State;
-export const IL = { name: 'Illinois', nameAbbr: 'IL' } as const satisfies State;
-export const PA = { name: 'Pennsylvania', nameAbbr: 'PA' } as const satisfies State;
-export const OH = { name: 'Ohio', nameAbbr: 'OH' } as const satisfies State;
-export const GA = { name: 'Georgia', nameAbbr: 'GA' } as const satisfies State;
-export const NC = { name: 'North Carolina', nameAbbr: 'NC' } as const satisfies State;
-export const MI = { name: 'Michigan', nameAbbr: 'MI' } as const satisfies State;
+const now = new Date().toISOString();
 
-export const mockStates: State[] = [CA, NY, TX, FL, IL, PA, OH, GA, NC, MI];
+export const CA: Jurisdiction = { 
+  id: '1', 
+  name: 'California', 
+  nameAbbreviation: 'CA',
+  createdAt: now,
+  updatedAt: now,
+};
+
+export const NY: Jurisdiction = { 
+  id: '2', 
+  name: 'New York', 
+  nameAbbreviation: 'NY',
+  createdAt: now,
+  updatedAt: now,
+};
+
+export const TX: Jurisdiction = { 
+  id: '3', 
+  name: 'Texas', 
+  nameAbbreviation: 'TX',
+  createdAt: now,
+  updatedAt: now,
+};
+
+export const FL: Jurisdiction = { 
+  id: '4', 
+  name: 'Florida', 
+  nameAbbreviation: 'FL',
+  createdAt: now,
+  updatedAt: now,
+};
+
+export const IL: Jurisdiction = { 
+  id: '5', 
+  name: 'Illinois', 
+  nameAbbreviation: 'IL',
+  createdAt: now,
+  updatedAt: now,
+};
+
+export const PA: Jurisdiction = { 
+  id: '6', 
+  name: 'Pennsylvania', 
+  nameAbbreviation: 'PA',
+  createdAt: now,
+  updatedAt: now,
+};
+
+export const OH: Jurisdiction = { 
+  id: '7', 
+  name: 'Ohio', 
+  nameAbbreviation: 'OH',
+  createdAt: now,
+  updatedAt: now,
+};
+
+export const GA: Jurisdiction = { 
+  id: '8', 
+  name: 'Georgia', 
+  nameAbbreviation: 'GA',
+  createdAt: now,
+  updatedAt: now,
+};
+
+export const NC: Jurisdiction = { 
+  id: '9', 
+  name: 'North Carolina', 
+  nameAbbreviation: 'NC',
+  createdAt: now,
+  updatedAt: now,
+};
+
+export const MI: Jurisdiction = { 
+  id: '10', 
+  name: 'Michigan', 
+  nameAbbreviation: 'MI',
+  createdAt: now,
+  updatedAt: now,
+};
+
+export const mockJurisdictions: Jurisdiction[] = [CA, NY, TX, FL, IL, PA, OH, GA, NC, MI];
 
