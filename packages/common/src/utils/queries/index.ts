@@ -9,7 +9,7 @@ import { getJurisdictions, getJurisdictionById } from '../../api/jurisdictions.a
 export const useJurisdictionsQuery = (searchText?: string) => {
   return useQuery<Jurisdiction[]>({
     queryKey: ['jurisdictions', searchText],
-    queryFn: () => getJurisdictions(searchText),
+    queryFn: () => getJurisdictions({ searchText }),
   });
 };
 

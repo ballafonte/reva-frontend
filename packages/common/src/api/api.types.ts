@@ -3,7 +3,7 @@ export type ApiEndpoint = string;
 export type ApiRequqestInit = {
 	body?: BodyInit;
 	headers?: HeadersInit;
-	method?: 'GET' | 'DELETE' | 'POST' | 'PUT' | 'UPDATE';
+	method?: 'GET' | 'DELETE' | 'POST' | 'PUT' | 'PATCH' | 'UPDATE';
 	query?: Record<string, string>;
 };
 

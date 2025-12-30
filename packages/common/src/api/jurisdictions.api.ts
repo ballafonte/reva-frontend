@@ -1,37 +1,34 @@
-import type { components } from '@revassurance/api/openapi';
-import { getApiBaseUrl } from './api.utils';
+import type { components, paths } from '@revassurance/api/openapi';
+import { callApi, getApiBaseUrl } from './api.utils';
+import { ApiRequqestInit } from './api.types';
 
 type Jurisdiction = components['schemas']['Jurisdiction'];
 type PostJurisdictionRequestBody = components['schemas']['PostJurisdictionRequestBody'];
 type PatchJurisdictionRequestBody = components['schemas']['PatchJurisdictionRequestBody'];
+
+export type GetJurisdictionsQuery = paths['/jurisdictions']['get']['parameters']['query'];
+export type GetJurisdictionsResponse = paths['/jurisdictions']['get']['responses']['200']['content']['application/json'];
 
 /**
  * Retrieve all jurisdictions in the database
  * @param searchText Optional text to search jurisdictions by
  * @returns Promise resolving to an array of jurisdictions
  */
-export const getJurisdictions = async (searchText?: string): Promise<Jurisdiction[]> => {
-  const baseUrl = getApiBaseUrl();
-  if (!baseUrl || baseUrl.trim() === '') {
-    throw new Error('API base URL is not configured. Please set NEXT_PUBLIC_API_BASE_URL or call setApiBaseUrl()');
-  }
-  const url = new URL('/jurisdictions', baseUrl);
-  if (searchText) {
-    url.searchParams.set('searchText', searchText);
-  }
+export const getJurisdictions = async ({ searchText }: GetJurisdictionsQuery = {}): Promise<GetJurisdictionsResponse> => {
+	const query: ApiRequqestInit['query'] = {};
+	if (searchText) query.searchText = searchText;
 
-  const response = await fetch(url.toString(), {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch jurisdictions: ${response.statusText}`);
-  }
-
-  return response.json();
+	return callApi<void, GetJurisdictionsResponse>(
+		`${getApiBaseUrl()}jurisdictions`,
+		{
+			method: 'GET',
+			query,
+		},
+		undefined,
+		() => {
+			return new Error('We could not get the jurisdictions at this time');
+		}
+	);
 };
 
 /**
@@ -41,23 +38,16 @@ export const getJurisdictions = async (searchText?: string): Promise<Jurisdictio
  * @throws Error if jurisdiction is not found
  */
 export const getJurisdictionById = async (id: string): Promise<Jurisdiction> => {
-  const url = new URL(`/jurisdictions/${id}`, getApiBaseUrl());
-
-  const response = await fetch(url.toString(), {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!response.ok) {
-    if (response.status === 404) {
-      throw new Error(`Jurisdiction with id ${id} not found`);
-    }
-    throw new Error(`Failed to fetch jurisdiction: ${response.statusText}`);
-  }
-
-  return response.json();
+	return callApi<void, Jurisdiction>(
+		`${getApiBaseUrl()}jurisdictions/${id}`,
+		{
+			method: 'GET',
+		},
+		undefined,
+		() => {
+			return new Error(`Jurisdiction with id ${id} not found`);
+		}
+	);
 };
 
 /**
@@ -66,23 +56,19 @@ export const getJurisdictionById = async (id: string): Promise<Jurisdiction> => 
  * @returns Promise resolving to the created jurisdiction
  */
 export const createJurisdiction = async (
-  body: PostJurisdictionRequestBody
+	body: PostJurisdictionRequestBody
 ): Promise<Jurisdiction> => {
-  const url = new URL('/jurisdictions', getApiBaseUrl());
-
-  const response = await fetch(url.toString(), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to create jurisdiction: ${response.statusText}`);
-  }
-
-  return response.json();
+	return callApi<PostJurisdictionRequestBody, Jurisdiction>(
+		`${getApiBaseUrl()}jurisdictions`,
+		{
+			method: 'POST',
+			body,
+		},
+		undefined,
+		() => {
+			return new Error('Failed to create jurisdiction');
+		}
+	);
 };
 
 /**
@@ -92,24 +78,20 @@ export const createJurisdiction = async (
  * @returns Promise resolving to the updated jurisdiction
  */
 export const updateJurisdiction = async (
-  id: string,
-  body: PatchJurisdictionRequestBody
+	id: string,
+	body: PatchJurisdictionRequestBody
 ): Promise<Jurisdiction> => {
-  const url = new URL(`/jurisdictions/${id}`, getApiBaseUrl());
-
-  const response = await fetch(url.toString(), {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to update jurisdiction: ${response.statusText}`);
-  }
-
-  return response.json();
+	return callApi<PatchJurisdictionRequestBody, Jurisdiction>(
+		`${getApiBaseUrl()}jurisdictions/${id}`,
+		{
+			method: 'PATCH',
+			body,
+		},
+		undefined,
+		() => {
+			return new Error(`Failed to update jurisdiction with id ${id}`);
+		}
+	);
 };
 
 /**
@@ -118,17 +100,15 @@ export const updateJurisdiction = async (
  * @returns Promise resolving when the jurisdiction is deleted
  */
 export const deleteJurisdiction = async (id: string): Promise<void> => {
-  const url = new URL(`/jurisdictions/${id}`, getApiBaseUrl());
-
-  const response = await fetch(url.toString(), {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to delete jurisdiction: ${response.statusText}`);
-  }
+	return callApi<void, void>(
+		`${getApiBaseUrl()}jurisdictions/${id}`,
+		{
+			method: 'DELETE',
+		},
+		undefined,
+		() => {
+			return new Error(`Failed to delete jurisdiction with id ${id}`);
+		}
+	);
 };
 
