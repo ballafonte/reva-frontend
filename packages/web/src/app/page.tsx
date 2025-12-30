@@ -20,6 +20,7 @@ import {
   useUpdateJurisdictionMutation,
   useCreateJurisdictionMutation,
   type Jurisdiction,
+  useDisclosure,
 } from '@reva-frontend/common';
 import EditJurisdictionDialog from '@/components/EditJurisdictionDialog/EditJurisdictionDialog';
 import AddJurisdictionDialog from '@/components/AddJurisdictionDialog/AddJurisdictionDialog';
@@ -29,17 +30,17 @@ export default function Home() {
   const deleteMutation = useDeleteJurisdictionMutation();
   const updateMutation = useUpdateJurisdictionMutation();
   const createMutation = useCreateJurisdictionMutation();
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const editDisclosure = useDisclosure();
+  const createDisclosure = useDisclosure();
   const [editingJurisdiction, setEditingJurisdiction] = useState<Jurisdiction | null>(null);
 
   const handleEditClick = (jurisdiction: Jurisdiction) => {
     setEditingJurisdiction(jurisdiction);
-    setEditModalOpen(true);
+    editDisclosure.onOpen();
   };
 
   const handleEditClose = () => {
-    setEditModalOpen(false);
+    editDisclosure.onClose();
     setEditingJurisdiction(null);
   };
 
@@ -69,11 +70,11 @@ export default function Home() {
   };
 
   const handleCreateClick = () => {
-    setCreateModalOpen(true);
+    createDisclosure.onOpen();
   };
 
   const handleCreateClose = () => {
-    setCreateModalOpen(false);
+    createDisclosure.onClose();
   };
 
   const handleCreateSubmit = (data: { name: string; nameAbbreviation: string }) => {
@@ -145,7 +146,7 @@ export default function Home() {
       </Box>
 
       <EditJurisdictionDialog
-        open={editModalOpen}
+        open={editDisclosure.open}
         onClose={handleEditClose}
         onSubmit={handleEditSubmit}
         initialData={{
@@ -156,7 +157,7 @@ export default function Home() {
       />
 
       <AddJurisdictionDialog
-        open={createModalOpen}
+        open={createDisclosure.open}
         onClose={handleCreateClose}
         onSubmit={handleCreateSubmit}
         isPending={createMutation.isPending}
