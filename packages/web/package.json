@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^7.3.6",
     "@mui/material": "^5.14.15",
     "@reva-frontend/common": "*",
     "@tanstack/react-query": "^5.0.0",
@@ -28,4 +29,3 @@
     "typescript": "^5.2.2"
   }
 }
-
