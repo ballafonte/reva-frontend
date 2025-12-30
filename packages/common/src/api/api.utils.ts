@@ -54,7 +54,9 @@ export const getApiBaseUrl = (): string => {
   return '/';
 };
 
-
+/**
+ * Generate API headers
+ */
 export const generateApiHeaders = (headersArg?: ApiRequqestInit['headers'] | false) => {
 	const headers = headersArg !== false ? headersArg || API_DEFAULT_HEADERS : undefined;
 
@@ -80,6 +82,9 @@ export type ExecuteApiRequestInit<T> = Omit<ApiRequqestInit, 'headers' | 'body'>
 	body?: T;
 };
 
+/**
+ * Execute an API request
+ */
 export const executeApiRequest = async <T>(
 	endpoint: string,
 	init: ExecuteApiRequestInit<T>
@@ -99,6 +104,9 @@ export const executeApiRequest = async <T>(
 	return fetch(endpointQuery, fetchInit);
 };
 
+/**
+ * Log the API response
+ */
 export const logApiResponse = <T, U>(
 	response: T,
 	params: { endpoint: ApiEndpoint; init: ExecuteApiRequestInit<U> }
@@ -106,6 +114,9 @@ export const logApiResponse = <T, U>(
 	printConsole('log', 'Successful API request:', params, '\n API response:', response);
 };
 
+/**
+ * Log the API error
+ */
 export const logApiError = <T, U>(
 	error: T,
 	params: { endpoint: ApiEndpoint; init: ExecuteApiRequestInit<U> }
@@ -113,6 +124,9 @@ export const logApiError = <T, U>(
 	printConsole('error', 'Failed API request:', params, '\n API error:', error);
 };
 
+/**
+ * Handle an error response from the API
+ */
 export const handleApiError = async <U, V>(
 	error: unknown,
 	options: { endpoint: ApiEndpoint; init: ExecuteApiRequestInit<V> },
@@ -126,6 +140,9 @@ export const handleApiError = async <U, V>(
 	throw error;
 };
 
+/**
+ * Handle the API response status
+ */
 export const handleApiResponseStatus = async <T, U>(
 	response: Response,
 	options: { endpoint: ApiEndpoint; init: ExecuteApiRequestInit<U> },
