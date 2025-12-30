@@ -9,12 +9,6 @@ import {
   ListItem,
   ListItemText,
   IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Button,
   ListItemSecondaryAction,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -27,6 +21,8 @@ import {
   useCreateJurisdictionMutation,
   type Jurisdiction,
 } from '@reva-frontend/common';
+import EditJurisdictionDialog from '@/components/EditJurisdictionDialog/EditJurisdictionDialog';
+import AddJurisdictionDialog from '@/components/AddJurisdictionDialog/AddJurisdictionDialog';
 
 export default function Home() {
   const { data: jurisdictions, isLoading, error } = useJurisdictionsQuery();
@@ -36,32 +32,25 @@ export default function Home() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editingJurisdiction, setEditingJurisdiction] = useState<Jurisdiction | null>(null);
-  const [editFormData, setEditFormData] = useState({ name: '', nameAbbreviation: '' });
-  const [createFormData, setCreateFormData] = useState({ name: '', nameAbbreviation: '' });
 
   const handleEditClick = (jurisdiction: Jurisdiction) => {
     setEditingJurisdiction(jurisdiction);
-    setEditFormData({
-      name: jurisdiction.name || '',
-      nameAbbreviation: jurisdiction.nameAbbreviation || '',
-    });
     setEditModalOpen(true);
   };
 
   const handleEditClose = () => {
     setEditModalOpen(false);
     setEditingJurisdiction(null);
-    setEditFormData({ name: '', nameAbbreviation: '' });
   };
 
-  const handleEditSave = () => {
+  const handleEditSubmit = (data: { name: string; nameAbbreviation: string }) => {
     if (editingJurisdiction?.id) {
       updateMutation.mutate(
         {
           id: editingJurisdiction.id,
           body: {
-            name: editFormData.name,
-            nameAbbreviation: editFormData.nameAbbreviation,
+            name: data.name,
+            nameAbbreviation: data.nameAbbreviation,
           },
         },
         {
@@ -80,20 +69,18 @@ export default function Home() {
   };
 
   const handleCreateClick = () => {
-    setCreateFormData({ name: '', nameAbbreviation: '' });
     setCreateModalOpen(true);
   };
 
   const handleCreateClose = () => {
     setCreateModalOpen(false);
-    setCreateFormData({ name: '', nameAbbreviation: '' });
   };
 
-  const handleCreateSave = () => {
+  const handleCreateSubmit = (data: { name: string; nameAbbreviation: string }) => {
     createMutation.mutate(
       {
-        name: createFormData.name,
-        nameAbbreviation: createFormData.nameAbbreviation,
+        name: data.name,
+        nameAbbreviation: data.nameAbbreviation,
       },
       {
         onSuccess: () => {
@@ -157,69 +144,23 @@ export default function Home() {
         )}
       </Box>
 
-      <Dialog open={editModalOpen} onClose={handleEditClose} maxWidth="sm" fullWidth>
-        <DialogTitle>Edit Jurisdiction</DialogTitle>
-        <DialogContent>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
-            <TextField
-              label="Name"
-              value={editFormData.name}
-              onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
-              fullWidth
-            />
-            <TextField
-              label="Name Abbreviation"
-              value={editFormData.nameAbbreviation}
-              onChange={(e) =>
-                setEditFormData({ ...editFormData, nameAbbreviation: e.target.value })
-              }
-              fullWidth
-            />
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleEditClose}>Cancel</Button>
-          <Button
-            onClick={handleEditSave}
-            variant="contained"
-            disabled={updateMutation.isPending}
-          >
-            {updateMutation.isPending ? 'Saving...' : 'Save'}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <EditJurisdictionDialog
+        open={editModalOpen}
+        onClose={handleEditClose}
+        onSubmit={handleEditSubmit}
+        initialData={{
+          name: editingJurisdiction?.name || '',
+          nameAbbreviation: editingJurisdiction?.nameAbbreviation || '',
+        }}
+        isPending={updateMutation.isPending}
+      />
 
-      <Dialog open={createModalOpen} onClose={handleCreateClose} maxWidth="sm" fullWidth>
-        <DialogTitle>Add New Jurisdiction</DialogTitle>
-        <DialogContent>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
-            <TextField
-              label="Name"
-              value={createFormData.name}
-              onChange={(e) => setCreateFormData({ ...createFormData, name: e.target.value })}
-              fullWidth
-            />
-            <TextField
-              label="Name Abbreviation"
-              value={createFormData.nameAbbreviation}
-              onChange={(e) =>
-                setCreateFormData({ ...createFormData, nameAbbreviation: e.target.value })
-              }
-              fullWidth
-            />
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCreateClose}>Cancel</Button>
-          <Button
-            onClick={handleCreateSave}
-            variant="contained"
-            disabled={createMutation.isPending}
-          >
-            {createMutation.isPending ? 'Creating...' : 'Create'}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <AddJurisdictionDialog
+        open={createModalOpen}
+        onClose={handleCreateClose}
+        onSubmit={handleCreateSubmit}
+        isPending={createMutation.isPending}
+      />
     </Container>
   );
 }
