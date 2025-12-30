@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Dialog,
   DialogTitle,
@@ -10,6 +12,7 @@ import {
   Button,
   Box,
 } from '@mui/material';
+import { addJurisdictionSchema, type AddJurisdictionFormData } from './AddJurisdictionDialog.schema';
 
 export interface AddJurisdictionDialogProps {
   open: boolean;
@@ -24,44 +27,75 @@ export default function AddJurisdictionDialog({
   onSubmit,
   isPending = false,
 }: AddJurisdictionDialogProps) {
-  const [formData, setFormData] = useState({ name: '', nameAbbreviation: '' });
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<AddJurisdictionFormData>({
+    resolver: zodResolver(addJurisdictionSchema),
+    defaultValues: {
+      name: '',
+      nameAbbreviation: '',
+    },
+  });
 
   useEffect(() => {
     if (open) {
-      setFormData({ name: '', nameAbbreviation: '' });
+      reset({
+        name: '',
+        nameAbbreviation: '',
+      });
     }
-  }, [open]);
+  }, [open, reset]);
 
-  const handleSubmit = () => {
-    onSubmit(formData);
+  const onSubmitForm = (data: AddJurisdictionFormData) => {
+    onSubmit(data);
   };
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>Add New Jurisdiction</DialogTitle>
-      <DialogContent>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
-          <TextField
-            label="Name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            fullWidth
-          />
-          <TextField
-            label="Name Abbreviation"
-            value={formData.nameAbbreviation}
-            onChange={(e) => setFormData({ ...formData, nameAbbreviation: e.target.value })}
-            fullWidth
-          />
-        </Box>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleSubmit} variant="contained" disabled={isPending}>
-          {isPending ? 'Creating...' : 'Create'}
-        </Button>
-      </DialogActions>
+      <form onSubmit={handleSubmit(onSubmitForm)}>
+        <DialogContent>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Name"
+                  fullWidth
+                  error={!!errors.name}
+                  helperText={errors.name?.message}
+                />
+              )}
+            />
+            <Controller
+              name="nameAbbreviation"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Name Abbreviation"
+                  fullWidth
+                  error={!!errors.nameAbbreviation}
+                  helperText={errors.nameAbbreviation?.message}
+                />
+              )}
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose} type="button">
+            Cancel
+          </Button>
+          <Button type="submit" variant="contained" disabled={isPending}>
+            {isPending ? 'Creating...' : 'Create'}
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 }
-

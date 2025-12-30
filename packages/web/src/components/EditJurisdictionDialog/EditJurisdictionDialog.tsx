@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Dialog,
   DialogTitle,
@@ -10,6 +12,7 @@ import {
   Button,
   Box,
 } from '@mui/material';
+import { editJurisdictionSchema, type EditJurisdictionFormData } from './EditJurisdictionDialog.schema';
 
 export interface EditJurisdictionDialogProps {
   open: boolean;
@@ -26,46 +29,75 @@ export default function EditJurisdictionDialog({
   initialData,
   isPending = false,
 }: EditJurisdictionDialogProps) {
-  const [formData, setFormData] = useState({ name: '', nameAbbreviation: '' });
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<EditJurisdictionFormData>({
+    resolver: zodResolver(editJurisdictionSchema),
+    defaultValues: {
+      name: initialData.name || '',
+      nameAbbreviation: initialData.nameAbbreviation || '',
+    },
+  });
 
   useEffect(() => {
     if (open) {
-      setFormData({
+      reset({
         name: initialData.name || '',
         nameAbbreviation: initialData.nameAbbreviation || '',
       });
     }
-  }, [open, initialData]);
+  }, [open, initialData, reset]);
 
-  const handleSubmit = () => {
-    onSubmit(formData);
+  const onSubmitForm = (data: EditJurisdictionFormData) => {
+    onSubmit(data);
   };
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>Edit Jurisdiction</DialogTitle>
-      <DialogContent>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
-          <TextField
-            label="Name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            fullWidth
-          />
-          <TextField
-            label="Name Abbreviation"
-            value={formData.nameAbbreviation}
-            onChange={(e) => setFormData({ ...formData, nameAbbreviation: e.target.value })}
-            fullWidth
-          />
-        </Box>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleSubmit} variant="contained" disabled={isPending}>
-          {isPending ? 'Saving...' : 'Save'}
-        </Button>
-      </DialogActions>
+      <form onSubmit={handleSubmit(onSubmitForm)}>
+        <DialogContent>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Name"
+                  fullWidth
+                  error={!!errors.name}
+                  helperText={errors.name?.message}
+                />
+              )}
+            />
+            <Controller
+              name="nameAbbreviation"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Name Abbreviation"
+                  fullWidth
+                  error={!!errors.nameAbbreviation}
+                  helperText={errors.nameAbbreviation?.message}
+                />
+              )}
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose} type="button">
+            Cancel
+          </Button>
+          <Button type="submit" variant="contained" disabled={isPending}>
+            {isPending ? 'Saving...' : 'Save'}
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 }
