@@ -1,5 +1,6 @@
 import { Providers } from './providers';
-import './globals.css';
+import PortalHeaderBar from '@/components/PortalHeaderBar/PortalHeaderBar';
+import '@/theme/globals.css';
 
 export const metadata = {
   title: 'Reva Frontend',
@@ -14,7 +15,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <PortalHeaderBar />
+          {children}
+        </Providers>
       </body>
     </html>
   );
