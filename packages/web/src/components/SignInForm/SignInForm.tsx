@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -20,9 +20,18 @@ import { useAuthContext } from '@/utils/contexts/AuthContext';
 export function SignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { signIn } = useAuthContext();
+  const { signIn, isAuthenticated } = useAuthContext();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Redirect after successful sign-in
+  useEffect(() => {
+    if (isAuthenticated) {
+      const redirectTo = searchParams.get('redirectTo');
+      const destination = redirectTo ? decodeURIComponent(redirectTo) : '/';
+      router.replace(destination);
+    }
+  }, [isAuthenticated, router, searchParams]);
 
   const {
     control,
@@ -42,11 +51,8 @@ export function SignInForm() {
 
     try {
       await signIn(data.email, data.password);
-      
-      // Redirect to the intended page or default to jurisdictions page
-      const redirectTo = searchParams.get('redirectTo');
-      const destination = redirectTo ? decodeURIComponent(redirectTo) : '/';
-      router.push(destination);
+      // Sign-in successful - redirect will be handled by useEffect
+      setIsLoading(false);
     } catch (err) {
       setError(
         err instanceof Error

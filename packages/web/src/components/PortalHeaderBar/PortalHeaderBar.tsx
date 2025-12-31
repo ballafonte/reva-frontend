@@ -2,6 +2,7 @@
 
 import { AppBar, Toolbar, Typography, IconButton, Box } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { printConsole } from '@common/utils';
 import { useAuthContext } from '@/utils/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
@@ -20,7 +21,7 @@ export default function PortalHeaderBar() {
       router.push('/sign-in');
     } catch (error) {
       // Error handling is done in the logout function
-      console.error('Sign out error:', error);
+      printConsole('error', 'Sign out error:', error);
     }
   };
 
