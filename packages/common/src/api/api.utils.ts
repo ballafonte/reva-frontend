@@ -1,4 +1,4 @@
-import { authStore, printConsole } from '@common/utils';
+import { authStore, isNullish, printConsole } from '@common/utils';
 import {
   API_STATUS_CODES,
   API_DEFAULT_HEADERS,
@@ -105,7 +105,29 @@ export const executeApiRequest = async <T>(
   const { body: bodyArg, headers: headersArg, method, query } = init;
   const queryParams = new URLSearchParams(query);
   const endpointQuery = queryParams ? `${endpoint}?${queryParams}` : endpoint;
-  const headers = generateApiHeaders(headersArg);
+
+  // Determine if body should be stringified as JSON
+  // Check if bodyArg is a plain object (not FormData, Blob, ArrayBuffer, etc.)
+  const shouldStringifyBody =
+    !isNullish(bodyArg) &&
+    typeof bodyArg === 'object' &&
+    !(bodyArg instanceof FormData) &&
+    !(bodyArg instanceof Blob) &&
+    !(bodyArg instanceof ArrayBuffer) &&
+    !(bodyArg instanceof URLSearchParams);
+
+  // Create headers - if headersArg is false but we need to send JSON,
+  // we still need proper headers with Content-Type
+  let headers: Headers;
+  if (shouldStringifyBody && headersArg === false) {
+    // Create headers with defaults when we need to send JSON but headersArg is false
+    headers = new Headers({
+      ...API_MANDATORY_HEADERS,
+      ...API_DEFAULT_HEADERS,
+    });
+  } else {
+    headers = generateApiHeaders(headersArg);
+  }
 
   // Add Authorization header if token exists and auth should be included
   if (includeAuth) {
@@ -115,15 +137,23 @@ export const executeApiRequest = async <T>(
     }
   }
 
-  const body =
-    headers.get('Content-Type') === 'application/json'
-      ? JSON.stringify(bodyArg)
-      : bodyArg;
+  // Stringify body if needed and ensure Content-Type is set
+  let body: BodyInit | undefined;
+  if (bodyArg !== undefined && bodyArg !== null) {
+    if (shouldStringifyBody) {
+      // Always stringify plain objects to JSON
+      body = JSON.stringify(bodyArg);
+      // Ensure Content-Type is set to application/json
+      headers.set('Content-Type', 'application/json');
+    } else {
+      body = bodyArg as BodyInit;
+    }
+  }
 
   const fetchInit: RequestInit = {
     credentials: 'include', // Always include credentials for cookie handling
   };
-  if (body) fetchInit.body = body as BodyInit;
+  if (body) fetchInit.body = body;
   if (headers) fetchInit.headers = headers;
   if (method) fetchInit.method = method;
 
