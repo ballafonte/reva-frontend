@@ -11,18 +11,18 @@ import {
   Button,
   Paper,
   Link as MuiLink,
-  Alert,
 } from '@mui/material';
 import Link from 'next/link';
 import { signInSchema, type SignInFormData } from './SignInForm.schema';
 import { useAuthContext } from '@/utils/contexts/AuthContext';
+import { useAlertsContext, SeverityContexts } from '@reva-frontend/common';
 
 export function SignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { signIn, isAuthenticated } = useAuthContext();
+  const { pushAlert } = useAlertsContext();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   // Redirect after successful sign-in
   useEffect(() => {
@@ -47,18 +47,21 @@ export function SignInForm() {
 
   const onSubmit = async (data: SignInFormData) => {
     setIsLoading(true);
-    setError(null);
 
     try {
       await signIn(data.email, data.password);
       // Sign-in successful - redirect will be handled by useEffect
       setIsLoading(false);
     } catch (err) {
-      setError(
+      const errorMessage =
         err instanceof Error
           ? err.message
-          : 'Sign-in failed. Please check your credentials and try again.'
-      );
+          : 'Sign-in failed. Please check your credentials and try again.';
+
+      pushAlert({
+        message: errorMessage,
+        severity: SeverityContexts.DANGER,
+      });
       setIsLoading(false);
     }
   };
@@ -77,11 +80,6 @@ export function SignInForm() {
       <Typography component="h1" variant="h4" sx={{ mb: 3 }}>
         Sign In
       </Typography>
-      {error && (
-        <Alert severity="error" sx={{ width: '100%', mb: 2 }}>
-          {error}
-        </Alert>
-      )}
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
@@ -146,4 +144,3 @@ export function SignInForm() {
     </Paper>
   );
 }
-

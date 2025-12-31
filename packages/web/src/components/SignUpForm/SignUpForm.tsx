@@ -11,17 +11,17 @@ import {
   Button,
   Paper,
   Link as MuiLink,
-  Alert,
 } from '@mui/material';
 import Link from 'next/link';
 import { signUpSchema, type SignUpFormData } from './SignUpForm.schema';
 import { useAuthContext } from '@/utils/contexts/AuthContext';
+import { useAlertsContext, SeverityContexts } from '@reva-frontend/common';
 
 export function SignUpForm() {
   const router = useRouter();
   const { signUp } = useAuthContext();
+  const { pushAlert } = useAlertsContext();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const {
     control,
@@ -38,7 +38,6 @@ export function SignUpForm() {
 
   const onSubmit = async (data: SignUpFormData) => {
     setIsLoading(true);
-    setError(null);
 
     try {
       await signUp(data.email, data.password);
@@ -46,11 +45,15 @@ export function SignUpForm() {
       // Redirect to sign-in page after successful sign-up
       router.push('/sign-in');
     } catch (err) {
-      setError(
+      const errorMessage =
         err instanceof Error
           ? err.message
-          : 'Sign-up failed. Please try again.'
-      );
+          : 'Sign-up failed. Please try again.';
+      
+      pushAlert({
+        message: errorMessage,
+        severity: SeverityContexts.DANGER,
+      });
       setIsLoading(false);
     }
   };
@@ -69,11 +72,6 @@ export function SignUpForm() {
       <Typography component="h1" variant="h4" sx={{ mb: 3 }}>
         Sign Up
       </Typography>
-      {error && (
-        <Alert severity="error" sx={{ width: '100%', mb: 2 }}>
-          {error}
-        </Alert>
-      )}
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}

@@ -1,5 +1,6 @@
 import { Providers } from './providers';
 import PortalHeaderBar from '@/components/PortalHeaderBar/PortalHeaderBar';
+import { AlertsToast } from '@/components/AlertsToast/AlertsToast';
 import '@/theme/globals.css';
 
 export const metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({
         <Providers>
           <PortalHeaderBar />
           {children}
+          <AlertsToast />
         </Providers>
       </body>
     </html>
