@@ -1,5 +1,6 @@
 import type { paths } from '@revassurance/api/openapi';
 import { authStore, printConsole } from '@common/utils';
+import { createApiErrorFromResponse } from './api.errors';
 import { callApi, getApiBaseUrl } from './api.utils';
 
 type PostSignUpRequestBody =
@@ -18,7 +19,7 @@ export async function signUp({
   email,
   passwordRaw,
 }: PostSignUpRequestBody): Promise<PostSignUpResponseBody> {
-  const response = await callApi<PostSignUpRequestBody, PostSignUpResponseBody>(
+  return callApi<PostSignUpRequestBody, PostSignUpResponseBody>(
     `${getApiBaseUrl()}users/sign-up`,
     {
       method: 'POST',
@@ -26,13 +27,16 @@ export async function signUp({
       headers: false, // Let callApi set default headers
     },
     undefined,
-    () => {
-      return new Error('Sign-up failed');
+    async (error) => {
+      // If it's a Response object, extract error information
+      if (error instanceof Response) {
+        return createApiErrorFromResponse(error, 'Sign-up failed');
+      }
+      // Otherwise, wrap in a generic error
+      return error instanceof Error ? error : new Error('Sign-up failed');
     },
     false // Don't include auth header for sign-up
   );
-
-  return response;
 }
 
 type PostSignInRequestBody =
@@ -60,8 +64,13 @@ export async function signIn({
       headers: false, // Let callApi set default headers
     },
     undefined,
-    () => {
-      return new Error('Sign-in failed');
+    async (error) => {
+      // If it's a Response object, extract error information
+      if (error instanceof Response) {
+        return createApiErrorFromResponse(error, 'Sign-in failed');
+      }
+      // Otherwise, wrap in a generic error
+      return error instanceof Error ? error : new Error('Sign-in failed');
     },
     false // Don't include auth header for sign-in
   );
