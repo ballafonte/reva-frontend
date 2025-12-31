@@ -1,6 +1,6 @@
 import type { paths } from '@revassurance/api/openapi';
+import { authStore, printConsole } from '@common/utils';
 import { callApi, getApiBaseUrl } from './api.utils';
-import { authStore } from '../utils/auth/authStore';
 
 type PostSignUpRequestBody =
   paths['/sign-up']['post']['requestBody']['content']['application/json'];
@@ -19,7 +19,7 @@ export async function signUp({
   passwordRaw,
 }: PostSignUpRequestBody): Promise<PostSignUpResponseBody> {
   const response = await callApi<PostSignUpRequestBody, PostSignUpResponseBody>(
-    `${getApiBaseUrl()}sign-up`,
+    `${getApiBaseUrl()}users/sign-up`,
     {
       method: 'POST',
       body: { email, passwordRaw },
@@ -53,7 +53,7 @@ export async function signIn({
   passwordRaw,
 }: PostSignInRequestBody): Promise<PostSignInResponseBody> {
   const response = await callApi<PostSignInRequestBody, PostSignInResponseBody>(
-    `${getApiBaseUrl()}sign-in`,
+    `${getApiBaseUrl()}users/sign-in`,
     {
       method: 'POST',
       body: { email, passwordRaw },
@@ -85,7 +85,7 @@ export type PostRefreshResponseBody =
  */
 export async function refreshToken(): Promise<string> {
   const response = await callApi<void, PostRefreshResponseBody>(
-    `${getApiBaseUrl()}refresh-token`,
+    `${getApiBaseUrl()}users/refresh-token`,
     {
       method: 'POST',
       headers: false,
@@ -112,7 +112,7 @@ export async function refreshToken(): Promise<string> {
 export async function signOut(): Promise<void> {
   try {
     await callApi<void, void>(
-      `${getApiBaseUrl()}sign-out`,
+      `${getApiBaseUrl()}users/sign-out`,
       {
         method: 'POST',
         headers: false,
@@ -125,7 +125,7 @@ export async function signOut(): Promise<void> {
     );
   } catch (error) {
     // Even if sign out fails on backend, clear local token
-    console.error('Sign out error:', error);
+    printConsole('error', 'Sign out error:', error);
   } finally {
     // Always clear the access token from memory
     authStore.clear();

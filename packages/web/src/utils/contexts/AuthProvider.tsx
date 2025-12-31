@@ -7,6 +7,7 @@ import {
   signOut as apiSignOut,
   type PostSignInResponseBody,
   authStore,
+  printConsole,
 } from '@reva-frontend/common';
 import { AuthContext, type AuthContextType } from './AuthContext';
 
@@ -51,7 +52,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const signUp = useCallback(async (email: string, password: string) => {
-    console.log('signUp', email, password);
     try {
       await apiSignUp({
         email,
@@ -68,7 +68,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await apiSignOut();
     } catch (error) {
       // Even if logout fails, clear local state
-      console.error('Logout error:', error);
+      printConsole('error', 'Logout error:', error);
     } finally {
       setUser(null);
       authStore.clear();

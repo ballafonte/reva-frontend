@@ -1,4 +1,4 @@
-import { printConsole } from '../utils/console';
+import { authStore, printConsole } from '@common/utils';
 import {
   API_STATUS_CODES,
   API_DEFAULT_HEADERS,
@@ -10,7 +10,6 @@ import {
   ApiSuccessCbType,
   ApiFailureCbType,
 } from './api.types';
-import { authStore } from '../utils/auth/authStore';
 import { refreshToken } from './auth.api';
 
 /**
@@ -107,7 +106,7 @@ export const executeApiRequest = async <T>(
   const queryParams = new URLSearchParams(query);
   const endpointQuery = queryParams ? `${endpoint}?${queryParams}` : endpoint;
   const headers = generateApiHeaders(headersArg);
-  
+
   // Add Authorization header if token exists and auth should be included
   if (includeAuth) {
     const token = authStore.getToken();
@@ -115,7 +114,7 @@ export const executeApiRequest = async <T>(
       headers.set('Authorization', `Bearer ${token}`);
     }
   }
-  
+
   const body =
     headers.get('Content-Type') === 'application/json'
       ? JSON.stringify(bodyArg)
@@ -203,7 +202,7 @@ let refreshInFlight: Promise<string> | null = null;
 
 /**
  * Call an API endpoint and handle the response.
- * 
+ *
  * Automatically handles token refresh on 401 responses.
  *
  * (Use `failureCb` to log errors to Sentry.)
@@ -217,9 +216,12 @@ export const callApi = async <T = void, U = void, V = never>(
 ): Promise<U | V> => {
   try {
     const response = await executeApiRequest(endpoint, init, includeAuth);
-    
+
     // Handle 401 Unauthorized - try to refresh token
-    if (response.status === API_STATUS_CODES.CLIENT_ERROR.UNAUTHORIZED && includeAuth) {
+    if (
+      response.status === API_STATUS_CODES.CLIENT_ERROR.UNAUTHORIZED &&
+      includeAuth
+    ) {
       // Check if this is already a refresh request to avoid infinite loop
       if (endpoint.includes('/auth/refresh') || endpoint.includes('/sign-in')) {
         // This is the refresh endpoint itself, don't retry
@@ -229,20 +231,26 @@ export const callApi = async <T = void, U = void, V = never>(
 
       // Single-flight refresh: only one refresh call at a time
       if (!refreshInFlight) {
-        refreshInFlight = refreshToken().catch((error) => {
-          // If refresh fails, clear auth state
-          authStore.clear();
-          throw error;
-        }).finally(() => {
-          refreshInFlight = null;
-        });
+        refreshInFlight = refreshToken()
+          .catch((error) => {
+            // If refresh fails, clear auth state
+            authStore.clear();
+            throw error;
+          })
+          .finally(() => {
+            refreshInFlight = null;
+          });
       }
 
       try {
         await refreshInFlight;
-        
+
         // Retry the original request with new token
-        const retryResponse = await executeApiRequest(endpoint, init, includeAuth);
+        const retryResponse = await executeApiRequest(
+          endpoint,
+          init,
+          includeAuth
+        );
         const formattedResponse = await handleApiResponseStatus(
           retryResponse,
           { endpoint, init },
