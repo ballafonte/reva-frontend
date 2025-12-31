@@ -27,6 +27,7 @@ import EditJurisdictionDialog from '@/components/EditJurisdictionDialog/EditJuri
 import AddJurisdictionDialog from '@/components/AddJurisdictionDialog/AddJurisdictionDialog';
 import ConfirmDialog from '@/components/ConfirmDialog/ConfirmDialog';
 import SearchBar from '@/components/SearchBar/SearchBar';
+import AuthGuard from '@/components/AuthGuard/AuthGuard';
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -134,7 +135,8 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth="md">
+    <AuthGuard>
+      <Container maxWidth="md">
       <Box sx={{ my: 4 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
           <Typography variant="h4" component="h1">
@@ -228,6 +230,7 @@ export default function Home() {
         confirmColor="error"
         isPending={deleteMutation.isPending}
       />
-    </Container>
+      </Container>
+    </AuthGuard>
   );
 }

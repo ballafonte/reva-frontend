@@ -10,6 +10,8 @@ import {
   ApiSuccessCbType,
   ApiFailureCbType,
 } from './api.types';
+import { authStore } from '../utils/auth/authStore';
+import { refreshToken } from './auth.api';
 
 /**
  * API utility functions for configuring API endpoints
@@ -98,18 +100,30 @@ export type ExecuteApiRequestInit<T> = Omit<
  */
 export const executeApiRequest = async <T>(
   endpoint: string,
-  init: ExecuteApiRequestInit<T>
+  init: ExecuteApiRequestInit<T>,
+  includeAuth = true
 ): Promise<Response> => {
   const { body: bodyArg, headers: headersArg, method, query } = init;
   const queryParams = new URLSearchParams(query);
   const endpointQuery = queryParams ? `${endpoint}?${queryParams}` : endpoint;
   const headers = generateApiHeaders(headersArg);
+  
+  // Add Authorization header if token exists and auth should be included
+  if (includeAuth) {
+    const token = authStore.getToken();
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+  }
+  
   const body =
     headers.get('Content-Type') === 'application/json'
       ? JSON.stringify(bodyArg)
       : bodyArg;
 
-  const fetchInit: RequestInit = {};
+  const fetchInit: RequestInit = {
+    credentials: 'include', // Always include credentials for cookie handling
+  };
   if (body) fetchInit.body = body as BodyInit;
   if (headers) fetchInit.headers = headers;
   if (method) fetchInit.method = method;
@@ -184,8 +198,13 @@ export const handleApiResponseStatus = async <T, U>(
   }
 };
 
+// Single-flight refresh token mechanism
+let refreshInFlight: Promise<string> | null = null;
+
 /**
  * Call an API endpoint and handle the response.
+ * 
+ * Automatically handles token refresh on 401 responses.
  *
  * (Use `failureCb` to log errors to Sentry.)
  */
@@ -193,11 +212,53 @@ export const callApi = async <T = void, U = void, V = never>(
   endpoint: ApiEndpoint,
   init: ExecuteApiRequestInit<T>,
   successCb?: ApiSuccessCbType<U>,
-  failureCb?: ApiFailureCbType
+  failureCb?: ApiFailureCbType,
+  includeAuth = true
 ): Promise<U | V> => {
   try {
-    const response = await executeApiRequest(endpoint, init);
-    const formattedResponse = handleApiResponseStatus(
+    const response = await executeApiRequest(endpoint, init, includeAuth);
+    
+    // Handle 401 Unauthorized - try to refresh token
+    if (response.status === API_STATUS_CODES.CLIENT_ERROR.UNAUTHORIZED && includeAuth) {
+      // Check if this is already a refresh request to avoid infinite loop
+      if (endpoint.includes('/auth/refresh') || endpoint.includes('/sign-in')) {
+        // This is the refresh endpoint itself, don't retry
+        authStore.clear();
+        throw await handleApiError(response, { endpoint, init }, failureCb);
+      }
+
+      // Single-flight refresh: only one refresh call at a time
+      if (!refreshInFlight) {
+        refreshInFlight = refreshToken().catch((error) => {
+          // If refresh fails, clear auth state
+          authStore.clear();
+          throw error;
+        }).finally(() => {
+          refreshInFlight = null;
+        });
+      }
+
+      try {
+        await refreshInFlight;
+        
+        // Retry the original request with new token
+        const retryResponse = await executeApiRequest(endpoint, init, includeAuth);
+        const formattedResponse = await handleApiResponseStatus(
+          retryResponse,
+          { endpoint, init },
+          successCb,
+          failureCb
+        );
+        return formattedResponse;
+      } catch (refreshError) {
+        // Refresh failed, clear auth and throw
+        authStore.clear();
+        throw await handleApiError(refreshError, { endpoint, init }, failureCb);
+      }
+    }
+
+    // Handle normal response
+    const formattedResponse = await handleApiResponseStatus(
       response,
       { endpoint, init },
       successCb,

@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
 import { initializeApp, useInitializedApp } from '@/utils/initialization';
+import { AuthProvider } from '@/utils/contexts/AuthProvider';
 
 const theme = createTheme({
   palette: {
@@ -38,7 +39,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
