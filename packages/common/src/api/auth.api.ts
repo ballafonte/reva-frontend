@@ -2,6 +2,39 @@ import type { paths } from '@revassurance/api/openapi';
 import { callApi, getApiBaseUrl } from './api.utils';
 import { authStore } from '../utils/auth/authStore';
 
+type PostSignUpRequestBody =
+  paths['/sign-up']['post']['requestBody']['content']['application/json'];
+
+export type PostSignUpResponseBody = void;
+
+/**
+ * Sign up with email and password
+ *
+ * @param email User email
+ * @param password User password
+ * @returns Promise resolving to the sign-up response
+ */
+export async function signUp(
+  email: string,
+  password: string
+): Promise<PostSignUpResponseBody> {
+  const response = await callApi<PostSignUpRequestBody, PostSignUpResponseBody>(
+    `${getApiBaseUrl()}sign-up`,
+    {
+      method: 'POST',
+      body: { email, passwordRaw: password },
+      headers: false, // Let callApi set default headers
+    },
+    undefined,
+    () => {
+      return new Error('Sign-up failed');
+    },
+    false // Don't include auth header for sign-up
+  );
+
+  return response;
+}
+
 type PostSignInRequestBody =
   paths['/sign-in']['post']['requestBody']['content']['application/json'];
 

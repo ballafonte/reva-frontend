@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect, ReactNode } from 'react';
 import {
   signIn as apiSignIn,
+  signUp as apiSignUp,
   signOut as apiSignOut,
   type PostSignInResponseBody,
   authStore,
@@ -46,6 +47,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, []);
 
+  const signUp = useCallback(async (email: string, password: string) => {
+    try {
+      await apiSignUp(email, password);
+      // Sign-up doesn't automatically sign in, so we don't set user here
+    } catch (error) {
+      throw error;
+    }
+  }, []);
+
   const logout = useCallback(async () => {
     try {
       await apiSignOut();
@@ -63,6 +73,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     isAuthenticated,
     isLoading,
     signIn,
+    signUp,
     logout,
   };
 
