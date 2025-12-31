@@ -37,7 +37,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const signIn = useCallback(async (email: string, password: string) => {
     try {
-      const response: PostSignInResponseBody = await apiSignIn(email, password);
+      const response: PostSignInResponseBody = await apiSignIn({
+        email,
+        passwordRaw: password,
+      });
       setUser(response.user);
     } catch (error) {
       // Clear any partial state on error
@@ -48,8 +51,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const signUp = useCallback(async (email: string, password: string) => {
+    console.log('signUp', email, password);
     try {
-      await apiSignUp(email, password);
+      await apiSignUp({
+        email,
+        passwordRaw: password,
+      });
       // Sign-up doesn't automatically sign in, so we don't set user here
     } catch (error) {
       throw error;

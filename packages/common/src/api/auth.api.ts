@@ -14,15 +14,15 @@ export type PostSignUpResponseBody = void;
  * @param password User password
  * @returns Promise resolving to the sign-up response
  */
-export async function signUp(
-  email: string,
-  password: string
-): Promise<PostSignUpResponseBody> {
+export async function signUp({
+  email,
+  passwordRaw,
+}: PostSignUpRequestBody): Promise<PostSignUpResponseBody> {
   const response = await callApi<PostSignUpRequestBody, PostSignUpResponseBody>(
     `${getApiBaseUrl()}sign-up`,
     {
       method: 'POST',
-      body: { email, passwordRaw: password },
+      body: { email, passwordRaw },
       headers: false, // Let callApi set default headers
     },
     undefined,
@@ -48,15 +48,15 @@ export type PostSignInResponseBody =
  * @param password User password
  * @returns Promise resolving to the sign-in response with user and accessToken
  */
-export async function signIn(
-  email: string,
-  password: string
-): Promise<PostSignInResponseBody> {
+export async function signIn({
+  email,
+  passwordRaw,
+}: PostSignInRequestBody): Promise<PostSignInResponseBody> {
   const response = await callApi<PostSignInRequestBody, PostSignInResponseBody>(
     `${getApiBaseUrl()}sign-in`,
     {
       method: 'POST',
-      body: { email, passwordRaw: password },
+      body: { email, passwordRaw },
       headers: false, // Let callApi set default headers
     },
     undefined,
