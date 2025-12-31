@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "scripts": {
+    "build:common": "cd packages/common && yarn build",
     "type-check": "yarn workspaces run type-check",
     "lint": "yarn workspaces run lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
