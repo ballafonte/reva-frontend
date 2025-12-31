@@ -527,7 +527,7 @@
 
 "@revassurance/api@git+https://github.com/ballafonte/reva-api.git":
   version "1.0.0"
-  resolved "git+https://github.com/ballafonte/reva-api.git#6b43ff4fb367550a55320206ef9a460ac5aca244"
+  resolved "git+https://github.com/ballafonte/reva-api.git#75d46f9f550d0c79af7c7f450815af6fc8128b91"
   dependencies:
     "@types/node" "^20.11.0"
     openapi-typescript "^7.8.0"

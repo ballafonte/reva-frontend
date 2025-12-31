@@ -3,10 +3,6 @@ import { callApi, getApiBaseUrl } from './api.utils';
 import { ApiRequqestInit } from './api.types';
 
 type Jurisdiction = components['schemas']['Jurisdiction'];
-type PostJurisdictionRequestBody =
-  components['schemas']['PostJurisdictionRequestBody'];
-type PatchJurisdictionRequestBody =
-  components['schemas']['PatchJurisdictionRequestBody'];
 
 export type GetJurisdictionsQuery =
   paths['/jurisdictions']['get']['parameters']['query'];
@@ -63,6 +59,9 @@ export const getJurisdictionById = async ({
   );
 };
 
+type PostJurisdictionRequestBody =
+  components['schemas']['PostJurisdictionRequestBody'];
+
 /**
  * Create a new jurisdiction
  * @param body The jurisdiction data to create
@@ -83,6 +82,9 @@ export const createJurisdiction = async (
     }
   );
 };
+
+type PatchJurisdictionRequestBody =
+  components['schemas']['PatchJurisdictionRequestBody'];
 
 /**
  * Update a jurisdiction by ID

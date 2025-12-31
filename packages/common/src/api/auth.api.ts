@@ -1,40 +1,29 @@
+import type { paths } from '@revassurance/api/openapi';
 import { callApi, getApiBaseUrl } from './api.utils';
 import { authStore } from '../utils/auth/authStore';
 
-/**
- * Response body from POST /sign-in
- */
-export type PostSignInResponseBody = {
-  user: any; // User DTO coming soon
-  token: string; // JWT token string
-};
+type PostSignInRequestBody =
+  paths['/sign-in']['post']['requestBody']['content']['application/json'];
 
-/**
- * Response body from POST /auth/refresh
- */
-export type PostRefreshResponseBody = {
-  token: string; // New JWT token string
-};
+export type PostSignInResponseBody =
+  paths['/sign-in']['post']['responses']['200']['content']['application/json'];
 
 /**
  * Sign in with email and password
  *
  * @param email User email
  * @param password User password
- * @returns Promise resolving to the sign-in response with user and token
+ * @returns Promise resolving to the sign-in response with user and accessToken
  */
 export async function signIn(
   email: string,
   password: string
 ): Promise<PostSignInResponseBody> {
-  const response = await callApi<
-    { email: string; password: string },
-    PostSignInResponseBody
-  >(
+  const response = await callApi<PostSignInRequestBody, PostSignInResponseBody>(
     `${getApiBaseUrl()}sign-in`,
     {
       method: 'POST',
-      body: { email, password },
+      body: { email, passwordRaw: password },
       headers: false, // Let callApi set default headers
     },
     undefined,
@@ -45,10 +34,13 @@ export async function signIn(
   );
 
   // Store the access token in memory
-  authStore.setToken(response.token);
+  authStore.setToken(response.accessToken);
 
   return response;
 }
+
+export type PostRefreshResponseBody =
+  paths['/refresh-token']['post']['responses']['200']['content']['application/json'];
 
 /**
  * Refresh the access token using the refresh token cookie
@@ -60,7 +52,7 @@ export async function signIn(
  */
 export async function refreshToken(): Promise<string> {
   const response = await callApi<void, PostRefreshResponseBody>(
-    `${getApiBaseUrl()}auth/refresh`,
+    `${getApiBaseUrl()}refresh-token`,
     {
       method: 'POST',
       headers: false,
@@ -73,9 +65,9 @@ export async function refreshToken(): Promise<string> {
   );
 
   // Store the new access token in memory
-  authStore.setToken(response.token);
+  authStore.setToken(response.accessToken);
 
-  return response.token;
+  return response.accessToken;
 }
 
 /**
@@ -87,7 +79,7 @@ export async function refreshToken(): Promise<string> {
 export async function signOut(): Promise<void> {
   try {
     await callApi<void, void>(
-      `${getApiBaseUrl()}auth/sign-out`,
+      `${getApiBaseUrl()}sign-out`,
       {
         method: 'POST',
         headers: false,
