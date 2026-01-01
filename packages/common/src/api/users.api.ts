@@ -58,7 +58,7 @@ export const createPlatformAdminStatus = async (
   body: PostPlatformAdminStatusRequestBody
 ): Promise<PlatformAdminStatus> => {
   return callApi<PostPlatformAdminStatusRequestBody, PlatformAdminStatus>(
-    `${getApiBaseUrl()}platform-admin-statuses`,
+    `${getApiBaseUrl()}users/platform-admin-statuses`,
     {
       method: 'POST',
       body,
@@ -71,7 +71,7 @@ export const createPlatformAdminStatus = async (
 };
 
 export type DeletePlatformAdminStatusParams =
-  paths['/platform-admin-statuses/{userId}']['delete']['parameters']['path'];
+  paths['/users/platform-admin-statuses/{userId}']['delete']['parameters']['path'];
 
 /**
  * Delete a platform admin status by user ID
@@ -82,7 +82,7 @@ export const deletePlatformAdminStatus = async ({
   userId,
 }: DeletePlatformAdminStatusParams): Promise<void> => {
   return callApi<void, void>(
-    `${getApiBaseUrl()}platform-admin-statuses/${userId}`,
+    `${getApiBaseUrl()}users/platform-admin-statuses/${userId}`,
     {
       method: 'DELETE',
     },

@@ -4,7 +4,7 @@ import { createApiErrorFromResponse } from './api.errors';
 import { callApi, getApiBaseUrl } from './api.utils';
 
 type PostSignUpRequestBody =
-  paths['/sign-up']['post']['requestBody']['content']['application/json'];
+  paths['/users/sign-up']['post']['requestBody']['content']['application/json'];
 
 export type PostSignUpResponseBody = void;
 
@@ -40,10 +40,10 @@ export async function signUp({
 }
 
 type PostSignInRequestBody =
-  paths['/sign-in']['post']['requestBody']['content']['application/json'];
+  paths['/users/sign-in']['post']['requestBody']['content']['application/json'];
 
 export type PostSignInResponseBody =
-  paths['/sign-in']['post']['responses']['200']['content']['application/json'];
+  paths['/users/sign-in']['post']['responses']['200']['content']['application/json'];
 
 /**
  * Sign in with email and password
@@ -93,7 +93,7 @@ export async function signIn({
 }
 
 export type PostRefreshResponseBody =
-  paths['/refresh-token']['post']['responses']['200']['content']['application/json'];
+  paths['/users/refresh-token']['post']['responses']['200']['content']['application/json'];
 
 /**
  * Refresh the access token using the refresh token cookie
