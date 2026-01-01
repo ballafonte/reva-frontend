@@ -1,9 +1,13 @@
+// Export folders
 export * from './auth';
-export * from './constants';
 export * from './contexts';
 export * from './hooks';
-export * from './queries';
 export * from './mutations';
+export * from './queries';
+
+// Export files
 export * from './console';
+export * from './constants';
+export * from './levenshtein';
 export * from './randomUUID';
 export * from './typeGuards';
