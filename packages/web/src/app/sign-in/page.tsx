@@ -1,28 +1,56 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Container, Box } from '@mui/material';
+import { useEffect, useRef } from 'react';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { Container, Box, CircularProgress } from '@mui/material';
 import { SignInForm } from '@/components/SignInForm/SignInForm';
 import { useAuthContext } from '@/utils/contexts/AuthContext';
+import { authStore } from '@reva-frontend/common';
 
 export default function SignInPage() {
   const { isAuthenticated, isLoading } = useAuthContext();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const hasRedirected = useRef(false);
 
   // Redirect authenticated users away from sign-in page
   useEffect(() => {
-    if (!isLoading && isAuthenticated) {
+    // Check both isAuthenticated state and token store as fallback
+    const token = authStore.getToken();
+    const shouldRedirect =
+      !isLoading &&
+      (isAuthenticated || !!token) &&
+      !hasRedirected.current &&
+      pathname === '/sign-in';
+
+    if (shouldRedirect) {
+      hasRedirected.current = true;
       const redirectTo = searchParams.get('redirectTo');
       const destination = redirectTo ? decodeURIComponent(redirectTo) : '/';
+      // Use replace to avoid adding sign-in page to history
       router.replace(destination);
     }
-  }, [isAuthenticated, isLoading, router, searchParams]);
+  }, [isAuthenticated, isLoading, router, searchParams, pathname]);
 
-  // Show nothing while checking auth or redirecting
+  // Show loading while checking auth
   if (isLoading || isAuthenticated) {
-    return null;
+    return (
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '50vh',
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      </Container>
+    );
   }
 
   return (

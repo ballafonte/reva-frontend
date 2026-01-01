@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Box,
   Typography,
@@ -18,20 +17,9 @@ import { useAuthContext } from '@/utils/contexts/AuthContext';
 import { useAlertsContext, SeverityContexts } from '@reva-frontend/common';
 
 export function SignInForm() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const { signIn, isAuthenticated } = useAuthContext();
+  const { signIn } = useAuthContext();
   const { pushAlert } = useAlertsContext();
   const [isLoading, setIsLoading] = useState(false);
-
-  // Redirect after successful sign-in
-  useEffect(() => {
-    if (isAuthenticated) {
-      const redirectTo = searchParams.get('redirectTo');
-      const destination = redirectTo ? decodeURIComponent(redirectTo) : '/';
-      router.replace(destination);
-    }
-  }, [isAuthenticated, router, searchParams]);
 
   const {
     control,
@@ -50,8 +38,7 @@ export function SignInForm() {
 
     try {
       await signIn(data.email, data.password);
-      // Sign-in successful - redirect will be handled by useEffect
-      setIsLoading(false);
+      // Redirect is handled by SignInPage useEffect when isAuthenticated becomes true
     } catch (err) {
       const errorMessage =
         err instanceof Error

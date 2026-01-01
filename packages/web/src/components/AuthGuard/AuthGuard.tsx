@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuthContext } from '@/utils/contexts/AuthContext';
+import { authStore } from '@reva-frontend/common';
 
 export interface AuthGuardProps {
   children: React.ReactNode;
@@ -25,15 +26,24 @@ export default function AuthGuard({ children }: AuthGuardProps) {
       return;
     }
 
+    // Check both isAuthenticated state and token store as fallback
+    // This prevents redirect loops when token is stored but state hasn't updated yet
+    const token = authStore.getToken();
+    const actuallyAuthenticated = isAuthenticated || !!token;
+
     // If not authenticated, redirect to sign-in
-    if (!isAuthenticated) {
+    if (!actuallyAuthenticated) {
       const redirectTo = encodeURIComponent(pathname);
       router.push(`/sign-in?redirectTo=${redirectTo}`);
     }
   }, [isAuthenticated, isLoading, router, pathname]);
 
-  // Show nothing while loading or redirecting
-  if (isLoading || !isAuthenticated) {
+  // Check token as fallback for rendering
+  const token = authStore.getToken();
+  const actuallyAuthenticated = isAuthenticated || !!token;
+
+  // Show nothing while loading or not authenticated
+  if (isLoading || !actuallyAuthenticated) {
     return null;
   }
 

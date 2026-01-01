@@ -76,7 +76,18 @@ export async function signIn({
   );
 
   // Store the access token in memory
-  authStore.setToken(response.accessToken);
+  // Ensure response has accessToken before storing
+  if (
+    response &&
+    typeof response === 'object' &&
+    'accessToken' in response &&
+    response.accessToken
+  ) {
+    authStore.setToken(response.accessToken);
+  } else {
+    printConsole('error', 'Sign-in response missing accessToken:', response);
+    throw new Error('Sign-in response is missing the access token');
+  }
 
   return response;
 }

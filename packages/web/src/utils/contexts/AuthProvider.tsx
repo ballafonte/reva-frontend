@@ -52,6 +52,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const wasAuthenticated =
         sessionStorage.getItem('wasAuthenticated') === 'true';
 
+      // Check if token already exists (might have been set by sign-in)
+      const existingToken = authStore.getToken();
+
       if (wasAuthenticated) {
         // Try to refresh the access token using the refresh token cookie
         // This will restore authentication if the user has a valid refresh token
@@ -62,24 +65,30 @@ export function AuthProvider({ children }: AuthProviderProps) {
           updateAuthState();
         } catch (error) {
           // Refresh token cookie is expired/invalid or doesn't exist
-          // Clear the flag and auth state
-          sessionStorage.removeItem('wasAuthenticated');
+          // Only clear if we don't have an existing token (might have been set by sign-in)
+          if (!existingToken) {
+            sessionStorage.removeItem('wasAuthenticated');
+            authStore.clear();
+            setUser(null);
+            updateAuthState();
+          }
+        }
+      } else {
+        // User was never authenticated in this session, no need to attempt refresh
+        // Only clear if we don't have an existing token (might have been set by sign-in)
+        if (!existingToken) {
           authStore.clear();
           setUser(null);
           updateAuthState();
         }
-      } else {
-        // User was never authenticated in this session, no need to attempt refresh
-        authStore.clear();
-        setUser(null);
-        updateAuthState();
       }
 
       setIsLoading(false);
     };
 
     initializeAuth();
-  }, [updateAuthState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
 
   const signIn = useCallback(
     async (email: string, password: string) => {
@@ -89,12 +98,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
           passwordRaw: password,
         });
 
+        // Mark that user was authenticated FIRST (before checking token)
+        // This prevents initializeAuth from clearing the token
+        sessionStorage.setItem('wasAuthenticated', 'true');
+
         // Set user and update auth state
         setUser(response.user);
-        // Mark that user was authenticated (for refresh token attempts on next page load)
-        sessionStorage.setItem('wasAuthenticated', 'true');
-        // Update auth state
-        setIsAuthenticated(!!authStore.getToken());
+
+        // Update auth state - check token after setting sessionStorage
+        const token = authStore.getToken();
+
+        // If token is missing, it might have been cleared by initializeAuth
+        // Re-store it from the response if needed
+        if (!token && response.accessToken) {
+          authStore.setToken(response.accessToken);
+        }
+
+        const finalToken = authStore.getToken();
+        setIsAuthenticated(!!finalToken);
       } catch (error) {
         // Clear any partial state on error
         sessionStorage.removeItem('wasAuthenticated');
