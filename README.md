@@ -9,6 +9,14 @@ A monorepo containing shared packages and web applications for the Reva frontend
 
 ## Getting Started
 
+### Node Version
+
+This project uses Node.js 24.12.0. If you're using `nvm`, you can automatically switch to the correct version:
+
+```bash
+nvm use
+```
+
 ### Install Dependencies
 
 ```bash
