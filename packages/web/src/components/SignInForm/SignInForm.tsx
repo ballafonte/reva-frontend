@@ -14,7 +14,12 @@ import {
 import Link from 'next/link';
 import { signInSchema, type SignInFormData } from './SignInForm.schema';
 import { useAuthContext } from '@/utils/contexts/AuthContext';
-import { useAlertsContext, SeverityContexts } from '@reva-frontend/common';
+import {
+  useAlertsContext,
+  SeverityContexts,
+  ApiError,
+  DEFAULT_ERROR_MESSAGE,
+} from '@reva-frontend/common';
 
 export function SignInForm() {
   const { signIn } = useAuthContext();
@@ -40,10 +45,12 @@ export function SignInForm() {
       await signIn(data.email, data.password);
       // Redirect is handled by SignInPage useEffect when isAuthenticated becomes true
     } catch (err) {
-      const errorMessage =
-        err instanceof Error
-          ? err.message
-          : 'Sign-in failed. Please check your credentials and try again.';
+      let errorMessage = DEFAULT_ERROR_MESSAGE;
+
+      // If the error is an ApiError with an ErrorResponse message, use that
+      if (err instanceof ApiError && err.errorResponse?.message) {
+        errorMessage = err.errorResponse.message;
+      }
 
       pushAlert({
         message: errorMessage,
