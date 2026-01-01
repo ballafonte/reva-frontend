@@ -19,6 +19,7 @@
   "dependencies": {
     "@revassurance/api": "git+https://github.com/ballafonte/reva-api.git",
     "@tanstack/react-query": "^5.0.0",
+    "fuse.js": "^7.1.0",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
