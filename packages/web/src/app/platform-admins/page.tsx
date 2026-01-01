@@ -20,6 +20,7 @@ import {
   type User,
   useDisclosure,
   usePlatformAdminsQuery,
+  useSearch,
 } from '@reva-frontend/common';
 import ConfirmDialog from '@/components/ConfirmDialog/ConfirmDialog';
 import SearchBar from '@/components/SearchBar/SearchBar';
@@ -29,15 +30,17 @@ export default function PlatformAdminsPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const searchText = searchParams.get('searchText') || undefined;
-  const {
-    data: platformAdmins,
-    isLoading,
-    error,
-  } = usePlatformAdminsQuery({ searchText });
+  const { data: platformAdmins, isLoading, error } = usePlatformAdminsQuery();
   const deleteDisclosure = useDisclosure();
   const [platformAdminToDelete, setPlatformAdminToDelete] = useState<
     string | null
   >(null);
+
+  const filteredPlatformAdmins = useSearch(
+    platformAdmins,
+    ['email', 'status'],
+    searchText
+  );
 
   const handleDeleteClick = (id: string) => {
     setPlatformAdminToDelete(id);
@@ -111,54 +114,61 @@ export default function PlatformAdminsPage() {
               {error instanceof Error ? error.message : 'Unknown error'}
             </Typography>
           )}
-          {platformAdmins && (
+          {filteredPlatformAdmins && (
             <List>
-              {platformAdmins.map((admin: User) => (
-              <ListItem key={admin.id}>
-                <ListItemText
-                  primary={admin.email || 'No email'}
-                  secondary={
-                    <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: 0.5 }}>
-                      <Chip
-                        label={admin.status || 'Unknown'}
-                        size="small"
-                        color={
-                          admin.status === 'ACTIVE'
-                            ? 'success'
-                            : admin.status === 'INACTIVE'
-                            ? 'default'
-                            : 'warning'
-                        }
-                      />
-                      {admin.platformAdminStatus?.isSuperAdmin && (
+              {filteredPlatformAdmins.map((admin: User) => (
+                <ListItem key={admin.id}>
+                  <ListItemText
+                    primary={admin.email || 'No email'}
+                    secondary={
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          gap: 1,
+                          alignItems: 'center',
+                          mt: 0.5,
+                        }}
+                      >
                         <Chip
-                          label="Super Admin"
+                          label={admin.status || 'Unknown'}
                           size="small"
-                          color="primary"
+                          color={
+                            admin.status === 'ACTIVE'
+                              ? 'success'
+                              : admin.status === 'INACTIVE'
+                                ? 'default'
+                                : 'warning'
+                          }
                         />
-                      )}
-                    </Box>
-                  }
-                />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    edge="end"
-                    aria-label="edit"
-                    onClick={() => handleEditClick(admin)}
-                    sx={{ mr: 1 }}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() => admin.id && handleDeleteClick(admin.id)}
-                    color="error"
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
+                        {admin.platformAdminStatus?.isSuperAdmin && (
+                          <Chip
+                            label="Super Admin"
+                            size="small"
+                            color="primary"
+                          />
+                        )}
+                      </Box>
+                    }
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      edge="end"
+                      aria-label="edit"
+                      onClick={() => handleEditClick(admin)}
+                      sx={{ mr: 1 }}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => admin.id && handleDeleteClick(admin.id)}
+                      color="error"
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
               ))}
             </List>
           )}
@@ -179,4 +189,3 @@ export default function PlatformAdminsPage() {
     </AuthGuard>
   );
 }
-
