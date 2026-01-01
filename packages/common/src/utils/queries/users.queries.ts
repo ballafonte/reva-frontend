@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import type { User } from '../../types';
+import { getPlatformAdmins } from '../../api/users.api';
 import { QueryConfig } from './queries.types';
-import { mockPlatformAdmins } from '../../../tests/mockData/platformAdmins';
 
 /**
  * Query hook for fetching all platform admins
- * @param searchText Optional text to search platform admins by email or status
+ * @param searchText Optional text to search platform admins by email or status (client-side filtering)
  */
 export const usePlatformAdminsQuery = (
   { searchText }: { searchText?: string } = {},
@@ -15,10 +15,9 @@ export const usePlatformAdminsQuery = (
     ...queryConfig,
     queryKey: ['platformAdmins', searchText],
     queryFn: async () => {
-      // TODO: Replace with API call when endpoint is ready
-      // For now, return mock data with optional filtering
-      const admins: User[] = [...mockPlatformAdmins];
+      const admins = await getPlatformAdmins();
 
+      // Client-side filtering since API doesn't support searchText parameter
       if (searchText) {
         const lowerSearch = searchText.toLowerCase();
         return admins.filter(
