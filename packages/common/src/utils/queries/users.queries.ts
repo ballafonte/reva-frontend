@@ -32,30 +32,3 @@ export const usePlatformAdminsQuery = (
     },
   });
 };
-
-/**
- * Query hook for fetching a single platform admin by ID
- * @param id The platform admin user ID
- */
-export const usePlatformAdminQuery = (
-  { id }: { id?: string } = {},
-  queryConfig?: QueryConfig<User>
-) => {
-  return useQuery<User>({
-    ...queryConfig,
-    queryKey: ['platformAdmin', id],
-    queryFn: async () => {
-      // TODO: Replace with API call when endpoint is ready
-      // For now, return mock data
-      if (!id) throw new Error('Platform admin ID is required');
-
-      const admin = mockPlatformAdmins.find((admin) => admin.id === id);
-      if (!admin) {
-        throw new Error(`Platform admin with id ${id} not found`);
-      }
-
-      return admin;
-    },
-    enabled: !!id,
-  });
-};
