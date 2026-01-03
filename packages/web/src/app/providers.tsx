@@ -5,8 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
 import { initializeApp, useInitializedApp } from '@/utils/initialization';
-import { AuthProvider } from '@/utils/contexts/AuthProvider';
-import { AlertsProvider } from '@reva-frontend/common';
+import { AlertsProvider, AuthProvider } from '@reva-frontend/common';
 
 const theme = createTheme({
   palette: {
@@ -41,9 +40,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AlertsProvider>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
+          <AuthProvider>{children}</AuthProvider>
         </AlertsProvider>
       </ThemeProvider>
     </QueryClientProvider>

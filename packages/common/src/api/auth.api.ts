@@ -6,7 +6,8 @@ import { callApi, getApiBaseUrl } from './api.utils';
 type PostSignUpRequestBody =
   paths['/users/sign-up']['post']['requestBody']['content']['application/json'];
 
-export type PostSignUpResponseBody = void;
+export type PostSignUpResponseBody =
+  paths['/users/sign-up']['post']['responses']['201']['content'];
 
 /**
  * Sign up with email and password

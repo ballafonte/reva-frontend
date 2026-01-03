@@ -3,7 +3,7 @@
 import { AppBar, Toolbar, Typography, IconButton, Box } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { printConsole } from '@common/utils';
-import { useAuthContext } from '@/utils/contexts/AuthContext';
+import { useAuthContext } from '@reva-frontend/common';
 import { useRouter } from 'next/navigation';
 
 export default function PortalHeaderBar() {

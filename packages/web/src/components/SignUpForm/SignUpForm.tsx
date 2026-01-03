@@ -14,8 +14,11 @@ import {
 } from '@mui/material';
 import Link from 'next/link';
 import { signUpSchema, type SignUpFormData } from './SignUpForm.schema';
-import { useAuthContext } from '@/utils/contexts/AuthContext';
-import { useAlertsContext, SeverityContexts } from '@reva-frontend/common';
+import {
+  useAlertsContext,
+  useAuthContext,
+  SeverityContexts,
+} from '@reva-frontend/common';
 
 export function SignUpForm() {
   const router = useRouter();
@@ -41,7 +44,7 @@ export function SignUpForm() {
 
     try {
       await signUp(data.email, data.password);
-      
+
       // Redirect to sign-in page after successful sign-up
       router.push('/sign-in');
     } catch (err) {
@@ -49,7 +52,7 @@ export function SignUpForm() {
         err instanceof Error
           ? err.message
           : 'Sign-up failed. Please try again.';
-      
+
       pushAlert({
         message: errorMessage,
         severity: SeverityContexts.DANGER,
@@ -155,4 +158,3 @@ export function SignUpForm() {
     </Paper>
   );
 }
-

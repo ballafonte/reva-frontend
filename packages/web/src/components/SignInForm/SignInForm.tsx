@@ -13,9 +13,9 @@ import {
 } from '@mui/material';
 import Link from 'next/link';
 import { signInSchema, type SignInFormData } from './SignInForm.schema';
-import { useAuthContext } from '@/utils/contexts/AuthContext';
 import {
   useAlertsContext,
+  useAuthContext,
   SeverityContexts,
   ApiError,
   DEFAULT_ERROR_MESSAGE,

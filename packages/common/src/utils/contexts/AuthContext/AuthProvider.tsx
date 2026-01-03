@@ -7,9 +7,9 @@ import {
   signOut as apiSignOut,
   refreshToken as apiRefreshToken,
   type PostSignInResponseBody,
-  authStore,
-  printConsole,
-} from '@reva-frontend/common';
+} from '../../../api';
+import { authStore } from '../../auth/authStore';
+import { printConsole } from '../../console';
 import { AuthContext, type AuthContextType } from './AuthContext';
 
 export interface AuthProviderProps {
@@ -27,25 +27,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   // Handle the response from the auth API
-  const handleAuthResponse = useCallback((response: PostSignInResponseBody) => {
-    // Mark that user was authenticated FIRST (before checking token)
-    // This prevents initializeAuth from clearing the token
-    sessionStorage.setItem('wasAuthenticated', 'true');
+  const handleAuthResponse = useCallback(
+    (response: PostSignInResponseBody) => {
+      // Mark that user was authenticated FIRST (before checking token)
+      // This prevents initializeAuth from clearing the token
+      sessionStorage.setItem('wasAuthenticated', 'true');
 
-    // Set user and update auth state
-    setUser(response.user);
+      // Set user and update auth state
+      setUser(response.user);
 
-    // Update auth state - check token after setting sessionStorage
-    const token = authStore.getToken();
+      // Update auth state - check token after setting sessionStorage
+      const token = authStore.getToken();
 
-    // If token is missing, it might have been cleared by initializeAuth
-    // Re-store it from the response if needed
-    if (!token && response.accessToken) {
-      authStore.setToken(response.accessToken);
-    }
+      // If token is missing, it might have been cleared by initializeAuth
+      // Re-store it from the response if needed
+      if (!token && response.accessToken) {
+        authStore.setToken(response.accessToken);
+      }
 
-    updateAuthState();
-  }, []);
+      updateAuthState();
+    },
+    [updateAuthState]
+  );
 
   // Watch for token changes as a backup mechanism
   useEffect(() => {
@@ -128,19 +131,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
         throw error;
       }
     },
-    [updateAuthState]
+    [updateAuthState, handleAuthResponse]
   );
 
   const signUp = useCallback(async (email: string, password: string) => {
-    try {
-      await apiSignUp({
-        email,
-        passwordRaw: password,
-      });
-      // Sign-up doesn't automatically sign in, so we don't set user here
-    } catch (error) {
-      throw error;
-    }
+    await apiSignUp({
+      email,
+      passwordRaw: password,
+    });
   }, []);
 
   const logout = useCallback(async () => {

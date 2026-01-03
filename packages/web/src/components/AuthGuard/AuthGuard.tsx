@@ -2,8 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useAuthContext } from '@/utils/contexts/AuthContext';
-import { authStore } from '@reva-frontend/common';
+import { authStore, useAuthContext } from '@reva-frontend/common';
 
 export interface AuthGuardProps {
   children: React.ReactNode;

@@ -3,7 +3,7 @@
 import { Box } from '@mui/material';
 import { usePathname } from 'next/navigation';
 import Sidebar from '@/components/Sidebar/Sidebar';
-import { useAuthContext } from '@/utils/contexts/AuthContext';
+import { useAuthContext } from '@reva-frontend/common';
 
 const DRAWER_WIDTH = 240;
 
@@ -41,4 +41,3 @@ export default function MainLayout({
     </Box>
   );
 }
-

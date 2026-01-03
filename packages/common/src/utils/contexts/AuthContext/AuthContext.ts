@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import type { User } from '@reva-frontend/common';
+import type { User } from '../../../types';
 
 export interface AuthContextType {
   user: User | null;
