@@ -8,6 +8,8 @@ build
 .env.development.local
 .env.test.local
 .env.production.local
+todo.md
+*.todo.md
 
 # TypeScript build info
 *.tsbuildinfo
