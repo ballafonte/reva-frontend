@@ -27,7 +27,9 @@ export default function SignInPage() {
     if (shouldRedirect) {
       hasRedirected.current = true;
       const redirectTo = searchParams.get('redirectTo');
-      const destination = redirectTo ? decodeURIComponent(redirectTo) : '/';
+      const destination = redirectTo
+        ? decodeURIComponent(redirectTo)
+        : '/jurisdictions';
       // Use replace to avoid adding sign-in page to history
       router.replace(destination);
     }

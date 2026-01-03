@@ -1,236 +1,63 @@
 'use client';
 
-import { useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import {
-  Container,
-  Typography,
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  IconButton,
-  ListItemSecondaryAction,
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import AddIcon from '@mui/icons-material/Add';
-import {
-  useJurisdictionsQuery,
-  useDeleteJurisdictionMutation,
-  useUpdateJurisdictionMutation,
-  useCreateJurisdictionMutation,
-  type Jurisdiction,
-  useDisclosure,
-} from '@reva-frontend/common';
-import EditJurisdictionDialog from '@/components/EditJurisdictionDialog/EditJurisdictionDialog';
-import AddJurisdictionDialog from '@/components/AddJurisdictionDialog/AddJurisdictionDialog';
-import ConfirmDialog from '@/components/ConfirmDialog/ConfirmDialog';
-import SearchBar from '@/components/SearchBar/SearchBar';
-import AuthGuard from '@/components/AuthGuard/AuthGuard';
+import { Container, Typography, Box, Button, Stack } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const searchText = searchParams.get('searchText') || undefined;
-  const {
-    data: jurisdictions,
-    isLoading,
-    error,
-  } = useJurisdictionsQuery({ searchText });
-  const deleteMutation = useDeleteJurisdictionMutation();
-  const updateMutation = useUpdateJurisdictionMutation();
-  const createMutation = useCreateJurisdictionMutation();
-  const editDisclosure = useDisclosure();
-  const createDisclosure = useDisclosure();
-  const deleteDisclosure = useDisclosure();
-  const [editingJurisdiction, setEditingJurisdiction] =
-    useState<Jurisdiction | null>(null);
-  const [jurisdictionToDelete, setJurisdictionToDelete] = useState<
-    string | null
-  >(null);
-
-  const handleEditClick = (jurisdiction: Jurisdiction) => {
-    setEditingJurisdiction(jurisdiction);
-    editDisclosure.onOpen();
-  };
-
-  const handleEditClose = () => {
-    editDisclosure.onClose();
-    setEditingJurisdiction(null);
-  };
-
-  const handleEditSubmit = (data: {
-    name: string;
-    nameAbbreviation: string;
-  }) => {
-    if (editingJurisdiction?.id) {
-      updateMutation.mutate(
-        {
-          id: editingJurisdiction.id,
-          body: {
-            name: data.name,
-            nameAbbreviation: data.nameAbbreviation,
-          },
-        },
-        {
-          onSuccess: () => {
-            handleEditClose();
-          },
-        }
-      );
-    }
-  };
-
-  const handleDeleteClick = (id: string) => {
-    setJurisdictionToDelete(id);
-    deleteDisclosure.onOpen();
-  };
-
-  const handleDeleteConfirm = () => {
-    if (jurisdictionToDelete) {
-      deleteMutation.mutate(jurisdictionToDelete);
-      setJurisdictionToDelete(null);
-    }
-  };
-
-  const handleDeleteClose = () => {
-    deleteDisclosure.onClose();
-    setJurisdictionToDelete(null);
-  };
-
-  const handleCreateClick = () => {
-    createDisclosure.onOpen();
-  };
-
-  const handleCreateClose = () => {
-    createDisclosure.onClose();
-  };
-
-  const handleCreateSubmit = (data: {
-    name: string;
-    nameAbbreviation: string;
-  }) => {
-    createMutation.mutate(
-      {
-        name: data.name,
-        nameAbbreviation: data.nameAbbreviation,
-      },
-      {
-        onSuccess: () => {
-          handleCreateClose();
-        },
-      }
-    );
-  };
-
-  const handleSearchChange = (value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (value.trim()) {
-      params.set('searchText', value.trim());
-    } else {
-      params.delete('searchText');
-    }
-    router.push(`?${params.toString()}`, { scroll: false });
-  };
+  const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'REVA Portal';
 
   return (
-    <AuthGuard>
-      <Container maxWidth="md">
-      <Box sx={{ my: 4 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-          <Typography variant="h4" component="h1">
-            Jurisdictions
-          </Typography>
-          <IconButton
-            aria-label="add jurisdiction"
-            onClick={handleCreateClick}
-            color="primary"
-            sx={{ ml: 1 }}
-          >
-            <AddIcon />
-          </IconButton>
-        </Box>
-        <Box sx={{ mb: 3 }}>
-          <SearchBar
-            value={searchText || ''}
-            onChange={handleSearchChange}
-            placeholder="Search jurisdictions by name or abbreviation..."
-            label="Search Jurisdictions"
-            autoApply={true}
-          />
-        </Box>
-        {isLoading && <Typography>Loading jurisdictions...</Typography>}
-        {error && (
-          <Typography color="error">
-            Error loading jurisdictions:{' '}
-            {error instanceof Error ? error.message : 'Unknown error'}
-          </Typography>
-        )}
-        {jurisdictions && (
-          <List>
-            {jurisdictions.map((jurisdiction: Jurisdiction) => (
-              <ListItem key={jurisdiction.id || jurisdiction.name}>
-                <ListItemText
-                  primary={jurisdiction.name || 'Unnamed Jurisdiction'}
-                  secondary={jurisdiction.nameAbbreviation || 'No abbreviation'}
-                />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    edge="end"
-                    aria-label="edit"
-                    onClick={() => handleEditClick(jurisdiction)}
-                    sx={{ mr: 1 }}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() =>
-                      jurisdiction.id && handleDeleteClick(jurisdiction.id)
-                    }
-                    color="error"
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
-          </List>
-        )}
-      </Box>
-
-      <EditJurisdictionDialog
-        open={editDisclosure.open}
-        onClose={handleEditClose}
-        onSubmit={handleEditSubmit}
-        initialData={{
-          name: editingJurisdiction?.name || '',
-          nameAbbreviation: editingJurisdiction?.nameAbbreviation || '',
+    <Container maxWidth="lg">
+      <Box
+        sx={{
+          my: 8,
+          textAlign: 'center',
+          minHeight: '60vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
         }}
-        isPending={updateMutation.isPending}
-      />
-
-      <AddJurisdictionDialog
-        open={createDisclosure.open}
-        onClose={handleCreateClose}
-        onSubmit={handleCreateSubmit}
-        isPending={createMutation.isPending}
-      />
-
-      <ConfirmDialog
-        open={deleteDisclosure.open}
-        onClose={handleDeleteClose}
-        onConfirm={handleDeleteConfirm}
-        title="Delete Jurisdiction"
-        message="Are you sure you want to delete this jurisdiction?"
-        confirmText="Delete"
-        cancelText="Cancel"
-        confirmColor="error"
-        isPending={deleteMutation.isPending}
-      />
-      </Container>
-    </AuthGuard>
+      >
+        <Typography variant="h2" component="h1" gutterBottom sx={{ mb: 4 }}>
+          {siteName}
+        </Typography>
+        <Typography
+          variant="h5"
+          component="h2"
+          color="text.secondary"
+          sx={{ mb: 4 }}
+        >
+          Welcome to Our Platform
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{ maxWidth: '800px', mx: 'auto', mb: 6 }}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur.
+        </Typography>
+        <Stack direction="row" spacing={2} justifyContent="center">
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => router.push('/sign-in')}
+          >
+            Sign In
+          </Button>
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={() => router.push('/sign-up')}
+          >
+            Sign Up
+          </Button>
+        </Stack>
+      </Box>
+    </Container>
   );
 }

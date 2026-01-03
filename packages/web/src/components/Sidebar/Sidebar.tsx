@@ -20,7 +20,7 @@ const DRAWER_WIDTH = 240;
 const menuItems = [
   {
     label: 'Jurisdictions',
-    path: '/',
+    path: '/jurisdictions',
     icon: <AccountTreeIcon />,
   },
   {
@@ -77,4 +77,3 @@ export default function Sidebar() {
     </Drawer>
   );
 }
-
