@@ -5,7 +5,7 @@ import {
   signIn as apiSignIn,
   signUp as apiSignUp,
   signOut as apiSignOut,
-  refreshToken,
+  refreshToken as apiRefreshToken,
   type PostSignInResponseBody,
   authStore,
   printConsole,
@@ -24,6 +24,27 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // Update isAuthenticated when token changes
   const updateAuthState = useCallback(() => {
     setIsAuthenticated(!!authStore.getToken());
+  }, []);
+
+  // Handle the response from the auth API
+  const handleAuthResponse = useCallback((response: PostSignInResponseBody) => {
+    // Mark that user was authenticated FIRST (before checking token)
+    // This prevents initializeAuth from clearing the token
+    sessionStorage.setItem('wasAuthenticated', 'true');
+
+    // Set user and update auth state
+    setUser(response.user);
+
+    // Update auth state - check token after setting sessionStorage
+    const token = authStore.getToken();
+
+    // If token is missing, it might have been cleared by initializeAuth
+    // Re-store it from the response if needed
+    if (!token && response.accessToken) {
+      authStore.setToken(response.accessToken);
+    }
+
+    updateAuthState();
   }, []);
 
   // Watch for token changes as a backup mechanism
@@ -59,10 +80,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         // Try to refresh the access token using the refresh token cookie
         // This will restore authentication if the user has a valid refresh token
         try {
-          await refreshToken();
+          const response = await apiRefreshToken();
           // Refresh succeeded - we now have a valid access token
           // User is authenticated (user data will be available after next sign-in or API call)
-          updateAuthState();
+          handleAuthResponse(response);
         } catch (error) {
           // Refresh token cookie is expired/invalid or doesn't exist
           // Only clear if we don't have an existing token (might have been set by sign-in)
@@ -93,29 +114,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const signIn = useCallback(
     async (email: string, password: string) => {
       try {
-        const response: PostSignInResponseBody = await apiSignIn({
+        const response = await apiSignIn({
           email,
           passwordRaw: password,
         });
-
-        // Mark that user was authenticated FIRST (before checking token)
-        // This prevents initializeAuth from clearing the token
-        sessionStorage.setItem('wasAuthenticated', 'true');
-
-        // Set user and update auth state
-        setUser(response.user);
-
-        // Update auth state - check token after setting sessionStorage
-        const token = authStore.getToken();
-
-        // If token is missing, it might have been cleared by initializeAuth
-        // Re-store it from the response if needed
-        if (!token && response.accessToken) {
-          authStore.setToken(response.accessToken);
-        }
-
-        const finalToken = authStore.getToken();
-        setIsAuthenticated(!!finalToken);
+        handleAuthResponse(response);
       } catch (error) {
         // Clear any partial state on error
         sessionStorage.removeItem('wasAuthenticated');

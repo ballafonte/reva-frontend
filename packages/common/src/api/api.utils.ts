@@ -10,7 +10,7 @@ import {
   ApiSuccessCbType,
   ApiFailureCbType,
 } from './api.types';
-import { refreshToken } from './auth.api';
+import { PostRefreshResponseBody, refreshToken } from './auth.api';
 
 /**
  * API utility functions for configuring API endpoints
@@ -228,7 +228,7 @@ export const handleApiResponseStatus = async <T, U>(
 };
 
 // Single-flight refresh token mechanism
-let refreshInFlight: Promise<string> | null = null;
+let refreshInFlight: Promise<PostRefreshResponseBody> | null = null;
 
 /**
  * Call an API endpoint and handle the response.

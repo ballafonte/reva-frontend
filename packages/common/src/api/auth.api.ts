@@ -103,7 +103,7 @@ export type PostRefreshResponseBody =
  *
  * @returns Promise resolving to the new access token
  */
-export async function refreshToken(): Promise<string> {
+export async function refreshToken(): Promise<PostRefreshResponseBody> {
   const response = await callApi<void, PostRefreshResponseBody>(
     `${getApiBaseUrl()}users/refresh-token`,
     {
@@ -117,10 +117,7 @@ export async function refreshToken(): Promise<string> {
     false // Don't include auth header for refresh (uses cookie instead)
   );
 
-  // Store the new access token in memory
-  authStore.setToken(response.accessToken);
-
-  return response.accessToken;
+  return response;
 }
 
 /**
