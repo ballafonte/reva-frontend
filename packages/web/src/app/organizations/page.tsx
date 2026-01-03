@@ -20,11 +20,15 @@ import {
   type Organization,
   useDisclosure,
   useOrganizationsQuery,
-  useSearch,
+  useDeleteOrganizationMutation,
+  useUpdateOrganizationMutation,
+  useCreateOrganizationMutation,
 } from '@reva-frontend/common';
 import ConfirmDialog from '@/components/ConfirmDialog/ConfirmDialog';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import AuthGuard from '@/components/AuthGuard/AuthGuard';
+import EditOrganizationDialog from '@/components/EditOrganizationDialog/EditOrganizationDialog';
+import AddOrganizationDialog from '@/components/AddOrganizationDialog/AddOrganizationDialog';
 
 export default function OrganizationsPage() {
   const searchParams = useSearchParams();
@@ -33,16 +37,52 @@ export default function OrganizationsPage() {
   const { data: organizations, isLoading, error } = useOrganizationsQuery({
     searchText,
   });
+  const deleteMutation = useDeleteOrganizationMutation();
+  const updateMutation = useUpdateOrganizationMutation();
+  const createMutation = useCreateOrganizationMutation();
+  const editDisclosure = useDisclosure();
+  const createDisclosure = useDisclosure();
   const deleteDisclosure = useDisclosure();
+  const [editingOrganization, setEditingOrganization] =
+    useState<Organization | null>(null);
   const [organizationToDelete, setOrganizationToDelete] = useState<
     string | null
   >(null);
 
-  const filteredOrganizations = useSearch(
-    organizations,
-    ['name', 'status'],
-    searchText
-  );
+  const handleEditClick = (organization: Organization) => {
+    setEditingOrganization(organization);
+    editDisclosure.onOpen();
+  };
+
+  const handleEditClose = () => {
+    editDisclosure.onClose();
+    setEditingOrganization(null);
+  };
+
+  const handleEditSubmit = (data: { name?: string; status?: string }) => {
+    if (editingOrganization?.id) {
+      updateMutation.mutate(
+        {
+          id: editingOrganization.id,
+          body: {
+            name: data.name,
+            status: data.status as
+              | 'ACTIVE'
+              | 'INACTIVE'
+              | 'PENDING'
+              | 'SUSPENDED'
+              | 'DELETED'
+              | undefined,
+          },
+        },
+        {
+          onSuccess: () => {
+            handleEditClose();
+          },
+        }
+      );
+    }
+  };
 
   const handleDeleteClick = (id: string) => {
     setOrganizationToDelete(id);
@@ -50,11 +90,13 @@ export default function OrganizationsPage() {
   };
 
   const handleDeleteConfirm = () => {
-    // TODO: Implement delete mutation when API is ready
     if (organizationToDelete) {
-      console.log('Delete organization:', organizationToDelete);
-      setOrganizationToDelete(null);
-      deleteDisclosure.onClose();
+      deleteMutation.mutate(organizationToDelete, {
+        onSuccess: () => {
+          setOrganizationToDelete(null);
+          deleteDisclosure.onClose();
+        },
+      });
     }
   };
 
@@ -64,13 +106,31 @@ export default function OrganizationsPage() {
   };
 
   const handleCreateClick = () => {
-    // TODO: Implement create dialog when API is ready
-    console.log('Create organization');
+    createDisclosure.onOpen();
   };
 
-  const handleEditClick = (organization: Organization) => {
-    // TODO: Implement edit dialog when API is ready
-    console.log('Edit organization:', organization);
+  const handleCreateClose = () => {
+    createDisclosure.onClose();
+  };
+
+  const handleCreateSubmit = (data: { name: string; status?: string }) => {
+    createMutation.mutate(
+      {
+        name: data.name,
+        status: data.status as
+          | 'ACTIVE'
+          | 'INACTIVE'
+          | 'PENDING'
+          | 'SUSPENDED'
+          | 'DELETED'
+          | undefined,
+      },
+      {
+        onSuccess: () => {
+          handleCreateClose();
+        },
+      }
+    );
   };
 
   const handleSearchChange = (value: string) => {
@@ -133,9 +193,9 @@ export default function OrganizationsPage() {
               {error instanceof Error ? error.message : 'Unknown error'}
             </Typography>
           )}
-          {filteredOrganizations && (
+          {organizations && (
             <List>
-              {filteredOrganizations.map((organization: Organization) => (
+              {organizations.map((organization: Organization) => (
                 <ListItem key={organization.id}>
                   <ListItemText
                     primary={organization.name || 'No name'}
@@ -182,6 +242,24 @@ export default function OrganizationsPage() {
           )}
         </Box>
 
+        <EditOrganizationDialog
+          open={editDisclosure.open}
+          onClose={handleEditClose}
+          onSubmit={handleEditSubmit}
+          initialData={{
+            name: editingOrganization?.name || '',
+            status: editingOrganization?.status,
+          }}
+          isPending={updateMutation.isPending}
+        />
+
+        <AddOrganizationDialog
+          open={createDisclosure.open}
+          onClose={handleCreateClose}
+          onSubmit={handleCreateSubmit}
+          isPending={createMutation.isPending}
+        />
+
         <ConfirmDialog
           open={deleteDisclosure.open}
           onClose={handleDeleteClose}
@@ -191,10 +269,9 @@ export default function OrganizationsPage() {
           confirmText="Delete"
           cancelText="Cancel"
           confirmColor="error"
-          isPending={false}
+          isPending={deleteMutation.isPending}
         />
       </Container>
     </AuthGuard>
   );
 }
-

@@ -109,17 +109,12 @@ export const updateOrganization = async (
   );
 };
 
-export type DeleteOrganizationParams =
-  paths['/organizations/{id}']['delete']['parameters']['path'];
-
 /**
  * Delete an organization by ID
  * @param id The organization ID
  * @returns Promise resolving when the organization is deleted
  */
-export const deleteOrganization = async ({
-  id,
-}: DeleteOrganizationParams): Promise<void> => {
+export const deleteOrganization = async (id: string): Promise<void> => {
   return callApi<void, void>(
     `${getApiBaseUrl()}organizations/${id}`,
     {
