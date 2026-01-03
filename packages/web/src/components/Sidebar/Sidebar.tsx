@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import BusinessIcon from '@mui/icons-material/Business';
 
 const DRAWER_WIDTH = 240;
 
@@ -21,6 +22,11 @@ const menuItems = [
     label: 'Jurisdictions',
     path: '/',
     icon: <AccountTreeIcon />,
+  },
+  {
+    label: 'Organizations',
+    path: '/organizations',
+    icon: <BusinessIcon />,
   },
   {
     label: 'Platform Admins',

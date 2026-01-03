@@ -482,9 +482,9 @@
     react-hook-form "^7.69.0"
     zod "^4.2.1"
 
-"@revassurance/api@git+https://github.com/ballafonte/reva-api.git":
+"@revassurance/api@github:ballafonte/reva-api":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/ballafonte/reva-api.git#b2a08c62c99a7593a946977dd0c214b4dead7c29"
+  resolved "git+ssh://git@github.com/ballafonte/reva-api.git#0d4fb46420f094f22c924ca86382598db23d4c77"
   dependencies:
     "@types/node" "^20.11.0"
     openapi-typescript "^7.8.0"
