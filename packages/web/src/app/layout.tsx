@@ -1,7 +1,5 @@
 import { Providers } from './providers';
-import PortalHeaderBar from '@/components/PortalHeaderBar/PortalHeaderBar';
-import MainLayout from '@/components/MainLayout/MainLayout';
-import { AlertsToast } from '@/components/AlertsToast/AlertsToast';
+import { AlertsToast, MainLayout, PortalHeaderBar } from '@/components/common';
 import '@/theme/globals.css';
 
 export const metadata = {

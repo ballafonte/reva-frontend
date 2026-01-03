@@ -33,7 +33,7 @@ const statusOptions = [
   { value: 'DELETED', label: 'Deleted' },
 ];
 
-export default function AddOrganizationDialog({
+export function AddOrganizationDialog({
   open,
   onClose,
   onSubmit,

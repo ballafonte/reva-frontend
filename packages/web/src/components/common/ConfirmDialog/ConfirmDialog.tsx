@@ -27,7 +27,7 @@ export interface ConfirmDialogProps {
   isPending?: boolean;
 }
 
-export default function ConfirmDialog({
+export function ConfirmDialog({
   open,
   onClose,
   onConfirm,

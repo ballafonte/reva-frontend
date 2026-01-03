@@ -1,7 +1,7 @@
 'use client';
 
 import { Container, Box } from '@mui/material';
-import { SignUpForm } from '@/components/SignUpForm/SignUpForm';
+import { SignUpForm } from '@/components/common';
 
 export default function SignUpPage() {
   return (

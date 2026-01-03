@@ -14,7 +14,7 @@ export interface AuthGuardProps {
  * If the user is not authenticated, they will be redirected to the sign-in page
  * with a redirectTo query parameter to return them to the intended page after sign-in.
  */
-export default function AuthGuard({ children }: AuthGuardProps) {
+export function AuthGuard({ children }: AuthGuardProps) {
   const { isAuthenticated, isLoading } = useAuthContext();
   const router = useRouter();
   const pathname = usePathname();

@@ -11,37 +11,47 @@ import {
   TextField,
   Button,
   Box,
+  MenuItem,
 } from '@mui/material';
 import {
-  editJurisdictionSchema,
-  type EditJurisdictionFormData,
-} from './EditJurisdictionDialog.schema';
+  editOrganizationSchema,
+  type EditOrganizationFormData,
+} from './EditOrganizationDialog.schema';
+import { OrganizationStatus } from '@reva-frontend/common';
 
-export interface EditJurisdictionDialogProps {
+export interface EditOrganizationDialogProps {
   open: boolean;
   onClose: () => void;
-  onSubmit: (data: { name: string; nameAbbreviation: string }) => void;
-  initialData: { name: string; nameAbbreviation: string };
+  onSubmit: (data: { name?: string; status?: OrganizationStatus }) => void;
+  initialData: { name: string; status?: OrganizationStatus };
   isPending?: boolean;
 }
 
-export default function EditJurisdictionDialog({
+const statusOptions = [
+  { value: 'ACTIVE', label: 'Active' },
+  { value: 'INACTIVE', label: 'Inactive' },
+  { value: 'PENDING', label: 'Pending' },
+  { value: 'SUSPENDED', label: 'Suspended' },
+  { value: 'DELETED', label: 'Deleted' },
+];
+
+export function EditOrganizationDialog({
   open,
   onClose,
   onSubmit,
   initialData,
   isPending = false,
-}: EditJurisdictionDialogProps) {
+}: EditOrganizationDialogProps) {
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<EditJurisdictionFormData>({
-    resolver: zodResolver(editJurisdictionSchema),
+  } = useForm<EditOrganizationFormData>({
+    resolver: zodResolver(editOrganizationSchema),
     defaultValues: {
       name: initialData.name || '',
-      nameAbbreviation: initialData.nameAbbreviation || '',
+      status: initialData.status,
     },
   });
 
@@ -49,18 +59,21 @@ export default function EditJurisdictionDialog({
     if (open) {
       reset({
         name: initialData.name || '',
-        nameAbbreviation: initialData.nameAbbreviation || '',
+        status: initialData.status,
       });
     }
   }, [open, initialData, reset]);
 
-  const onSubmitForm = (data: EditJurisdictionFormData) => {
-    onSubmit(data);
+  const onSubmitForm = (data: EditOrganizationFormData) => {
+    onSubmit({
+      name: data.name,
+      status: data.status,
+    });
   };
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>Edit Jurisdiction</DialogTitle>
+      <DialogTitle>Edit Organization</DialogTitle>
       <form onSubmit={handleSubmit(onSubmitForm)}>
         <DialogContent>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 2 }}>
@@ -78,16 +91,28 @@ export default function EditJurisdictionDialog({
               )}
             />
             <Controller
-              name="nameAbbreviation"
+              name="status"
               control={control}
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="Name Abbreviation"
+                  select
+                  label="Status"
                   fullWidth
-                  error={!!errors.nameAbbreviation}
-                  helperText={errors.nameAbbreviation?.message}
-                />
+                  value={field.value || ''}
+                  onChange={(e) => field.onChange(e.target.value || undefined)}
+                  error={!!errors.status}
+                  helperText={errors.status?.message}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {statusOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
               )}
             />
           </Box>

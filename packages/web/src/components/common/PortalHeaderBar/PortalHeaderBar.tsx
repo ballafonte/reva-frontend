@@ -6,7 +6,7 @@ import { printConsole } from '@common/utils';
 import { useAuthContext } from '@reva-frontend/common';
 import { useRouter } from 'next/navigation';
 
-export default function PortalHeaderBar() {
+export function PortalHeaderBar() {
   const { isAuthenticated, logout } = useAuthContext();
   const router = useRouter();
 

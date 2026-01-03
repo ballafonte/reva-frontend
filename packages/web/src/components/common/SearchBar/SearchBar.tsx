@@ -50,7 +50,7 @@ export interface SearchBarProps {
   showClearButton?: boolean;
 }
 
-export default function SearchBar({
+export function SearchBar({
   value = '',
   onChange,
   placeholder = 'Search...',

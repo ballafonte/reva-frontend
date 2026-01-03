@@ -23,11 +23,13 @@ import {
   type Jurisdiction,
   useDisclosure,
 } from '@reva-frontend/common';
-import EditJurisdictionDialog from '@/components/EditJurisdictionDialog/EditJurisdictionDialog';
-import AddJurisdictionDialog from '@/components/AddJurisdictionDialog/AddJurisdictionDialog';
-import ConfirmDialog from '@/components/ConfirmDialog/ConfirmDialog';
-import SearchBar from '@/components/SearchBar/SearchBar';
-import AuthGuard from '@/components/AuthGuard/AuthGuard';
+import {
+  AuthGuard,
+  AddJurisdictionDialog,
+  ConfirmDialog,
+  EditJurisdictionDialog,
+  SearchBar,
+} from '@/components/common';
 
 export default function JurisdictionsPage() {
   const searchParams = useSearchParams();

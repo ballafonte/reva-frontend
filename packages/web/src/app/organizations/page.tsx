@@ -24,11 +24,13 @@ import {
   useUpdateOrganizationMutation,
   useCreateOrganizationMutation,
 } from '@reva-frontend/common';
-import ConfirmDialog from '@/components/ConfirmDialog/ConfirmDialog';
-import SearchBar from '@/components/SearchBar/SearchBar';
-import AuthGuard from '@/components/AuthGuard/AuthGuard';
-import EditOrganizationDialog from '@/components/EditOrganizationDialog/EditOrganizationDialog';
-import AddOrganizationDialog from '@/components/AddOrganizationDialog/AddOrganizationDialog';
+import {
+  AddOrganizationDialog,
+  AuthGuard,
+  ConfirmDialog,
+  EditOrganizationDialog,
+  SearchBar,
+} from '@/components/common';
 
 export default function OrganizationsPage() {
   const searchParams = useSearchParams();

@@ -22,9 +22,7 @@ import {
   usePlatformAdminsQuery,
   useSearch,
 } from '@reva-frontend/common';
-import ConfirmDialog from '@/components/ConfirmDialog/ConfirmDialog';
-import SearchBar from '@/components/SearchBar/SearchBar';
-import AuthGuard from '@/components/AuthGuard/AuthGuard';
+import { AuthGuard, ConfirmDialog, SearchBar } from '@/components/common';
 
 export default function PlatformAdminsPage() {
   const searchParams = useSearchParams();

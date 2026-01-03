@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Container, Box, CircularProgress } from '@mui/material';
-import { SignInForm } from '@/components/SignInForm/SignInForm';
+import { SignInForm } from '@/components/common';
 import { authStore, useAuthContext } from '@reva-frontend/common';
 
 export default function SignInPage() {

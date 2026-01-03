@@ -24,7 +24,7 @@ export interface AddJurisdictionDialogProps {
   isPending?: boolean;
 }
 
-export default function AddJurisdictionDialog({
+export function AddJurisdictionDialog({
   open,
   onClose,
   onSubmit,
