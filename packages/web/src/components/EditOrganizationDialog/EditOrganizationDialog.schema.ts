@@ -14,4 +14,3 @@ export const editOrganizationSchema = z.object({
 });
 
 export type EditOrganizationFormData = z.infer<typeof editOrganizationSchema>;
-

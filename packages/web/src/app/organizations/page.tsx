@@ -34,7 +34,11 @@ export default function OrganizationsPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const searchText = searchParams.get('searchText') || undefined;
-  const { data: organizations, isLoading, error } = useOrganizationsQuery({
+  const {
+    data: organizations,
+    isLoading,
+    error,
+  } = useOrganizationsQuery({
     searchText,
   });
   const deleteMutation = useDeleteOrganizationMutation();
@@ -215,6 +219,7 @@ export default function OrganizationsPage() {
                         />
                       </Box>
                     }
+                    secondaryTypographyProps={{ component: 'div' }}
                   />
                   <ListItemSecondaryAction>
                     <IconButton
