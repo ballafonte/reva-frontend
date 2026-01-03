@@ -532,9 +532,9 @@
     pluralize "^8.0.0"
     yaml-ast-parser "0.0.43"
 
-"@revassurance/api@git+https://github.com/ballafonte/reva-api.git":
+"@revassurance/api@github:ballafonte/reva-api":
   version "1.0.0"
-  resolved "git+https://github.com/ballafonte/reva-api.git#cc8e976f33508d58a3a08aa4230316dc6c8d608f"
+  resolved "git+ssh://git@github.com/ballafonte/reva-api.git#cc8e976f33508d58a3a08aa4230316dc6c8d608f"
   dependencies:
     "@types/node" "^20.11.0"
     openapi-typescript "^7.8.0"
