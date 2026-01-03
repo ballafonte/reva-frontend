@@ -98,9 +98,7 @@ export default function AddOrganizationDialog({
                   label="Status"
                   fullWidth
                   value={field.value || ''}
-                  onChange={(e) =>
-                    field.onChange(e.target.value || undefined)
-                  }
+                  onChange={(e) => field.onChange(e.target.value || undefined)}
                   error={!!errors.status}
                   helperText={errors.status?.message}
                 >
@@ -129,4 +127,3 @@ export default function AddOrganizationDialog({
     </Dialog>
   );
 }
-

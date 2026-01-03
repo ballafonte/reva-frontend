@@ -11,7 +11,7 @@ export interface AuthGuardProps {
 
 /**
  * AuthGuard component that protects routes requiring authentication
- * 
+ *
  * If the user is not authenticated, they will be redirected to the sign-in page
  * with a redirectTo query parameter to return them to the intended page after sign-in.
  */
@@ -50,4 +50,3 @@ export default function AuthGuard({ children }: AuthGuardProps) {
   // User is authenticated, render children
   return <>{children}</>;
 }
-

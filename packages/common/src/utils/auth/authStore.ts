@@ -1,6 +1,6 @@
 /**
  * In-memory authentication token store
- * 
+ *
  * Access tokens are stored in memory only (not localStorage) for security.
  * This prevents XSS attacks from stealing tokens.
  */
@@ -31,4 +31,3 @@ export const authStore = {
     accessToken = null;
   },
 };
-
