@@ -64,18 +64,11 @@ export const palette: PaletteOptions = {
   },
 
   // Additional theme context colors
-  highlight: {
-    main: THEME_COLORS[ThemeContexts.HIGHLIGHT].base,
-    light: getLightContextColor(ThemeContexts.HIGHLIGHT),
-    dark: getDarkContextColor(ThemeContexts.HIGHLIGHT),
-    contrastText: THEME_COLORS[ThemeContexts.HIGHLIGHT].contrast,
-  },
-
-  promotion: {
-    main: THEME_COLORS[ThemeContexts.PROMOTION].base,
-    light: getLightContextColor(ThemeContexts.PROMOTION),
-    dark: getDarkContextColor(ThemeContexts.PROMOTION),
-    contrastText: THEME_COLORS[ThemeContexts.PROMOTION].contrast,
+  tertiary: {
+    main: THEME_COLORS[ThemeContexts.TERTIARY].base,
+    light: getLightContextColor(ThemeContexts.TERTIARY),
+    dark: getDarkContextColor(ThemeContexts.TERTIARY),
+    contrastText: THEME_COLORS[ThemeContexts.TERTIARY].contrast,
   },
 
   // Additional severity context colors
@@ -121,8 +114,7 @@ export const palette: PaletteOptions = {
   themeContext: {
     [ThemeContexts.PRIMARY]: THEME_COLORS[ThemeContexts.PRIMARY],
     [ThemeContexts.SECONDARY]: THEME_COLORS[ThemeContexts.SECONDARY],
-    [ThemeContexts.HIGHLIGHT]: THEME_COLORS[ThemeContexts.HIGHLIGHT],
-    [ThemeContexts.PROMOTION]: THEME_COLORS[ThemeContexts.PROMOTION],
+    [ThemeContexts.TERTIARY]: THEME_COLORS[ThemeContexts.TERTIARY],
   },
 
   severityContext: {

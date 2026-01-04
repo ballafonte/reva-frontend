@@ -44,15 +44,10 @@ export const THEME_COLORS = {
     contrast: '#3F4254',
     text: '#7E8299',
   },
-  [ThemeContexts.HIGHLIGHT]: {
+  [ThemeContexts.TERTIARY]: {
     base: '#ED7D31',
     contrast: '#FFFFFF',
     text: '#B35A1F',
-  },
-  [ThemeContexts.PROMOTION]: {
-    base: '#F8F0B2',
-    contrast: '#000000',
-    text: '#C2A15B',
   },
 } as const;
 

@@ -21,8 +21,7 @@ declare module '@mui/material/styles' {
       SeverityContexts,
       { base: string; contrast: string; text: string }
     >;
-    highlight: PaletteColor;
-    promotion: PaletteColor;
+    tertiary: PaletteColor;
     plain: PaletteColor;
     muted: PaletteColor;
     danger: PaletteColor;
@@ -31,8 +30,7 @@ declare module '@mui/material/styles' {
   interface PaletteOptions {
     themeContext?: Palette['themeContext'];
     severityContext?: Palette['severityContext'];
-    highlight?: PaletteColorOptions;
-    promotion?: PaletteColorOptions;
+    tertiary?: PaletteColorOptions;
     plain?: PaletteColorOptions;
     muted?: PaletteColorOptions;
     danger?: PaletteColorOptions;
@@ -41,8 +39,7 @@ declare module '@mui/material/styles' {
 
 declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
-    highlight: true;
-    promotion: true;
+    tertiary: true;
     plain: true;
     muted: true;
     danger: true;
@@ -59,8 +56,7 @@ declare module '@mui/material/Alert' {
 
 declare module '@mui/material/Chip' {
   interface ChipPropsColorOverrides {
-    highlight: true;
-    promotion: true;
+    tertiary: true;
     plain: true;
     muted: true;
     danger: true;
@@ -70,8 +66,7 @@ declare module '@mui/material/Chip' {
 
 declare module '@mui/material/Badge' {
   interface BadgePropsColorOverrides {
-    highlight: true;
-    promotion: true;
+    tertiary: true;
     plain: true;
     muted: true;
     danger: true;
@@ -81,8 +76,7 @@ declare module '@mui/material/Badge' {
 
 declare module '@mui/material/CircularProgress' {
   interface CircularProgressPropsColorOverrides {
-    highlight: true;
-    promotion: true;
+    tertiary: true;
     plain: true;
     muted: true;
     danger: true;
@@ -92,8 +86,7 @@ declare module '@mui/material/CircularProgress' {
 
 declare module '@mui/material/LinearProgress' {
   interface LinearProgressPropsColorOverrides {
-    highlight: true;
-    promotion: true;
+    tertiary: true;
     plain: true;
     muted: true;
     danger: true;
@@ -103,8 +96,7 @@ declare module '@mui/material/LinearProgress' {
 
 declare module '@mui/material/Switch' {
   interface SwitchPropsColorOverrides {
-    highlight: true;
-    promotion: true;
+    tertiary: true;
     plain: true;
     muted: true;
     danger: true;
@@ -114,8 +106,7 @@ declare module '@mui/material/Switch' {
 
 declare module '@mui/material/Checkbox' {
   interface CheckboxPropsColorOverrides {
-    highlight: true;
-    promotion: true;
+    tertiary: true;
     plain: true;
     muted: true;
     danger: true;
@@ -125,8 +116,7 @@ declare module '@mui/material/Checkbox' {
 
 declare module '@mui/material/Radio' {
   interface RadioPropsColorOverrides {
-    highlight: true;
-    promotion: true;
+    tertiary: true;
     plain: true;
     muted: true;
     danger: true;
@@ -136,8 +126,7 @@ declare module '@mui/material/Radio' {
 
 declare module '@mui/material/IconButton' {
   interface IconButtonPropsColorOverrides {
-    highlight: true;
-    promotion: true;
+    tertiary: true;
     plain: true;
     muted: true;
     danger: true;
