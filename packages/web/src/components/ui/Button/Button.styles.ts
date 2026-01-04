@@ -1,26 +1,16 @@
-import {
-  CONTEXT_COLORS,
-  THEME_COLORS,
-  SeverityContexts,
-  SeverityContextType,
-  ThemeContexts,
-  ThemeContextType,
-  WHITESPACE,
-} from '@common/theme';
+import { WHITESPACE } from '@common/theme';
 import { css } from '@emotion/react';
-import { ButtonContext } from './Button.types';
+import { ButtonProps } from './Button.types';
 
-const getColorFromContext = (context: ButtonContext) => {
-  if (
-    Object.values(SeverityContexts).includes(context as SeverityContextType)
-  ) {
-    return CONTEXT_COLORS[context as SeverityContextType];
-  }
-  if (Object.values(ThemeContexts).includes(context as ThemeContextType)) {
-    return THEME_COLORS[context as ThemeContextType];
-  }
+export const buttonStyles = ({ size }: ButtonProps) => {
+  const borderRadius =
+    size === 'small'
+      ? WHITESPACE.sm
+      : size === 'medium'
+        ? WHITESPACE.sm
+        : WHITESPACE.md;
+
+  return css`
+    border-radius: ${borderRadius}px;
+  `;
 };
-
-export const buttonStyles = {
-  borderRadius: WHITESPACE.sm,
-} as const;

@@ -1,11 +1,8 @@
+import { Contexts } from '@common/theme';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
-import { SeverityContexts, ThemeContexts } from '@reva-frontend/common';
 
-const colorKnobOptions = [
-  ...Object.values(ThemeContexts),
-  ...Object.values(SeverityContexts),
-];
+const contextKnobOptions = Object.values(Contexts);
 
 const meta = {
   title: 'UI/Button',
@@ -21,9 +18,9 @@ const meta = {
         disable: true,
       },
     },
-    color: {
+    context: {
       control: 'select',
-      options: colorKnobOptions,
+      options: contextKnobOptions,
     },
     size: {
       control: 'select',
@@ -48,8 +45,8 @@ type Story = StoryObj<typeof meta>;
 export const Contained: Story = {
   args: {
     children: 'Button',
+    context: 'primary',
     variant: 'contained',
-    color: 'primary',
   },
 };
 
@@ -57,8 +54,8 @@ export const Contained: Story = {
 export const Outlined: Story = {
   args: {
     children: 'Button',
+    context: 'primary',
     variant: 'outlined',
-    color: 'primary',
   },
 };
 
@@ -66,7 +63,7 @@ export const Outlined: Story = {
 export const Text: Story = {
   args: {
     children: 'Button',
+    context: 'primary',
     variant: 'text',
-    color: 'primary',
   },
 };
