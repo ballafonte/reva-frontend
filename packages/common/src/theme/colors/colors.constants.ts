@@ -77,11 +77,6 @@ export const SEVERITY_COLORS = {
     contrast: COLORS.GRAY_900,
     text: COLORS.GRAY_700,
   },
-  [SeverityContexts.MUTED]: {
-    base: COLORS.GRAY_300,
-    contrast: COLORS.GRAY_500,
-    text: COLORS.GRAY_400,
-  },
 } as const;
 
 export const CONTEXT_COLORS = {

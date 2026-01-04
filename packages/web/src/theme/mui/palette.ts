@@ -79,13 +79,6 @@ export const palette: PaletteOptions = {
     contrastText: SEVERITY_COLORS[SeverityContexts.PLAIN].contrast,
   },
 
-  muted: {
-    main: SEVERITY_COLORS[SeverityContexts.MUTED].base,
-    light: getLightContextColor(SeverityContexts.MUTED),
-    dark: getDarkContextColor(SeverityContexts.MUTED),
-    contrastText: SEVERITY_COLORS[SeverityContexts.MUTED].contrast,
-  },
-
   grey: {
     100: COLORS.GRAY_100,
     200: COLORS.GRAY_200,
@@ -123,6 +116,5 @@ export const palette: PaletteOptions = {
     [SeverityContexts.DANGER]: SEVERITY_COLORS[SeverityContexts.DANGER],
     [SeverityContexts.INFO]: SEVERITY_COLORS[SeverityContexts.INFO],
     [SeverityContexts.PLAIN]: SEVERITY_COLORS[SeverityContexts.PLAIN],
-    [SeverityContexts.MUTED]: SEVERITY_COLORS[SeverityContexts.MUTED],
   },
 };

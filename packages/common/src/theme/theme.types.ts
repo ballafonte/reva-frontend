@@ -19,7 +19,6 @@ export const SeverityContexts = {
   DANGER: 'danger',
   INFO: 'info',
   PLAIN: 'plain',
-  MUTED: 'muted',
 } as const;
 
 type SeverityContextKeys = keyof typeof SeverityContexts;
