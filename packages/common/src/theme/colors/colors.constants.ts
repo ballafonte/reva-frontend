@@ -101,7 +101,7 @@ export const ELEMENT_COLORS = {
   BODY: '#F4F6FA',
   BOX_SHADOW: '#523F69',
   CODE: '#B93993',
-  LINK: '#AC8219', // primary-dark color: `darkenColor(THEME_COLORS.primary, 0.3)`
+  LINK: THEME_COLORS[ThemeContexts.PRIMARY].text,
 } as const;
 
 /**

@@ -6,7 +6,7 @@ import {
   DARK_CONTEXT_COLOR_FACTOR,
   LIGHT_CONTEXT_COLOR_FACTOR,
   COLORS,
-} from './colors';
+} from './colors.constants';
 import { ThemeColorsType, ContextColorsType } from './colors.types';
 
 /**

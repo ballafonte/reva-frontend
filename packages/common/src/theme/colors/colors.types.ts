@@ -1,4 +1,4 @@
-import { CONTEXT_COLORS, THEME_COLORS } from './colors';
+import { CONTEXT_COLORS, THEME_COLORS } from './colors.constants';
 
 type ThemeColorsKeys = keyof typeof THEME_COLORS;
 
