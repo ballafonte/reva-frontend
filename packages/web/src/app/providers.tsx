@@ -1,17 +1,12 @@
 'use client';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
 import { initializeApp, useInitializedApp } from '@/utils/initialization';
 import { AlertsProvider, AuthProvider } from '@reva-frontend/common';
-
-const theme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-});
+import { theme } from '@/theme/mui/theme';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   // Initialize API configuration synchronously before anything else

@@ -10,12 +10,25 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['text', 'outlined', 'contained'],
+      control: false,
+      table: {
+        disable: true,
+      },
     },
     color: {
       control: 'select',
-      options: ['primary', 'secondary', 'success', 'error', 'info', 'warning'],
+      options: [
+        'primary',
+        'secondary',
+        'highlight',
+        'promotion',
+        'success',
+        'error',
+        'info',
+        'warning',
+        'plain',
+        'muted',
+      ],
     },
     size: {
       control: 'select',
@@ -27,13 +40,17 @@ const meta = {
     fullWidth: {
       control: 'boolean',
     },
+    children: {
+      control: 'text',
+    },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+// Contained variant
+export const Contained: Story = {
   args: {
     children: 'Button',
     variant: 'contained',
@@ -41,14 +58,7 @@ export const Primary: Story = {
   },
 };
 
-export const Secondary: Story = {
-  args: {
-    children: 'Button',
-    variant: 'contained',
-    color: 'secondary',
-  },
-};
-
+// Outlined variant
 export const Outlined: Story = {
   args: {
     children: 'Button',
@@ -57,77 +67,11 @@ export const Outlined: Story = {
   },
 };
 
+// Text variant
 export const Text: Story = {
   args: {
     children: 'Button',
     variant: 'text',
     color: 'primary',
-  },
-};
-
-export const Small: Story = {
-  args: {
-    children: 'Small Button',
-    size: 'small',
-    variant: 'contained',
-  },
-};
-
-export const Large: Story = {
-  args: {
-    children: 'Large Button',
-    size: 'large',
-    variant: 'contained',
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    children: 'Disabled Button',
-    disabled: true,
-    variant: 'contained',
-  },
-};
-
-export const FullWidth: Story = {
-  args: {
-    children: 'Full Width Button',
-    fullWidth: true,
-    variant: 'contained',
-  },
-  parameters: {
-    layout: 'padded',
-  },
-};
-
-export const Success: Story = {
-  args: {
-    children: 'Success',
-    color: 'success',
-    variant: 'contained',
-  },
-};
-
-export const Error: Story = {
-  args: {
-    children: 'Error',
-    color: 'error',
-    variant: 'contained',
-  },
-};
-
-export const Warning: Story = {
-  args: {
-    children: 'Warning',
-    color: 'warning',
-    variant: 'contained',
-  },
-};
-
-export const Info: Story = {
-  args: {
-    children: 'Info',
-    color: 'info',
-    variant: 'contained',
   },
 };
