@@ -1,13 +1,13 @@
-import { ThemeContextType, SeverityContextType } from '../theme.types';
+import { ContextType } from '../theme.types';
 import {
   RGB_REGEX,
-  THEME_COLORS,
-  CONTEXT_COLORS,
+  SEVERITY_COLORS,
   DARK_CONTEXT_COLOR_FACTOR,
   LIGHT_CONTEXT_COLOR_FACTOR,
   COLORS,
+  CONTEXT_COLORS,
 } from './colors.constants';
-import { ThemeColorsType, ContextColorsType } from './colors.types';
+import { ContextColorsType } from './colors.types';
 
 /**
  * @link https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
@@ -170,36 +170,24 @@ export const lightenColor = (color: string, factor: number) => {
 /**
  * A function to get the base and contrast color for a given context
  */
-export const getContextColors = <
-  T extends ThemeContextType | SeverityContextType,
->(
+export const getContextColors = <T extends ContextType>(
   context?: T
-): ThemeColorsType | ContextColorsType => {
-  return context
-    ? { ...THEME_COLORS, ...CONTEXT_COLORS }[context]
-    : CONTEXT_COLORS.plain;
+): ContextColorsType => {
+  return context ? CONTEXT_COLORS[context] : SEVERITY_COLORS.plain;
 };
 
 /**
  * A function to get the dark version of a context color
  */
-export const getDarkContextColor = <
-  T extends ThemeContextType | SeverityContextType,
->(
-  context?: T
-) => {
-  const { base } = context ? getContextColors(context) : CONTEXT_COLORS.plain;
+export const getDarkContextColor = <T extends ContextType>(context?: T) => {
+  const { base } = context ? getContextColors(context) : SEVERITY_COLORS.plain;
   return darkenColor(base, DARK_CONTEXT_COLOR_FACTOR);
 };
 
 /**
  * A function to get the light version of a context color
  */
-export const getLightContextColor = <
-  T extends ThemeContextType | SeverityContextType,
->(
-  context?: T
-) => {
-  const { base } = context ? getContextColors(context) : CONTEXT_COLORS.plain;
+export const getLightContextColor = <T extends ContextType>(context?: T) => {
+  const { base } = context ? getContextColors(context) : SEVERITY_COLORS.plain;
   return lightenColor(base, LIGHT_CONTEXT_COLOR_FACTOR);
 };

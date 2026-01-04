@@ -27,6 +27,15 @@ type SeverityContextKeys = keyof typeof SeverityContexts;
 export type SeverityContextType =
   (typeof SeverityContexts)[SeverityContextKeys];
 
+export const Contexts = {
+  ...ThemeContexts,
+  ...SeverityContexts,
+} as const;
+
+type ContextKeys = keyof typeof Contexts;
+
+export type ContextType = (typeof Contexts)[ContextKeys];
+
 export const ElementStates = {
   DEFAULT: 'default',
   HOVER: 'hover',

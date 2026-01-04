@@ -2,7 +2,7 @@ import { PaletteOptions } from '@mui/material/styles';
 import {
   COLORS,
   THEME_COLORS,
-  CONTEXT_COLORS,
+  SEVERITY_COLORS,
   ELEMENT_COLORS,
   ThemeContexts,
   SeverityContexts,
@@ -28,39 +28,39 @@ export const palette: PaletteOptions = {
   },
 
   success: {
-    main: CONTEXT_COLORS[SeverityContexts.SUCCESS].base,
+    main: SEVERITY_COLORS[SeverityContexts.SUCCESS].base,
     light: getLightContextColor(SeverityContexts.SUCCESS),
     dark: getDarkContextColor(SeverityContexts.SUCCESS),
-    contrastText: CONTEXT_COLORS[SeverityContexts.SUCCESS].contrast,
+    contrastText: SEVERITY_COLORS[SeverityContexts.SUCCESS].contrast,
   },
 
   warning: {
-    main: CONTEXT_COLORS[SeverityContexts.WARNING].base,
+    main: SEVERITY_COLORS[SeverityContexts.WARNING].base,
     light: getLightContextColor(SeverityContexts.WARNING),
     dark: getDarkContextColor(SeverityContexts.WARNING),
-    contrastText: CONTEXT_COLORS[SeverityContexts.WARNING].contrast,
+    contrastText: SEVERITY_COLORS[SeverityContexts.WARNING].contrast,
   },
 
   danger: {
-    main: CONTEXT_COLORS[SeverityContexts.DANGER].base,
+    main: SEVERITY_COLORS[SeverityContexts.DANGER].base,
     light: getLightContextColor(SeverityContexts.DANGER),
     dark: getDarkContextColor(SeverityContexts.DANGER),
-    contrastText: CONTEXT_COLORS[SeverityContexts.DANGER].contrast,
+    contrastText: SEVERITY_COLORS[SeverityContexts.DANGER].contrast,
   },
 
   // Keep error as alias to danger for backward compatibility
   error: {
-    main: CONTEXT_COLORS[SeverityContexts.DANGER].base,
+    main: SEVERITY_COLORS[SeverityContexts.DANGER].base,
     light: getLightContextColor(SeverityContexts.DANGER),
     dark: getDarkContextColor(SeverityContexts.DANGER),
-    contrastText: CONTEXT_COLORS[SeverityContexts.DANGER].contrast,
+    contrastText: SEVERITY_COLORS[SeverityContexts.DANGER].contrast,
   },
 
   info: {
-    main: CONTEXT_COLORS[SeverityContexts.INFO].base,
+    main: SEVERITY_COLORS[SeverityContexts.INFO].base,
     light: getLightContextColor(SeverityContexts.INFO),
     dark: getDarkContextColor(SeverityContexts.INFO),
-    contrastText: CONTEXT_COLORS[SeverityContexts.INFO].contrast,
+    contrastText: SEVERITY_COLORS[SeverityContexts.INFO].contrast,
   },
 
   // Additional theme context colors
@@ -73,17 +73,17 @@ export const palette: PaletteOptions = {
 
   // Additional severity context colors
   plain: {
-    main: CONTEXT_COLORS[SeverityContexts.PLAIN].base,
+    main: SEVERITY_COLORS[SeverityContexts.PLAIN].base,
     light: getLightContextColor(SeverityContexts.PLAIN),
     dark: getDarkContextColor(SeverityContexts.PLAIN),
-    contrastText: CONTEXT_COLORS[SeverityContexts.PLAIN].contrast,
+    contrastText: SEVERITY_COLORS[SeverityContexts.PLAIN].contrast,
   },
 
   muted: {
-    main: CONTEXT_COLORS[SeverityContexts.MUTED].base,
+    main: SEVERITY_COLORS[SeverityContexts.MUTED].base,
     light: getLightContextColor(SeverityContexts.MUTED),
     dark: getDarkContextColor(SeverityContexts.MUTED),
-    contrastText: CONTEXT_COLORS[SeverityContexts.MUTED].contrast,
+    contrastText: SEVERITY_COLORS[SeverityContexts.MUTED].contrast,
   },
 
   grey: {
@@ -118,11 +118,11 @@ export const palette: PaletteOptions = {
   },
 
   severityContext: {
-    [SeverityContexts.SUCCESS]: CONTEXT_COLORS[SeverityContexts.SUCCESS],
-    [SeverityContexts.WARNING]: CONTEXT_COLORS[SeverityContexts.WARNING],
-    [SeverityContexts.DANGER]: CONTEXT_COLORS[SeverityContexts.DANGER],
-    [SeverityContexts.INFO]: CONTEXT_COLORS[SeverityContexts.INFO],
-    [SeverityContexts.PLAIN]: CONTEXT_COLORS[SeverityContexts.PLAIN],
-    [SeverityContexts.MUTED]: CONTEXT_COLORS[SeverityContexts.MUTED],
+    [SeverityContexts.SUCCESS]: SEVERITY_COLORS[SeverityContexts.SUCCESS],
+    [SeverityContexts.WARNING]: SEVERITY_COLORS[SeverityContexts.WARNING],
+    [SeverityContexts.DANGER]: SEVERITY_COLORS[SeverityContexts.DANGER],
+    [SeverityContexts.INFO]: SEVERITY_COLORS[SeverityContexts.INFO],
+    [SeverityContexts.PLAIN]: SEVERITY_COLORS[SeverityContexts.PLAIN],
+    [SeverityContexts.MUTED]: SEVERITY_COLORS[SeverityContexts.MUTED],
   },
 };

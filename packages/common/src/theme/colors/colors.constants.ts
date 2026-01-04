@@ -51,8 +51,7 @@ export const THEME_COLORS = {
   },
 } as const;
 
-// TODO: Rename to `SEVERITY_CONTEXT_COLORS` and add text colors `darkenColor(base, 0.3)`
-export const CONTEXT_COLORS = {
+export const SEVERITY_COLORS = {
   [SeverityContexts.SUCCESS]: {
     base: '#50CD89',
     contrast: COLORS.WHITE,
@@ -83,6 +82,11 @@ export const CONTEXT_COLORS = {
     contrast: COLORS.GRAY_500,
     text: COLORS.GRAY_400,
   },
+} as const;
+
+export const CONTEXT_COLORS = {
+  ...THEME_COLORS,
+  ...SEVERITY_COLORS,
 } as const;
 
 export const DARK_CONTEXT_COLOR_FACTOR = 0.65;
