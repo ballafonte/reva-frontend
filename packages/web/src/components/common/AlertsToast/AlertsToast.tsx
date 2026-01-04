@@ -1,20 +1,20 @@
 'use client';
 
 import { useAlertsContext } from '@reva-frontend/common';
-import { Snackbar, Alert as MuiAlert, AlertColor } from '@mui/material';
+import { Snackbar, Alert as MuiAlert } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 
 /**
  * Maps severity from AlertsContext to MUI Alert severity
  */
-const mapSeverityToMui = (severity: string): AlertColor => {
+const mapSeverityToMui = (severity: string): 'success' | 'info' | 'warning' | 'danger' => {
   switch (severity) {
     case 'success':
       return 'success';
     case 'warning':
       return 'warning';
     case 'danger':
-      return 'error';
+      return 'danger';
     case 'info':
       return 'info';
     default:

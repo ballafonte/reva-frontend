@@ -164,7 +164,7 @@ export default function JurisdictionsPage() {
           </Box>
           {isLoading && <Typography>Loading jurisdictions...</Typography>}
           {error && (
-            <Typography color="error">
+            <Typography color="danger">
               Error loading jurisdictions:{' '}
               {error instanceof Error ? error.message : 'Unknown error'}
             </Typography>
@@ -194,7 +194,7 @@ export default function JurisdictionsPage() {
                       onClick={() =>
                         jurisdiction.id && handleDeleteClick(jurisdiction.id)
                       }
-                      color="error"
+                      color="danger"
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -231,7 +231,7 @@ export default function JurisdictionsPage() {
           message="Are you sure you want to delete this jurisdiction?"
           confirmText="Delete"
           cancelText="Cancel"
-          confirmColor="error"
+          confirmColor="danger"
           isPending={deleteMutation.isPending}
         />
       </Container>

@@ -158,7 +158,7 @@ export default function OrganizationsPage() {
       case 'PENDING':
         return 'warning';
       case 'SUSPENDED':
-        return 'error';
+        return 'danger';
       case 'DELETED':
         return 'default';
       default:
@@ -194,7 +194,7 @@ export default function OrganizationsPage() {
           </Box>
           {isLoading && <Typography>Loading organizations...</Typography>}
           {error && (
-            <Typography color="error">
+            <Typography color="danger">
               Error loading organizations:{' '}
               {error instanceof Error ? error.message : 'Unknown error'}
             </Typography>
@@ -238,7 +238,7 @@ export default function OrganizationsPage() {
                       onClick={() =>
                         organization.id && handleDeleteClick(organization.id)
                       }
-                      color="error"
+                      color="danger"
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -275,7 +275,7 @@ export default function OrganizationsPage() {
           message="Are you sure you want to delete this organization?"
           confirmText="Delete"
           cancelText="Cancel"
-          confirmColor="error"
+          confirmColor="danger"
           isPending={deleteMutation.isPending}
         />
       </Container>

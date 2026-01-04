@@ -20,7 +20,7 @@ export interface ConfirmDialogProps {
   confirmColor?:
     | 'primary'
     | 'secondary'
-    | 'error'
+    | 'danger'
     | 'warning'
     | 'info'
     | 'success';
@@ -35,7 +35,7 @@ export function ConfirmDialog({
   message,
   confirmText = 'Confirm',
   cancelText = 'Cancel',
-  confirmColor = 'error',
+  confirmColor = 'danger',
   isPending = false,
 }: ConfirmDialogProps) {
   const handleConfirm = () => {

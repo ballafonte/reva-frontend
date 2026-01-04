@@ -1,5 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
+import { SeverityContexts, ThemeContexts } from '@reva-frontend/common';
+
+const colorKnobOptions = [
+  ...Object.values(ThemeContexts),
+  ...Object.values(SeverityContexts),
+];
 
 const meta = {
   title: 'UI/Button',
@@ -17,18 +23,7 @@ const meta = {
     },
     color: {
       control: 'select',
-      options: [
-        'primary',
-        'secondary',
-        'highlight',
-        'promotion',
-        'success',
-        'error',
-        'info',
-        'warning',
-        'plain',
-        'muted',
-      ],
+      options: colorKnobOptions,
     },
     size: {
       control: 'select',

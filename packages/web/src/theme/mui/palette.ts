@@ -6,6 +6,8 @@ import {
   ELEMENT_COLORS,
   ThemeContexts,
   SeverityContexts,
+  getLightContextColor,
+  getDarkContextColor,
 } from '@reva-frontend/common';
 
 export const palette: PaletteOptions = {
@@ -13,53 +15,81 @@ export const palette: PaletteOptions = {
 
   primary: {
     main: THEME_COLORS[ThemeContexts.PRIMARY].base,
+    light: getLightContextColor(ThemeContexts.PRIMARY),
+    dark: getDarkContextColor(ThemeContexts.PRIMARY),
     contrastText: THEME_COLORS[ThemeContexts.PRIMARY].contrast,
   },
 
   secondary: {
     main: THEME_COLORS[ThemeContexts.SECONDARY].base,
+    light: getLightContextColor(ThemeContexts.SECONDARY),
+    dark: getDarkContextColor(ThemeContexts.SECONDARY),
     contrastText: THEME_COLORS[ThemeContexts.SECONDARY].contrast,
   },
 
   success: {
     main: CONTEXT_COLORS[SeverityContexts.SUCCESS].base,
+    light: getLightContextColor(SeverityContexts.SUCCESS),
+    dark: getDarkContextColor(SeverityContexts.SUCCESS),
     contrastText: CONTEXT_COLORS[SeverityContexts.SUCCESS].contrast,
   },
 
   warning: {
     main: CONTEXT_COLORS[SeverityContexts.WARNING].base,
+    light: getLightContextColor(SeverityContexts.WARNING),
+    dark: getDarkContextColor(SeverityContexts.WARNING),
     contrastText: CONTEXT_COLORS[SeverityContexts.WARNING].contrast,
   },
 
+  danger: {
+    main: CONTEXT_COLORS[SeverityContexts.DANGER].base,
+    light: getLightContextColor(SeverityContexts.DANGER),
+    dark: getDarkContextColor(SeverityContexts.DANGER),
+    contrastText: CONTEXT_COLORS[SeverityContexts.DANGER].contrast,
+  },
+
+  // Keep error as alias to danger for backward compatibility
   error: {
     main: CONTEXT_COLORS[SeverityContexts.DANGER].base,
+    light: getLightContextColor(SeverityContexts.DANGER),
+    dark: getDarkContextColor(SeverityContexts.DANGER),
     contrastText: CONTEXT_COLORS[SeverityContexts.DANGER].contrast,
   },
 
   info: {
     main: CONTEXT_COLORS[SeverityContexts.INFO].base,
+    light: getLightContextColor(SeverityContexts.INFO),
+    dark: getDarkContextColor(SeverityContexts.INFO),
     contrastText: CONTEXT_COLORS[SeverityContexts.INFO].contrast,
   },
 
   // Additional theme context colors
   highlight: {
     main: THEME_COLORS[ThemeContexts.HIGHLIGHT].base,
+    light: getLightContextColor(ThemeContexts.HIGHLIGHT),
+    dark: getDarkContextColor(ThemeContexts.HIGHLIGHT),
     contrastText: THEME_COLORS[ThemeContexts.HIGHLIGHT].contrast,
   },
 
   promotion: {
     main: THEME_COLORS[ThemeContexts.PROMOTION].base,
+    light: getLightContextColor(ThemeContexts.PROMOTION),
+    dark: getDarkContextColor(ThemeContexts.PROMOTION),
     contrastText: THEME_COLORS[ThemeContexts.PROMOTION].contrast,
   },
 
   // Additional severity context colors
   plain: {
     main: CONTEXT_COLORS[SeverityContexts.PLAIN].base,
+    light: getLightContextColor(SeverityContexts.PLAIN),
+    dark: getDarkContextColor(SeverityContexts.PLAIN),
     contrastText: CONTEXT_COLORS[SeverityContexts.PLAIN].contrast,
   },
 
   muted: {
     main: CONTEXT_COLORS[SeverityContexts.MUTED].base,
+    light: getLightContextColor(SeverityContexts.MUTED),
+    dark: getDarkContextColor(SeverityContexts.MUTED),
     contrastText: CONTEXT_COLORS[SeverityContexts.MUTED].contrast,
   },
 

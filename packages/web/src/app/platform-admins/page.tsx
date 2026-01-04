@@ -107,7 +107,7 @@ export default function PlatformAdminsPage() {
           </Box>
           {isLoading && <Typography>Loading platform admins...</Typography>}
           {error && (
-            <Typography color="error">
+            <Typography color="danger">
               Error loading platform admins:{' '}
               {error instanceof Error ? error.message : 'Unknown error'}
             </Typography>
@@ -161,7 +161,7 @@ export default function PlatformAdminsPage() {
                       edge="end"
                       aria-label="delete"
                       onClick={() => admin.id && handleDeleteClick(admin.id)}
-                      color="error"
+                      color="danger"
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -180,7 +180,7 @@ export default function PlatformAdminsPage() {
           message="Are you sure you want to delete this platform admin?"
           confirmText="Delete"
           cancelText="Cancel"
-          confirmColor="error"
+          confirmColor="danger"
           isPending={false}
         />
       </Container>
