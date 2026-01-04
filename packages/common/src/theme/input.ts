@@ -1,4 +1,4 @@
-import { CONTEXT_COLORS } from './colors';
+import { CONTEXT_COLORS } from './colors/colors';
 import { COMPONENT_FONT_SIZES, FONT_WEIGHTS } from './typography';
 import { WHITESPACE } from './whitespace';
 

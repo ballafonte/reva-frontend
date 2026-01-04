@@ -6,7 +6,8 @@ export type ColorContextType<T> = {
 export const ThemeContexts = {
   PRIMARY: 'primary',
   SECONDARY: 'secondary',
-  TERTIARY: 'tertiary',
+  ACTION: 'action',
+  PROMOTION: 'promotion',
 } as const;
 
 type ThemeContextKeys = keyof typeof ThemeContexts;

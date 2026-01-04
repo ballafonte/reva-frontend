@@ -1,124 +1,13 @@
-// TODO: code split this file into constants vs util functions
-
+import { ThemeContextType, SeverityContextType } from '../theme.types';
 import {
-  ThemeContexts,
-  type ThemeContextType,
-  SeverityContexts,
-  type SeverityContextType,
-} from './theme.types';
-
-export type RgbColorType = {
-  r: number;
-  g: number;
-  b: number;
-};
-
-export type HexColorType = string;
-
-export const COLORS = {
-  BLUE: '#0D6EFD',
-  INDIGO: '#6610F2',
-  PURPLE: '#6F42C1',
-  PINK: '#D63384',
-  RED: '#DC3545',
-  ORANGE: '#FD7E14',
-  YELLOW: '#FFC107',
-  GREEN: '#198754',
-  TEAL: '#20C997',
-  CYAN: '#0DCAF0',
-  BLACK: '#000000',
-  WHITE: '#FFFFFF',
-  GRAY: '#7E8299',
-  GRAY_100: '#F9F9F9',
-  GRAY_200: '#EFEFF0',
-  GRAY_300: '#E1E3EA',
-  GRAY_400: '#B5B5C3',
-  GRAY_500: '#A1A5B7',
-  GRAY_600: '#7E8299',
-  GRAY_700: '#5E6278',
-  GRAY_800: '#3F4254',
-  GRAY_900: '#181C32',
-} as const;
-
-export const THEME_COLORS = {
-  [ThemeContexts.PRIMARY]: {
-    base: '#FFC80A',
-    contrast: '#000000',
-    text: '#AC8219',
-  },
-  [ThemeContexts.SECONDARY]: {
-    base: '#E1E3EA',
-    contrast: '#3F4254',
-    text: '#7E8299',
-  },
-  [ThemeContexts.TERTIARY]: {
-    base: '#F9F9F9',
-    contrast: '#000000',
-    text: '#181C32',
-  },
-} as const;
-
-type ThemeColorsKeys = keyof typeof THEME_COLORS;
-
-export type ThemeColorsType = (typeof THEME_COLORS)[ThemeColorsKeys];
-
-// TODO: Rename to `SEVERITY_CONTEXT_COLORS` and add text colors `darkenColor(base, 0.3)`
-export const CONTEXT_COLORS = {
-  [SeverityContexts.SUCCESS]: {
-    base: '#50CD89',
-    contrast: '#ffffff',
-    text: '#146c43',
-  },
-  [SeverityContexts.WARNING]: {
-    base: '#FFC700',
-    contrast: '#ffffff',
-    text: '#997404',
-  },
-  [SeverityContexts.DANGER]: {
-    base: '#F1416C',
-    contrast: '#ffffff',
-    text: '#b02a37',
-  },
-  [SeverityContexts.INFO]: {
-    base: '#7239EA',
-    contrast: '#ffffff',
-    text: '#087990',
-  },
-  [SeverityContexts.PLAIN]: {
-    base: COLORS.GRAY_300,
-    contrast: COLORS.GRAY_900,
-    text: COLORS.GRAY_700,
-  },
-  [SeverityContexts.MUTED]: {
-    base: COLORS.GRAY_300,
-    contrast: COLORS.GRAY_500,
-    text: COLORS.GRAY_400,
-  },
-} as const;
-
-type ContextColorsKeys = keyof typeof CONTEXT_COLORS;
-
-export type ContextColorsType = (typeof CONTEXT_COLORS)[ContextColorsKeys];
-
-export const DARK_CONTEXT_COLOR_FACTOR = 0.65;
-
-export const LIGHT_CONTEXT_COLOR_FACTOR = 0.94;
-
-export const ELEMENT_COLORS = {
-  TEXT: COLORS.GRAY_900,
-  BORDER: COLORS.GRAY_300,
-  BACKGROUND: COLORS.WHITE,
-  BODY: '#F4F6FA',
-  BOX_SHADOW: '#523F69',
-  CODE: '#B93993',
-  LINK: '#AC8219', // primary-dark color: `darkenColor(THEME_COLORS.primary, 0.3)`
-} as const;
-
-/**
- * A regular expression to match rgb-formatted color strings
- */
-export const RGB_REGEX =
-  /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
+  RGB_REGEX,
+  THEME_COLORS,
+  CONTEXT_COLORS,
+  DARK_CONTEXT_COLOR_FACTOR,
+  LIGHT_CONTEXT_COLOR_FACTOR,
+  COLORS,
+} from './colors';
+import { ThemeColorsType, ContextColorsType } from './colors.types';
 
 /**
  * @link https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
@@ -230,8 +119,8 @@ export const getTextFontColor = (color?: string) => {
       });
       const L = 0.2126 * r + 0.7152 * g + 0.0722 * b;
       return (L + 0.05) / (0.0 + 0.05) > (1.0 + 0.05) / (L + 0.05)
-        ? '#000'
-        : '#fff';
+        ? COLORS.BLACK
+        : COLORS.WHITE;
     }
   }
 };
