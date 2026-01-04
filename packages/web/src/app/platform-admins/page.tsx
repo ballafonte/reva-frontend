@@ -34,8 +34,8 @@ export default function PlatformAdminsPage() {
     string | null
   >(null);
 
-  const filteredPlatformAdmins = useSearch(
-    platformAdmins,
+  const filteredPlatformAdmins = useSearch<User>(
+    platformAdmins ?? [],
     ['email', 'status'],
     searchText
   );
