@@ -116,4 +116,3 @@ describe('sortByFirstCharAndLevenshteinDistance', () => {
     expect(sorted[0]).toBe('apple');
   });
 });
-

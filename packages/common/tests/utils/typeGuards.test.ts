@@ -46,4 +46,3 @@ describe('isNullish', () => {
     expect(isNullish(false)).toBe(false);
   });
 });
-

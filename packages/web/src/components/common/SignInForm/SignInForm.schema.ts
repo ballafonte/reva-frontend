@@ -6,4 +6,3 @@ export const signInSchema = z.object({
 });
 
 export type SignInFormData = z.infer<typeof signInSchema>;
-

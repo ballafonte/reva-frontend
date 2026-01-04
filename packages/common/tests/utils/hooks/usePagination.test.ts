@@ -9,9 +9,7 @@ describe('usePagination', () => {
   });
 
   it('should initialize with first page for non-empty items', () => {
-    const { result } = renderHook(() =>
-      usePagination([1, 2, 3, 4, 5], 2)
-    );
+    const { result } = renderHook(() => usePagination([1, 2, 3, 4, 5], 2));
 
     expect(result.current.currentPage).toBe(1);
     expect(result.current.maxPage).toBe(3);
@@ -27,17 +25,13 @@ describe('usePagination', () => {
   });
 
   it('should calculate maxPage correctly', () => {
-    const { result } = renderHook(() =>
-      usePagination([1, 2, 3, 4, 5], 2)
-    );
+    const { result } = renderHook(() => usePagination([1, 2, 3, 4, 5], 2));
 
     expect(result.current.maxPage).toBe(3);
   });
 
   it('should return correct items for current page', () => {
-    const { result } = renderHook(() =>
-      usePagination([1, 2, 3, 4, 5], 2)
-    );
+    const { result } = renderHook(() => usePagination([1, 2, 3, 4, 5], 2));
 
     expect(result.current.currentItems).toEqual([1, 2]);
 
@@ -49,9 +43,7 @@ describe('usePagination', () => {
   });
 
   it('should navigate to next page', () => {
-    const { result } = renderHook(() =>
-      usePagination([1, 2, 3, 4, 5], 2)
-    );
+    const { result } = renderHook(() => usePagination([1, 2, 3, 4, 5], 2));
 
     act(() => {
       result.current.nextPage();
@@ -62,9 +54,7 @@ describe('usePagination', () => {
   });
 
   it('should not go beyond maxPage', () => {
-    const { result } = renderHook(() =>
-      usePagination([1, 2, 3, 4, 5], 2)
-    );
+    const { result } = renderHook(() => usePagination([1, 2, 3, 4, 5], 2));
 
     act(() => {
       result.current.nextPage();
@@ -77,9 +67,7 @@ describe('usePagination', () => {
   });
 
   it('should navigate to previous page', () => {
-    const { result } = renderHook(() =>
-      usePagination([1, 2, 3, 4, 5], 2)
-    );
+    const { result } = renderHook(() => usePagination([1, 2, 3, 4, 5], 2));
 
     act(() => {
       result.current.nextPage();
@@ -90,9 +78,7 @@ describe('usePagination', () => {
   });
 
   it('should not go below page 1', () => {
-    const { result } = renderHook(() =>
-      usePagination([1, 2, 3, 4, 5], 2)
-    );
+    const { result } = renderHook(() => usePagination([1, 2, 3, 4, 5], 2));
 
     act(() => {
       result.current.prevPage();
@@ -103,9 +89,7 @@ describe('usePagination', () => {
   });
 
   it('should navigate to first page', () => {
-    const { result } = renderHook(() =>
-      usePagination([1, 2, 3, 4, 5], 2)
-    );
+    const { result } = renderHook(() => usePagination([1, 2, 3, 4, 5], 2));
 
     act(() => {
       result.current.nextPage();
@@ -118,9 +102,7 @@ describe('usePagination', () => {
   });
 
   it('should navigate to last page', () => {
-    const { result } = renderHook(() =>
-      usePagination([1, 2, 3, 4, 5], 2)
-    );
+    const { result } = renderHook(() => usePagination([1, 2, 3, 4, 5], 2));
 
     act(() => {
       result.current.lastPage();
@@ -163,9 +145,7 @@ describe('usePagination', () => {
   });
 
   it('should correctly identify first and last page', () => {
-    const { result } = renderHook(() =>
-      usePagination([1, 2, 3, 4, 5], 2)
-    );
+    const { result } = renderHook(() => usePagination([1, 2, 3, 4, 5], 2));
 
     expect(result.current.isFirstPage).toBe(true);
     expect(result.current.isLastPage).toBe(false);
@@ -178,4 +158,3 @@ describe('usePagination', () => {
     expect(result.current.isLastPage).toBe(true);
   });
 });
-

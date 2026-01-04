@@ -10,9 +10,7 @@ describe('useSearch', () => {
   ];
 
   it('should return all items when searchText is empty', () => {
-    const { result } = renderHook(() =>
-      useSearch(items, ['name'], undefined)
-    );
+    const { result } = renderHook(() => useSearch(items, ['name'], undefined));
 
     expect(result.current).toEqual(items);
   });
@@ -24,9 +22,7 @@ describe('useSearch', () => {
   });
 
   it('should filter items by search text', () => {
-    const { result } = renderHook(() =>
-      useSearch(items, ['name'], 'Apple')
-    );
+    const { result } = renderHook(() => useSearch(items, ['name'], 'Apple'));
 
     expect(result.current).toHaveLength(1);
     expect(result.current[0].name).toBe('Apple');
@@ -44,33 +40,25 @@ describe('useSearch', () => {
   });
 
   it('should return empty array when no matches found', () => {
-    const { result } = renderHook(() =>
-      useSearch(items, ['name'], 'XYZ123')
-    );
+    const { result } = renderHook(() => useSearch(items, ['name'], 'XYZ123'));
 
     expect(result.current).toEqual([]);
   });
 
   it('should handle case-insensitive search', () => {
-    const { result } = renderHook(() =>
-      useSearch(items, ['name'], 'apple')
-    );
+    const { result } = renderHook(() => useSearch(items, ['name'], 'apple'));
 
     expect(result.current.length).toBeGreaterThan(0);
   });
 
   it('should handle empty items array', () => {
-    const { result } = renderHook(() =>
-      useSearch([], ['name'], 'test')
-    );
+    const { result } = renderHook(() => useSearch([], ['name'], 'test'));
 
     expect(result.current).toEqual([]);
   });
 
   it('should prioritize items starting with search text', () => {
-    const { result } = renderHook(() =>
-      useSearch(items, ['name'], 'Ap')
-    );
+    const { result } = renderHook(() => useSearch(items, ['name'], 'Ap'));
 
     // Should prioritize items starting with 'Ap'
     expect(result.current.length).toBeGreaterThan(0);
@@ -92,4 +80,3 @@ describe('useSearch', () => {
     expect(result.current.length).toBeGreaterThanOrEqual(1);
   });
 });
-

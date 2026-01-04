@@ -1,4 +1,8 @@
-import { getRandomNumber, getRandomString, randomUUID } from '@common/utils/randomUUID';
+import {
+  getRandomNumber,
+  getRandomString,
+  randomUUID,
+} from '@common/utils/randomUUID';
 
 describe('randomUUID', () => {
   it('should generate a valid UUID format', () => {
@@ -79,4 +83,3 @@ describe('getRandomString', () => {
     expect(typeof str).toBe('string');
   });
 });
-

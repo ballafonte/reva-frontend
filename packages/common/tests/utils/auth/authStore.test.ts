@@ -55,4 +55,3 @@ describe('authStore', () => {
     expect(authStore.getToken()).toBe(longToken);
   });
 });
-

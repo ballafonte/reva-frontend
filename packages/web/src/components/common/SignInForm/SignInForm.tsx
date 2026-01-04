@@ -128,7 +128,7 @@ export function SignInForm() {
         </Button>
         <Box sx={{ textAlign: 'center', mt: 2 }}>
           <Typography variant="body2">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <MuiLink component={Link} href="/sign-up">
               Sign up
             </MuiLink>

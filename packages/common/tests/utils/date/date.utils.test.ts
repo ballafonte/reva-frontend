@@ -19,9 +19,7 @@ import {
 
 describe('ensureUtcString', () => {
   it('should append Z if no timezone info present', () => {
-    expect(ensureUtcString('2023-01-01T12:00:00')).toBe(
-      '2023-01-01T12:00:00Z'
-    );
+    expect(ensureUtcString('2023-01-01T12:00:00')).toBe('2023-01-01T12:00:00Z');
   });
 
   it('should not modify string with Z suffix', () => {
@@ -272,4 +270,3 @@ describe('formatLocalDateTimeRange', () => {
     expect(formatted).toContain('–');
   });
 });
-
