@@ -44,7 +44,7 @@ export const THEME_COLORS = {
     contrast: '#3F4254',
     text: '#7E8299',
   },
-  [ThemeContexts.ACTION]: {
+  [ThemeContexts.HIGHLIGHT]: {
     base: '#ED7D31',
     contrast: '#FFFFFF',
     text: '#B35A1F',
