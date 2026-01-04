@@ -7,7 +7,9 @@ import { useCallback, useEffect, useState } from 'react';
 /**
  * Maps severity from AlertsContext to MUI Alert severity
  */
-const mapSeverityToMui = (severity: string): 'success' | 'info' | 'warning' | 'danger' => {
+const mapSeverityToMui = (
+  severity: string
+): 'success' | 'info' | 'warning' | 'danger' => {
   switch (severity) {
     case 'success':
       return 'success';

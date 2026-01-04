@@ -2,6 +2,7 @@ export * from './AddJurisdictionDialog/AddJurisdictionDialog';
 export * from './AddOrganizationDialog/AddOrganizationDialog';
 export * from './AlertsToast/AlertsToast';
 export * from './AuthGuard/AuthGuard';
+export * from './Breadcrumbs/Breadcrumbs';
 export * from './ConfirmDialog/ConfirmDialog';
 export * from './EditJurisdictionDialog/EditJurisdictionDialog';
 export * from './EditOrganizationDialog/EditOrganizationDialog';
