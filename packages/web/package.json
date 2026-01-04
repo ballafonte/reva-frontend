@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -25,10 +27,21 @@
     "zod": "^4.2.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.0",
+    "@babel/preset-env": "^7.25.0",
+    "@babel/preset-react": "^7.25.0",
+    "@babel/preset-typescript": "^7.25.0",
+    "@storybook/addon-essentials": "^7.6.19",
+    "@storybook/addon-interactions": "^7.6.19",
+    "@storybook/react": "^7.6.19",
+    "@storybook/react-webpack5": "^7.6.19",
+    "@storybook/test": "^7.6.19",
     "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "babel-loader": "^10.0.0",
     "eslint": "^8.50.0",
+    "storybook": "^7.6.19",
     "typescript": "^5.2.2"
   }
 }
