@@ -10,3 +10,4 @@ export * from './Divider';
 export * from './ProgressBar';
 export * from './Icon';
 export * from './IconButton';
+export * from './Link';
