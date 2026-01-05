@@ -26,6 +26,9 @@ const meta = {
         custom: 'Custom (number)',
       },
     },
+    component: {
+      control: false,
+    },
   },
 } satisfies Meta<typeof Icon>;
 

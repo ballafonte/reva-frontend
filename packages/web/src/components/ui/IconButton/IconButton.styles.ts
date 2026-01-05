@@ -3,9 +3,9 @@ import { SxProps, Theme } from '@mui/material';
 import { IconButtonProps } from './IconButton.types';
 
 export const iconButtonStyles = ({
-  size,
+  size = 'sm',
   circular = false,
-  padding = 'md',
+  padding = 'xsm',
 }: Pick<IconButtonProps, 'size' | 'circular' | 'padding'>): SxProps<Theme> => {
   const paddingValue = WHITESPACE[padding as WhitespaceSize];
 
@@ -20,24 +20,22 @@ export const iconButtonStyles = ({
     },
   };
 
-  if (size !== undefined) {
-    let buttonSize: number;
-    if (typeof size === 'string' && size in SIZE) {
-      // It's a SIZE token (e.g., 'md', 'sm', etc.)
-      buttonSize = SIZE[size as Size];
-    } else if (typeof size === 'number') {
-      // It's a number in pixels
-      buttonSize = size;
-    } else {
-      return baseStyles;
-    }
-
-    // Set width and height based on size, including padding
-    baseStyles.width = 'auto';
-    baseStyles.height = 'auto';
-    baseStyles.minWidth = `${buttonSize + paddingValue * 2}px`;
-    baseStyles.minHeight = `${buttonSize + paddingValue * 2}px`;
+  let buttonSize: number;
+  if (typeof size === 'string' && size in SIZE) {
+    // It's a SIZE token (e.g., 'md', 'sm', etc.)
+    buttonSize = SIZE[size as Size];
+  } else if (typeof size === 'number') {
+    // It's a number in pixels
+    buttonSize = size;
+  } else {
+    return baseStyles;
   }
+
+  // Set width and height based on size, including padding
+  baseStyles.width = 'auto';
+  baseStyles.height = 'auto';
+  baseStyles.minWidth = `${buttonSize + paddingValue * 2}px`;
+  baseStyles.minHeight = `${buttonSize + paddingValue * 2}px`;
 
   return baseStyles;
 };

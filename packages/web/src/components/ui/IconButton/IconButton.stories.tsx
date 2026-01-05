@@ -41,6 +41,18 @@ const meta = {
         ])
       ),
     },
+    circular: {
+      control: 'boolean',
+    },
+    component: {
+      control: false,
+    },
+    onClick: {
+      control: false,
+    },
+    ref: {
+      control: false,
+    },
   },
 } satisfies Meta<typeof IconButton>;
 
@@ -50,8 +62,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     onClick: () => console.log('Clicked'),
-    children: <SearchIcon />,
+    size: 'sm',
+    padding: 'xsm',
   },
+  render: (args) => (
+    <IconButton {...args}>
+      <Icon component={SearchIcon} size={args.size} />
+    </IconButton>
+  ),
 };
 
 export const WithSizeTokens: Story = {
