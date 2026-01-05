@@ -1,4 +1,4 @@
-import { WHITESPACE } from '@common/theme';
+import { WHITESPACE, WhitespaceSize } from '@common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { ImageProps } from './Image.types';
 
@@ -13,11 +13,17 @@ export const imageStyles = ({
         ? `${WHITESPACE.sm}px`
         : '0';
 
-  const dimension = size
-    ? typeof size === 'number'
-      ? `${size}px`
-      : size
-    : 'auto';
+  let dimension: string = 'auto';
+
+  if (size !== undefined) {
+    if (typeof size === 'number') {
+      dimension = `${size}px`;
+    } else if (typeof size === 'string' && size in WHITESPACE) {
+      dimension = `${WHITESPACE[size as WhitespaceSize] * 4}px`;
+    } else {
+      dimension = size;
+    }
+  }
 
   return {
     width: dimension,
