@@ -68,9 +68,9 @@ export const SEVERITY_COLORS = {
     text: '#b02a37',
   },
   [SeverityContexts.INFO]: {
-    base: COLORS.PURPLE,
+    base: COLORS.BLUE,
     contrast: COLORS.WHITE,
-    text: '#4d23b3',
+    text: '#0a58ca',
   },
   [SeverityContexts.PLAIN]: {
     base: COLORS.GRAY_300,
@@ -95,7 +95,7 @@ export const ELEMENT_COLORS = {
   BODY: '#F4F6FA',
   BOX_SHADOW: '#523F69',
   CODE: '#B93993',
-  LINK: THEME_COLORS[ThemeContexts.PRIMARY].text,
+  LINK: SEVERITY_COLORS[SeverityContexts.INFO].text,
 } as const;
 
 /**
