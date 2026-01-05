@@ -26,6 +26,13 @@ const config = {
         '@common': path.resolve(__dirname, '../../common/dist/src'),
       };
     }
+
+    // Add support for font files in CSS
+    config.module.rules.push({
+      test: /\.(woff|woff2|eot|ttf|otf)$/i,
+      type: 'asset/resource',
+    });
+
     return config;
   },
 };

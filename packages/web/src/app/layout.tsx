@@ -1,5 +1,6 @@
 import { Providers } from './providers';
 import { AlertsToast, MainLayout, PortalHeaderBar } from '@/components/common';
+import '@/theme/fonts.css';
 import '@/theme/globals.css';
 
 export const metadata = {
