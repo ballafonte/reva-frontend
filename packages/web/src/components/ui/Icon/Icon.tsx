@@ -3,6 +3,8 @@ import { iconStyles } from './Icon.styles';
 import { IconProps } from './Icon.types';
 
 export const Icon = (props: IconProps) => {
-  const styles = iconStyles();
-  return <SvgIcon {...props} sx={styles} />;
+  const { size, ...rest } = props;
+  const styles = iconStyles({ size });
+
+  return <SvgIcon {...rest} sx={styles} />;
 };

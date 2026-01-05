@@ -1,4 +1,4 @@
-import { WHITESPACE, WhitespaceSize } from '@common/theme';
+import { SIZE, Size, WHITESPACE, WhitespaceSize } from '@common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { ImageProps } from './Image.types';
 
@@ -18,9 +18,14 @@ export const imageStyles = ({
   if (size !== undefined) {
     if (typeof size === 'number') {
       dimension = `${size}px`;
+    } else if (typeof size === 'string' && size in SIZE) {
+      // It's a SIZE token (e.g., 'md', 'sm', etc.)
+      dimension = `${SIZE[size as Size]}px`;
     } else if (typeof size === 'string' && size in WHITESPACE) {
-      dimension = `${WHITESPACE[size as WhitespaceSize] * 4}px`;
+      // It's a WHITESPACE token (e.g., 'md', 'sm', etc.) - multiply by 2
+      dimension = `${WHITESPACE[size as WhitespaceSize] * 2}px`;
     } else {
+      // It's a custom CSS value (e.g., '100px', '50%', etc.)
       dimension = size;
     }
   }
