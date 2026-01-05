@@ -1,5 +1,6 @@
 import { Contexts } from '@common/theme';
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 import { Button } from './Button';
 
 const contextKnobOptions = Object.values(Contexts);
@@ -11,6 +12,9 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  args: {
+    onClick: fn(),
+  },
   argTypes: {
     variant: {
       control: false,
@@ -47,6 +51,7 @@ export const Contained: Story = {
     children: 'Button',
     context: 'primary',
     variant: 'contained',
+    onClick: fn(),
   },
 };
 
@@ -56,6 +61,7 @@ export const Outlined: Story = {
     children: 'Button',
     context: 'primary',
     variant: 'outlined',
+    onClick: fn(),
   },
 };
 
@@ -65,5 +71,6 @@ export const Text: Story = {
     children: 'Button',
     context: 'primary',
     variant: 'text',
+    onClick: fn(),
   },
 };

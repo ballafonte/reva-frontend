@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 import { SIZE, WHITESPACE } from '@common/theme';
 import { IconButton } from './IconButton';
 import { Box } from '@mui/material';
@@ -20,6 +21,9 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  args: {
+    onClick: fn(),
+  },
   argTypes: {
     size: {
       control: 'select',
@@ -61,7 +65,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    onClick: () => console.log('Clicked'),
+    onClick: fn(),
     size: 'sm',
     padding: 'xsm',
   },
@@ -74,7 +78,7 @@ export const Default: Story = {
 
 export const WithSizeTokens: Story = {
   args: {
-    onClick: () => {},
+    onClick: fn(),
   },
   render: () => (
     <Box
@@ -82,7 +86,7 @@ export const WithSizeTokens: Story = {
     >
       {sizeOptions.map((size) => (
         <Box key={size} sx={{ textAlign: 'center' }}>
-          <IconButton onClick={() => {}} size={size}>
+          <IconButton onClick={fn()} size={size}>
             <Icon component={SearchIcon} size={size} />
           </IconButton>
           <Box sx={{ marginTop: '4px', fontSize: '12px' }}>
@@ -101,19 +105,19 @@ export const WithSizeTokens: Story = {
 export const Circular: Story = {
   render: () => (
     <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-      <IconButton onClick={() => {}} size="xsm" circular>
+      <IconButton onClick={fn()} size="xsm" circular>
         <Icon component={SearchIcon} size="xsm" />
       </IconButton>
-      <IconButton onClick={() => {}} size="sm" circular>
+      <IconButton onClick={fn()} size="sm" circular>
         <Icon component={SearchIcon} size="sm" />
       </IconButton>
-      <IconButton onClick={() => {}} size="md" circular>
+      <IconButton onClick={fn()} size="md" circular>
         <Icon component={SearchIcon} size="md" />
       </IconButton>
-      <IconButton onClick={() => {}} size="lg" circular>
+      <IconButton onClick={fn()} size="lg" circular>
         <Icon component={SearchIcon} size="lg" />
       </IconButton>
-      <IconButton onClick={() => {}} size="xlg" circular>
+      <IconButton onClick={fn()} size="xlg" circular>
         <Icon component={SearchIcon} size="xlg" />
       </IconButton>
     </Box>
@@ -123,16 +127,16 @@ export const Circular: Story = {
 export const DifferentIcons: Story = {
   render: () => (
     <Box sx={{ display: 'flex', gap: 2 }}>
-      <IconButton onClick={() => {}}>
+      <IconButton onClick={fn()}>
         <SearchIcon />
       </IconButton>
-      <IconButton onClick={() => {}}>
+      <IconButton onClick={fn()}>
         <CloseIcon />
       </IconButton>
-      <IconButton onClick={() => {}}>
+      <IconButton onClick={fn()}>
         <GridViewIcon />
       </IconButton>
-      <IconButton onClick={() => {}}>
+      <IconButton onClick={fn()}>
         <MoreVertIcon />
       </IconButton>
     </Box>
@@ -141,7 +145,7 @@ export const DifferentIcons: Story = {
 
 export const Disabled: Story = {
   args: {
-    onClick: () => {},
+    onClick: fn(),
     disabled: true,
     children: <SearchIcon />,
   },
@@ -150,13 +154,13 @@ export const Disabled: Story = {
 export const Colored: Story = {
   render: () => (
     <Box sx={{ display: 'flex', gap: 2 }}>
-      <IconButton onClick={() => {}} color="primary">
+      <IconButton onClick={fn()} color="primary">
         <SearchIcon />
       </IconButton>
-      <IconButton onClick={() => {}} color="secondary">
+      <IconButton onClick={fn()} color="secondary">
         <CloseIcon />
       </IconButton>
-      <IconButton onClick={() => {}} color="default">
+      <IconButton onClick={fn()} color="default">
         <CloseIcon />
       </IconButton>
     </Box>
