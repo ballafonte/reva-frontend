@@ -5,5 +5,5 @@ import { InputProps } from './Input.types';
 export const Input = (props: InputProps) => {
   const { variant = 'outlined', ...rest } = props;
   const styles = inputStyles();
-  return <TextField {...rest} variant={variant} sx={styles} />;
+  return <TextField {...rest} variant={variant} sx={styles} size="small" />;
 };
