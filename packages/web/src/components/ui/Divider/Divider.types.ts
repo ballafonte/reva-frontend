@@ -1,6 +1,14 @@
-import { DividerProps as MuiDividerProps } from '@mui/material';
+import { ContextType, WHITESPACE } from '@common/theme';
+import { SvgIconProps } from '@mui/material';
 
-export type DividerProps = MuiDividerProps & {
-  orientation?: 'horizontal' | 'vertical';
-  variant?: 'fullWidth' | 'inset' | 'middle';
+export type DividerProps = {
+  color?: ContextType;
+  containerStyle?: React.CSSProperties;
+  icon?: React.ElementType;
+  iconLeft?: boolean;
+  iconRight?: boolean;
+  lineThickness?: number;
+  onClick?: (_: React.MouseEvent) => void;
+  size?: keyof typeof WHITESPACE;
+  style?: React.CSSProperties;
 };

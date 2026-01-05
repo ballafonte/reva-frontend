@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Contexts } from '@common/theme';
 import { Divider } from './Divider';
 import { Box, Typography } from '@mui/material';
+import StarIcon from '@mui/icons-material/Star';
+
+const contextOptions = Object.values(Contexts);
 
 const meta = {
   title: 'UI/Divider',
@@ -9,6 +13,12 @@ const meta = {
     layout: 'padded',
   },
   tags: ['autodocs'],
+  argTypes: {
+    color: {
+      control: 'select',
+      options: contextOptions,
+    },
+  },
 } satisfies Meta<typeof Divider>;
 
 export default meta;
@@ -24,31 +34,30 @@ export const Default: Story = {
   ),
 };
 
-export const Vertical: Story = {
+export const WithIcon: Story = {
   render: () => (
-    <Box sx={{ display: 'flex', height: 100 }}>
-      <Typography>Left</Typography>
-      <Divider orientation="vertical" flexItem />
-      <Typography>Right</Typography>
+    <Box>
+      <Divider icon={StarIcon} />
     </Box>
   ),
 };
 
-export const Inset: Story = {
+export const WithIconLeft: Story = {
   render: () => (
     <Box>
-      <Typography>Content above</Typography>
-      <Divider variant="inset" />
-      <Typography>Content below</Typography>
+      <Divider icon={StarIcon} iconLeft />
     </Box>
   ),
 };
 
-export const Middle: Story = {
-  render: () => (
+export const WithColor: Story = {
+  args: {
+    color: 'primary',
+  },
+  render: (args) => (
     <Box>
       <Typography>Content above</Typography>
-      <Divider variant="middle" />
+      <Divider {...args} />
       <Typography>Content below</Typography>
     </Box>
   ),
