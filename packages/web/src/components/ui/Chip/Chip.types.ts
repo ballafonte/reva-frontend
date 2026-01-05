@@ -1,10 +1,11 @@
 import { ContextType } from '@common/theme';
+import { ReactNode } from 'react';
 
-export type TagProps = {
+export type ChipProps = {
   label: string;
   context?: ContextType;
-  onDelete?: () => void;
-  deleteIcon?: React.ReactElement;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
   size?: 'small' | 'medium';
   variant?: 'filled' | 'outlined';
 };

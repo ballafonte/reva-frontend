@@ -1,13 +1,13 @@
 import { CONTEXT_COLORS, WHITESPACE } from '@common/theme';
 import { ContextType } from '@common/theme';
 import { SxProps, Theme } from '@mui/material';
-import { TagProps } from './Tag.types';
+import { ChipProps } from './Chip.types';
 
-export const tagStyles = ({
+export const chipStyles = ({
   context = 'primary',
   size = 'medium',
   variant = 'filled',
-}: Pick<TagProps, 'context' | 'size' | 'variant'>): SxProps<Theme> => {
+}: Pick<ChipProps, 'context' | 'size' | 'variant'>): SxProps<Theme> => {
   const contextColor =
     CONTEXT_COLORS[context as ContextType] || CONTEXT_COLORS.primary;
   const padding =

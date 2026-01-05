@@ -1,0 +1,93 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { Info as InfoIcon, Cancel as CancelIcon } from '@mui/icons-material';
+import { Chip } from './Chip';
+import { Box } from '@mui/material';
+import { IconButton } from '../IconButton';
+import { Icon } from '../Icon';
+import { fn } from '@storybook/test';
+
+const meta = {
+  title: 'UI/Chip',
+  component: Chip,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    prefix: { control: false },
+    suffix: { control: false },
+  },
+} satisfies Meta<typeof Chip>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+const ChipPrefix = () => <Icon component={InfoIcon} size="xsm" />;
+
+const ChipSuffix = () => (
+  <IconButton onClick={fn()} padding="none" size="sm" circular>
+    <Icon component={CancelIcon} />
+  </IconButton>
+);
+
+export const Default: Story = {
+  args: {
+    label: 'Work',
+    context: 'primary',
+  },
+};
+
+export const WithSuffix: Story = {
+  args: {
+    label: 'Source',
+    context: 'primary',
+    suffix: <ChipSuffix />,
+  },
+};
+
+export const WithPrefix: Story = {
+  args: {
+    label: 'Work',
+    context: 'primary',
+    prefix: <ChipPrefix />,
+  },
+};
+
+export const WithPrefixAndSuffix: Story = {
+  args: {
+    label: 'Tag',
+    context: 'primary',
+    prefix: <ChipPrefix />,
+    suffix: <ChipSuffix />,
+  },
+};
+
+export const Outlined: Story = {
+  args: {
+    label: 'Font',
+    context: 'primary',
+    variant: 'outlined',
+  },
+};
+
+export const Small: Story = {
+  args: {
+    label: 'Small Chip',
+    context: 'primary',
+    size: 'small',
+  },
+};
+
+export const DifferentColors: Story = {
+  args: {
+    label: 'Work',
+    context: 'primary',
+  },
+  render: () => (
+    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+      <Chip label="Work" context="primary" />
+      <Chip label="Source" context="info" />
+      <Chip label="Font" context="success" />
+    </Box>
+  ),
+};
