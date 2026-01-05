@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import GridViewIcon from '@mui/icons-material/GridView';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Icon } from '../Icon';
+import { IconWrapper } from '../IconWrapper';
 
 const sizeOptions = Object.keys(SIZE) as Array<keyof typeof SIZE>;
 const whitespaceOptions = Object.keys(WHITESPACE) as Array<
@@ -71,7 +71,7 @@ export const Default: Story = {
   },
   render: (args) => (
     <IconButton {...args}>
-      <Icon component={SearchIcon} size={args.size} />
+      <IconWrapper component={SearchIcon} size={args.size} />
     </IconButton>
   ),
 };
@@ -87,7 +87,7 @@ export const WithSizeTokens: Story = {
       {sizeOptions.map((size) => (
         <Box key={size} sx={{ textAlign: 'center' }}>
           <IconButton onClick={fn()} size={size}>
-            <Icon component={SearchIcon} size={size} />
+            <IconWrapper component={SearchIcon} size={size} />
           </IconButton>
           <Box sx={{ marginTop: '4px', fontSize: '12px' }}>
             SIZE.{size}
@@ -106,19 +106,19 @@ export const Circular: Story = {
   render: () => (
     <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
       <IconButton onClick={fn()} size="xsm" circular>
-        <Icon component={SearchIcon} size="xsm" />
+        <IconWrapper component={SearchIcon} size="xsm" />
       </IconButton>
       <IconButton onClick={fn()} size="sm" circular>
-        <Icon component={SearchIcon} size="sm" />
+        <IconWrapper component={SearchIcon} size="sm" />
       </IconButton>
       <IconButton onClick={fn()} size="md" circular>
-        <Icon component={SearchIcon} size="md" />
+        <IconWrapper component={SearchIcon} size="md" />
       </IconButton>
       <IconButton onClick={fn()} size="lg" circular>
-        <Icon component={SearchIcon} size="lg" />
+        <IconWrapper component={SearchIcon} size="lg" />
       </IconButton>
       <IconButton onClick={fn()} size="xlg" circular>
-        <Icon component={SearchIcon} size="xlg" />
+        <IconWrapper component={SearchIcon} size="xlg" />
       </IconButton>
     </Box>
   ),

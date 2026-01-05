@@ -3,7 +3,7 @@ import { Info as InfoIcon, Cancel as CancelIcon } from '@mui/icons-material';
 import { Chip } from './Chip';
 import { Box } from '@mui/material';
 import { IconButton } from '../IconButton';
-import { Icon } from '../Icon';
+import { IconWrapper } from '../IconWrapper';
 import { fn } from '@storybook/test';
 
 const meta = {
@@ -22,11 +22,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const ChipPrefix = () => <Icon component={InfoIcon} size="xsm" />;
+const ChipPrefix = () => <IconWrapper component={InfoIcon} size="xsm" />;
 
 const ChipSuffix = () => (
   <IconButton onClick={fn()} padding="none" size="sm" circular>
-    <Icon component={CancelIcon} />
+    <IconWrapper component={CancelIcon} />
   </IconButton>
 );
 

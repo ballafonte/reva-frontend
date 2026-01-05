@@ -1,7 +1,7 @@
 import { CONTEXT_COLORS, WHITESPACE } from '@common/theme';
 import { ContextType } from '@common/theme';
 import React from 'react';
-import { Icon } from '../Icon';
+import { IconWrapper } from '../IconWrapper';
 import { dividerStyles, dividerHorizontalRuleStyles } from './Divider.styles';
 import { DividerProps } from './Divider.types';
 
@@ -29,7 +29,7 @@ export const Divider: React.FC<DividerProps> = ({
     >
       {!iconLeft && <hr style={{ ...hrStyles, ...style }} />}
       {IconComponent && (
-        <Icon
+        <IconWrapper
           component={IconComponent}
           sx={{
             color: color

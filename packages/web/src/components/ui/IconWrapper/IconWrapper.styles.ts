@@ -1,10 +1,10 @@
 import { SIZE, Size } from '@common/theme';
 import { SxProps, Theme } from '@mui/material';
-import { IconProps } from './Icon.types';
+import { IconWrapperProps } from './IconWrapper.types';
 
-export const iconStyles = ({
+export const iconWrapperStyles = ({
   size = 'sm',
-}: Pick<IconProps, 'size'>): SxProps<Theme> => {
+}: Pick<IconWrapperProps, 'size'>): SxProps<Theme> => {
   const baseStyles: SxProps<Theme> = {
     display: 'inline-flex',
     alignItems: 'center',
