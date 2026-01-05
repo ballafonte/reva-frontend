@@ -6,7 +6,11 @@ export const buttonStyles = ({
   size,
   variant,
   context,
-}: ButtonProps): SxProps<Theme> => {
+  isLoading,
+  muiVariant,
+}: ButtonProps & {
+  muiVariant?: 'contained' | 'outlined' | 'text';
+}): SxProps<Theme> => {
   // For the new 'text' variant, make it look like a link
   if (variant === 'text') {
     return {
@@ -38,7 +42,7 @@ export const buttonStyles = ({
     };
   }
 
-  // For other variants, apply border radius
+  // Base styles for other variants
   const borderRadius =
     size === 'small'
       ? WHITESPACE.sm
@@ -46,7 +50,100 @@ export const buttonStyles = ({
         ? WHITESPACE.sm
         : WHITESPACE.md;
 
-  return {
+  const baseStyles: SxProps<Theme> = {
     borderRadius: `${borderRadius}px`,
   };
+
+  // Apply active state styles when loading
+  if (isLoading && muiVariant) {
+    const loadingStyles: SxProps<Theme> = {
+      ...baseStyles,
+      // Use MUI's active state by applying the same styles as :active pseudo-class
+      ...(muiVariant === 'contained' && {
+        backgroundColor: (theme) => {
+          // Access the color from theme.palette using the context
+          // MUI handles the color prop, so we can use the same approach
+          const paletteColor =
+            context && context in theme.palette
+              ? (theme.palette as any)[context]
+              : theme.palette.primary;
+          return paletteColor?.dark || theme.palette.primary.dark;
+        },
+        '&:hover': {
+          backgroundColor: (theme) => {
+            const paletteColor =
+              context && context in theme.palette
+                ? (theme.palette as any)[context]
+                : theme.palette.primary;
+            return paletteColor?.dark || theme.palette.primary.dark;
+          },
+        },
+      }),
+      ...(muiVariant === 'outlined' && {
+        borderColor: (theme) => {
+          const paletteColor =
+            context && context in theme.palette
+              ? (theme.palette as any)[context]
+              : theme.palette.primary;
+          return paletteColor?.main || theme.palette.primary.main;
+        },
+        backgroundColor: (theme) => {
+          const paletteColor =
+            context && context in theme.palette
+              ? (theme.palette as any)[context]
+              : theme.palette.primary;
+          const mainColor = paletteColor?.main || theme.palette.primary.main;
+          return theme.palette.mode === 'dark'
+            ? `${mainColor}14`
+            : `${mainColor}08`;
+        },
+        '&:hover': {
+          borderColor: (theme) => {
+            const paletteColor =
+              context && context in theme.palette
+                ? (theme.palette as any)[context]
+                : theme.palette.primary;
+            return paletteColor?.main || theme.palette.primary.main;
+          },
+          backgroundColor: (theme) => {
+            const paletteColor =
+              context && context in theme.palette
+                ? (theme.palette as any)[context]
+                : theme.palette.primary;
+            const mainColor = paletteColor?.main || theme.palette.primary.main;
+            return theme.palette.mode === 'dark'
+              ? `${mainColor}14`
+              : `${mainColor}08`;
+          },
+        },
+      }),
+      ...(muiVariant === 'text' && {
+        backgroundColor: (theme) => {
+          const paletteColor =
+            context && context in theme.palette
+              ? (theme.palette as any)[context]
+              : theme.palette.primary;
+          const mainColor = paletteColor?.main || theme.palette.primary.main;
+          return theme.palette.mode === 'dark'
+            ? `${mainColor}14`
+            : `${mainColor}08`;
+        },
+        '&:hover': {
+          backgroundColor: (theme) => {
+            const paletteColor =
+              context && context in theme.palette
+                ? (theme.palette as any)[context]
+                : theme.palette.primary;
+            const mainColor = paletteColor?.main || theme.palette.primary.main;
+            return theme.palette.mode === 'dark'
+              ? `${mainColor}14`
+              : `${mainColor}08`;
+          },
+        },
+      }),
+    };
+    return loadingStyles;
+  }
+
+  return baseStyles;
 };

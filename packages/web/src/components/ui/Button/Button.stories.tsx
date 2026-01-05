@@ -29,6 +29,9 @@ const meta = {
     disabled: {
       control: 'boolean',
     },
+    isLoading: {
+      control: 'boolean',
+    },
     fullWidth: {
       control: 'boolean',
     },
@@ -119,6 +122,17 @@ export const FullWidth: Story = {
     context: 'primary',
     variant: 'contained',
     fullWidth: true,
+    onClick: fn(),
+  },
+};
+
+// Loading state story
+export const Loading: Story = {
+  args: {
+    children: 'Loading Button',
+    context: 'primary',
+    variant: 'contained',
+    isLoading: true,
     onClick: fn(),
   },
 };
