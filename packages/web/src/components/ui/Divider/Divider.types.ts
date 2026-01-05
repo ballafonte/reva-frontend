@@ -1,5 +1,4 @@
 import { ContextType, WHITESPACE } from '@common/theme';
-import { SvgIconProps } from '@mui/material';
 
 export type DividerProps = {
   color?: ContextType;

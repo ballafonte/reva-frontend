@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import { palette } from './palette';
-import { ButtonMui } from '@/components/ui/Button';
+import { ButtonMuiConfig } from '@/components/ui/Button';
 import {
   AppBarMuiConfig,
   CardMuiConfig,
@@ -37,7 +37,7 @@ export const theme = createTheme({
   },
   components: {
     MuiAppBar: AppBarMuiConfig,
-    MuiButton: ButtonMui,
+    MuiButton: ButtonMuiConfig,
     MuiCard: CardMuiConfig,
     MuiDialog: DialogMuiConfig,
     MuiDrawer: DrawerMuiConfig,

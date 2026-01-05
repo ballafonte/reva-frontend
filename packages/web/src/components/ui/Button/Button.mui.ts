@@ -1,13 +1,14 @@
+import { Components, CSSObject } from '@mui/material';
 import { SEVERITY_COLORS, SeverityContexts } from '@reva-frontend/common';
 
-export const ButtonMui = {
+export const ButtonMuiConfig = {
   styleOverrides: {
     root: ({
       ownerState,
     }: {
       ownerState: { color?: string; variant?: string };
     }) => {
-      const baseStyles: Record<string, any> = {};
+      const baseStyles: CSSObject = {};
 
       // Add subtle shadow for contained buttons
       if (ownerState.variant === 'contained') {
@@ -36,4 +37,4 @@ export const ButtonMui = {
       return baseStyles;
     },
   },
-};
+} as const satisfies Components['MuiButton'];

@@ -1,4 +1,4 @@
-import { COLORS, WHITESPACE } from '@common/theme';
+import { WHITESPACE } from '@common/theme';
 import { SxProps, Theme } from '@mui/material';
 
 export const panelFooterStyles = (): SxProps<Theme> => {

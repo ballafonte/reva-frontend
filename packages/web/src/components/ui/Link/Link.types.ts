@@ -1,5 +1,4 @@
 import { ContextType } from '@common/theme';
-import { SxProps, Theme } from '@mui/material';
 import { LinkProps as MuiLinkProps } from '@mui/material';
 
 export type LinkProps = {

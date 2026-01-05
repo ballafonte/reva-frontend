@@ -1,6 +1,6 @@
 'use client';
 
-import { AppBar, Toolbar, Typography, IconButton, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { printConsole } from '@common/utils';
 import { useAuthContext } from '@reva-frontend/common';

@@ -1,6 +1,5 @@
-import { COLORS, WHITESPACE } from '@common/theme';
+import { WHITESPACE } from '@common/theme';
 import { SxProps, Theme } from '@mui/material';
-import { PanelHeaderProps } from './PanelHeader.types';
 
 export const panelHeaderStyles = (): SxProps<Theme> => {
   return {
