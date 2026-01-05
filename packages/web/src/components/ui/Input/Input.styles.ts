@@ -19,6 +19,7 @@ export const inputStyles = ({
 
   return {
     '& .MuiInputLabel-root': {
+      ...(contextColor && { color: `${contextColor.text} !important` }),
       '&.Mui-focused': {
         ...(contextColor && { color: `${contextColor.text} !important` }),
       },
@@ -26,10 +27,14 @@ export const inputStyles = ({
     '& .MuiOutlinedInput-root': {
       borderRadius: `${WHITESPACE.sm}px`,
       '& fieldset': {
-        borderColor: ELEMENT_COLORS.BORDER,
+        borderColor: contextColor
+          ? `${contextColor.base} !important`
+          : ELEMENT_COLORS.BORDER,
       },
       '&:hover fieldset': {
-        borderColor: COLORS.GRAY_400,
+        borderColor: contextColor
+          ? `${contextColor.base} !important`
+          : COLORS.GRAY_400,
       },
       '&.Mui-focused fieldset': {
         ...(contextColor && { borderColor: `${contextColor.base} !important` }),
@@ -51,15 +56,19 @@ export const inputStyles = ({
     },
     '& .MuiInput-root': {
       '&::before': {
-        borderBottomColor: ELEMENT_COLORS.BORDER,
+        borderBottomColor: contextColor
+          ? `${contextColor.base} !important`
+          : ELEMENT_COLORS.BORDER,
       },
       '&:hover:not(.Mui-disabled)::before': {
-        borderBottomColor: COLORS.GRAY_400,
+        borderBottomColor: contextColor
+          ? `${contextColor.base} !important`
+          : COLORS.GRAY_400,
       },
       '&.Mui-focused::after': {
-        ...(contextColor && {
-          borderBottomColor: `${contextColor.base} !important`,
-        }),
+        borderBottomColor: contextColor
+          ? `${contextColor.base} !important`
+          : undefined,
       },
     },
   };
