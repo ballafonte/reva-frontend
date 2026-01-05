@@ -5,6 +5,7 @@ export * from './input';
 export * from './layers';
 export * from './layout';
 export * from './responsiveness';
+export * from './size';
 export * from './theme.types';
 export * from './typography';
 export * from './whitespace';
