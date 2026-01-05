@@ -7,7 +7,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import GridViewIcon from '@mui/icons-material/GridView';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { IconWrapper } from '../IconWrapper';
 
 const sizeOptions = Object.keys(SIZE) as Array<keyof typeof SIZE>;
 const whitespaceOptions = Object.keys(WHITESPACE) as Array<
@@ -66,19 +65,16 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     onClick: fn(),
+    component: SearchIcon,
     size: 'sm',
     padding: 'xsm',
   },
-  render: (args) => (
-    <IconButton {...args}>
-      <IconWrapper component={SearchIcon} size={args.size} />
-    </IconButton>
-  ),
 };
 
 export const WithSizeTokens: Story = {
   args: {
     onClick: fn(),
+    component: SearchIcon,
   },
   render: () => (
     <Box
@@ -86,9 +82,7 @@ export const WithSizeTokens: Story = {
     >
       {sizeOptions.map((size) => (
         <Box key={size} sx={{ textAlign: 'center' }}>
-          <IconButton onClick={fn()} size={size}>
-            <IconWrapper component={SearchIcon} size={size} />
-          </IconButton>
+          <IconButton onClick={fn()} component={SearchIcon} size={size} />
           <Box sx={{ marginTop: '4px', fontSize: '12px' }}>
             SIZE.{size}
             <br />({SIZE[size]}px)
@@ -103,42 +97,32 @@ export const WithSizeTokens: Story = {
 };
 
 export const Circular: Story = {
+  args: {
+    onClick: fn(),
+    component: SearchIcon,
+  },
   render: () => (
     <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-      <IconButton onClick={fn()} size="xsm" circular>
-        <IconWrapper component={SearchIcon} size="xsm" />
-      </IconButton>
-      <IconButton onClick={fn()} size="sm" circular>
-        <IconWrapper component={SearchIcon} size="sm" />
-      </IconButton>
-      <IconButton onClick={fn()} size="md" circular>
-        <IconWrapper component={SearchIcon} size="md" />
-      </IconButton>
-      <IconButton onClick={fn()} size="lg" circular>
-        <IconWrapper component={SearchIcon} size="lg" />
-      </IconButton>
-      <IconButton onClick={fn()} size="xlg" circular>
-        <IconWrapper component={SearchIcon} size="xlg" />
-      </IconButton>
+      <IconButton onClick={fn()} component={SearchIcon} size="xsm" circular />
+      <IconButton onClick={fn()} component={SearchIcon} size="sm" circular />
+      <IconButton onClick={fn()} component={SearchIcon} size="md" circular />
+      <IconButton onClick={fn()} component={SearchIcon} size="lg" circular />
+      <IconButton onClick={fn()} component={SearchIcon} size="xlg" circular />
     </Box>
   ),
 };
 
 export const DifferentIcons: Story = {
+  args: {
+    onClick: fn(),
+    component: SearchIcon,
+  },
   render: () => (
     <Box sx={{ display: 'flex', gap: 2 }}>
-      <IconButton onClick={fn()}>
-        <SearchIcon />
-      </IconButton>
-      <IconButton onClick={fn()}>
-        <CloseIcon />
-      </IconButton>
-      <IconButton onClick={fn()}>
-        <GridViewIcon />
-      </IconButton>
-      <IconButton onClick={fn()}>
-        <MoreVertIcon />
-      </IconButton>
+      <IconButton onClick={fn()} component={SearchIcon} />
+      <IconButton onClick={fn()} component={CloseIcon} />
+      <IconButton onClick={fn()} component={GridViewIcon} />
+      <IconButton onClick={fn()} component={MoreVertIcon} />
     </Box>
   ),
 };
@@ -146,23 +130,21 @@ export const DifferentIcons: Story = {
 export const Disabled: Story = {
   args: {
     onClick: fn(),
+    component: SearchIcon,
     disabled: true,
-    children: <SearchIcon />,
   },
 };
 
 export const Colored: Story = {
+  args: {
+    onClick: fn(),
+    component: SearchIcon,
+  },
   render: () => (
     <Box sx={{ display: 'flex', gap: 2 }}>
-      <IconButton onClick={fn()} color="primary">
-        <SearchIcon />
-      </IconButton>
-      <IconButton onClick={fn()} color="secondary">
-        <CloseIcon />
-      </IconButton>
-      <IconButton onClick={fn()} color="default">
-        <CloseIcon />
-      </IconButton>
+      <IconButton onClick={fn()} component={SearchIcon} color="primary" />
+      <IconButton onClick={fn()} component={CloseIcon} color="secondary" />
+      <IconButton onClick={fn()} component={CloseIcon} color="default" />
     </Box>
   ),
 };

@@ -25,9 +25,13 @@ type Story = StoryObj<typeof meta>;
 const ChipPrefix = () => <IconWrapper component={InfoIcon} size="xsm" />;
 
 const ChipSuffix = () => (
-  <IconButton onClick={fn()} padding="none" size="sm" circular>
-    <IconWrapper component={CancelIcon} />
-  </IconButton>
+  <IconButton
+    onClick={fn()}
+    component={CancelIcon}
+    padding="none"
+    size="xsm"
+    circular
+  />
 );
 
 export const Default: Story = {

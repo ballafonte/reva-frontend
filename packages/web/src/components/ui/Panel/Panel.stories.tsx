@@ -25,9 +25,10 @@ type Story = StoryObj<typeof meta>;
 
 const HeaderSuffix = () => {
   return (
-    <IconButton onClick={() => console.log('More options')}>
-      <MoreVertIcon />
-    </IconButton>
+    <IconButton
+      onClick={() => console.log('More options')}
+      component={MoreVertIcon}
+    />
   );
 };
 

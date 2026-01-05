@@ -36,6 +36,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const ShowPasswordInputSuffix = (props: {
+  onShowPassword: () => void;
+  shownPassword: boolean;
+}) => (
+  <IconButton
+    onClick={props.onShowPassword}
+    component={props.shownPassword ? VisibilityOffIcon : VisibilityIcon}
+    circular
+  />
+);
+
 export const Default: Story = {
   args: {
     label: 'Label',
@@ -80,17 +91,17 @@ export const WithPrefix: Story = {
 
 export const WithSuffix: Story = {
   render: () => {
-    const suffix = (
-      <IconButton onClick={() => {}} size="sm">
-        <VisibilityIcon />
-      </IconButton>
-    );
     return (
       <Input
         label="Password"
         type="password"
         placeholder="Enter password"
-        suffix={suffix}
+        suffix={
+          <ShowPasswordInputSuffix
+            onShowPassword={() => {}}
+            shownPassword={false}
+          />
+        }
       />
     );
   },
@@ -127,9 +138,10 @@ const PasswordWithToggleComponent = () => {
       placeholder="Enter password"
       prefix={<LockIcon />}
       suffix={
-        <IconButton onClick={() => setShowPassword(!showPassword)} size="sm">
-          {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-        </IconButton>
+        <ShowPasswordInputSuffix
+          onShowPassword={() => setShowPassword(!showPassword)}
+          shownPassword={showPassword}
+        />
       }
     />
   );
