@@ -5,8 +5,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { Contexts } from '@common/theme';
 import { IconButton } from '../IconButton';
 import { Input } from './Input';
+
+const contextOptions = Object.values(Contexts);
 
 const meta = {
   title: 'UI/Input',
@@ -16,6 +19,16 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
+    context: {
+      control: 'radio',
+      options: contextOptions,
+      labels: {
+        undefined: 'Default',
+        ...Object.fromEntries(contextOptions.map((key) => [key, key])),
+      },
+    },
+    prefix: { control: false },
+    suffix: { control: false },
     variant: { control: 'radio', options: ['outlined', 'filled', 'standard'] },
   },
 } satisfies Meta<typeof Input>;

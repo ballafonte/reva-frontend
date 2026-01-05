@@ -3,8 +3,8 @@ import { inputStyles } from './Input.styles';
 import { InputProps } from './Input.types';
 
 export const Input = (props: InputProps) => {
-  const { variant = 'outlined', prefix, suffix, ...rest } = props;
-  const styles = inputStyles();
+  const { variant = 'outlined', prefix, suffix, context, ...rest } = props;
+  const styles = inputStyles({ context });
 
   // Map prefix to startAdornment and suffix to endAdornment
   const startAdornment = prefix ? (

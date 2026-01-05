@@ -1,10 +1,12 @@
 import { ReactNode } from 'react';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material';
+import { ContextType } from '@common/theme';
 
 export type InputProps = Omit<
   MuiTextFieldProps,
-  'component' | 'variant' | 'InputProps' | 'prefix'
+  'component' | 'variant' | 'InputProps' | 'prefix' | 'color'
 > & {
+  context?: ContextType;
   error?: boolean;
   helperText?: string;
   prefix?: ReactNode;
