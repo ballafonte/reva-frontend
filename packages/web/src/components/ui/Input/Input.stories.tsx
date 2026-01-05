@@ -43,11 +43,3 @@ export const WithError: Story = {
     helperText: 'This field is required',
   },
 };
-
-export const SearchInput: Story = {
-  args: {
-    placeholder: 'Q Search anything...',
-    variant: 'outlined',
-    fullWidth: true,
-  },
-};
