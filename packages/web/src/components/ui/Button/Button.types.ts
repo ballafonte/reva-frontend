@@ -6,5 +6,5 @@ export type ButtonProps = Omit<MuiButtonProps, 'color' | 'variant'> & {
   disabled?: boolean;
   isLoading?: boolean;
   onClick: () => void;
-  variant?: 'contained' | 'outlined' | 'text';
+  variant?: 'contained' | 'outlined' | 'ghost' | 'text';
 };

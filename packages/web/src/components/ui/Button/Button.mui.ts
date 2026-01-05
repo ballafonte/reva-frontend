@@ -14,7 +14,8 @@ export const ButtonMui = {
         baseStyles.boxShadow = '0 1px 1px rgba(0, 0, 0, 0.5)';
       }
 
-      // Use a darker color for plain buttons when using outlined or text variants
+      // Use a darker color for plain buttons when using outlined or ghost variants
+      // Note: 'ghost' maps to MUI's 'text' variant, so we check for 'text' here
       if (
         ownerState.color === 'plain' &&
         (ownerState.variant === 'outlined' || ownerState.variant === 'text')
