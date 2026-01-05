@@ -3,7 +3,7 @@ import { buttonStyles } from './Button.styles';
 import { ButtonProps } from './Button.types';
 
 export const Button = (props: ButtonProps) => {
-  const { variant, ...rest } = props;
+  const { variant, fullWidth, ...rest } = props;
   const styles = buttonStyles(props);
 
   // Map 'ghost' to MUI's 'text' variant, and handle new 'text' variant
@@ -17,10 +17,14 @@ export const Button = (props: ButtonProps) => {
     muiVariant = variant;
   }
 
+  // Don't allow fullWidth for text variant (link-like buttons should be inline)
+  const shouldUseFullWidth = variant === 'text' ? false : fullWidth;
+
   return (
     <MuiButton
       {...rest}
       variant={muiVariant}
+      fullWidth={shouldUseFullWidth}
       sx={styles}
       color={props.context}
     />

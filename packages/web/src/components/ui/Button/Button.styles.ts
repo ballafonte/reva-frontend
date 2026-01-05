@@ -13,6 +13,7 @@ export const buttonStyles = ({
       display: 'inline',
       padding: 0,
       minWidth: 'auto',
+      width: 'auto', // Explicitly prevent fullWidth from affecting text variant
       textTransform: 'none',
       fontSize: 'inherit',
       textDecoration: 'none',

@@ -1,7 +1,10 @@
 import { ContextType } from '@common/theme';
 import { ButtonProps as MuiButtonProps } from '@mui/material';
 
-export type ButtonProps = Omit<MuiButtonProps, 'color' | 'variant'> & {
+export type ButtonProps = Omit<
+  MuiButtonProps,
+  'color' | 'component' | 'variant'
+> & {
   context?: ContextType;
   disabled?: boolean;
   isLoading?: boolean;

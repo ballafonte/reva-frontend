@@ -9,9 +9,6 @@ const contextKnobOptions = Object.values(Contexts);
 const meta = {
   title: 'UI/Button',
   component: Button,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   args: {
     onClick: fn(),
@@ -112,5 +109,16 @@ export const TextInContext: Story = {
   argTypes: {
     variant: { control: false, table: { disable: true } },
     context: { control: false, table: { disable: true } },
+  },
+};
+
+// FullWidth story to demonstrate the fullWidth prop
+export const FullWidth: Story = {
+  args: {
+    children: 'Full Width Button',
+    context: 'primary',
+    variant: 'contained',
+    fullWidth: true,
+    onClick: fn(),
   },
 };
