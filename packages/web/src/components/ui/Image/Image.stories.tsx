@@ -1,5 +1,6 @@
+import { SIZE, WHITESPACE } from '@common/theme';
+import { Box } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
-import { SIZE, Size, WHITESPACE, WhitespaceSize } from '@common/theme';
 import { Image } from './Image';
 
 const sizeOptions = Object.keys(SIZE) as Array<keyof typeof SIZE>;
@@ -98,18 +99,26 @@ export const WithSizeTokens: Story = {
       }}
     >
       {sizeOptions.map((size) => (
-        <div key={size} style={{ textAlign: 'center' }}>
+        <Box
+          key={size}
+          sx={{
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            textAlign: 'center',
+          }}
+        >
           <Image
             variant="circle"
             size={size}
             src="https://picsum.photos/100"
             alt={`${size} size image`}
           />
-          <div style={{ marginTop: '8px', fontSize: '12px' }}>
+          <Box sx={{ marginTop: 1, fontSize: 12 }}>
             SIZE.{size}
             <br />({SIZE[size]}px)
-          </div>
-        </div>
+          </Box>
+        </Box>
       ))}
     </div>
   ),

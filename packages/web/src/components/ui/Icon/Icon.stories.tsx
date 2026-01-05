@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SIZE, Size } from '@common/theme';
+import { SIZE } from '@common/theme';
 import { Box } from '@mui/material';
 import FolderIcon from '@mui/icons-material/Folder';
 import SearchIcon from '@mui/icons-material/Search';
@@ -36,18 +36,6 @@ export const Default: Story = {
   args: {
     component: FolderIcon,
   },
-};
-
-export const DifferentSizes: Story = {
-  render: () => (
-    <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-      <Icon component={HomeIcon} size="xsm" />
-      <Icon component={HomeIcon} size="sm" />
-      <Icon component={HomeIcon} size="md" />
-      <Icon component={HomeIcon} size="lg" />
-      <Icon component={HomeIcon} size="xlg" />
-    </Box>
-  ),
 };
 
 export const WithSizeTokens: Story = {

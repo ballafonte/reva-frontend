@@ -3,6 +3,7 @@ import { iconButtonStyles } from './IconButton.styles';
 import { IconButtonProps } from './IconButton.types';
 
 export const IconButton = (props: IconButtonProps) => {
-  const styles = iconButtonStyles();
-  return <MuiIconButton {...props} sx={styles} />;
+  const { size, circular, padding, ...rest } = props;
+  const styles = iconButtonStyles({ size, circular, padding });
+  return <MuiIconButton {...rest} sx={styles} />;
 };

@@ -1,7 +1,10 @@
+import { Size, WhitespaceSize } from '@common/theme';
 import { IconButtonProps as MuiIconButtonProps } from '@mui/material';
 
-export type IconButtonProps = MuiIconButtonProps & {
+export type IconButtonProps = Omit<MuiIconButtonProps, 'size'> & {
   onClick: () => void;
-  size?: 'small' | 'medium' | 'large';
+  size?: Size | number;
+  circular?: boolean;
+  padding?: WhitespaceSize;
   edge?: false | 'start' | 'end';
 };
