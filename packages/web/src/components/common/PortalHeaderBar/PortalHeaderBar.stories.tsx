@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { PortalHeaderBar } from './PortalHeaderBar';
-import { AuthProvider } from '@reva-frontend/common';
 import { Box, Typography } from '@mui/material';
+import type { Meta, StoryObj } from '@storybook/react';
+import { MockAuthProvider } from '../../../../tests/utils/MockAuthProvider';
+import { PortalHeaderBar } from './PortalHeaderBar';
 
 const meta = {
   title: 'Common/PortalHeaderBar',
@@ -10,11 +10,22 @@ const meta = {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
+  argTypes: {
+    isAuthenticated: {
+      control: 'boolean',
+      description: 'Simulate authentication state',
+      table: {
+        category: 'Story Controls',
+      },
+    },
+  } as any,
   decorators: [
-    (Story) => (
-      <AuthProvider>
+    (Story, context) => (
+      <MockAuthProvider
+        isAuthenticated={(context.args as any).isAuthenticated ?? false}
+      >
         <Story />
-      </AuthProvider>
+      </MockAuthProvider>
     ),
   ],
 } satisfies Meta<typeof PortalHeaderBar>;

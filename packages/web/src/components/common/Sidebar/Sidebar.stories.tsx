@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Sidebar } from './Sidebar';
-import { Box } from '@mui/material';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import BusinessIcon from '@mui/icons-material/Business';
-import { SidebarItem } from './Sidebar.types';
+import { Box } from '@mui/material';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { Sidebar } from './Sidebar';
+import { SidebarItem } from './Sidebar.types';
 
 const meta = {
   title: 'Common/Sidebar',
