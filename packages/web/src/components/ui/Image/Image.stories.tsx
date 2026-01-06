@@ -109,10 +109,10 @@ export const WithSizeTokens: Story = {
           }}
         >
           <Image
-            variant="circle"
+            alt={`${size} size image`}
             size={size}
             src="https://picsum.photos/100"
-            alt={`${size} size image`}
+            variant="circle"
           />
           <Box sx={{ marginTop: 1, fontSize: 12 }}>
             SIZE.{size}

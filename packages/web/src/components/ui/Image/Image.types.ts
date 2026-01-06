@@ -1,10 +1,10 @@
 import { ImgHTMLAttributes } from 'react';
-import { Size, WhitespaceSize } from '@common/theme';
+import { Size } from '@common/theme';
 
 export type ImageVariant = 'square' | 'rounded' | 'circle';
 
 export type ImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'style'> & {
   variant?: ImageVariant;
-  size?: number | string | Size | WhitespaceSize;
+  size?: Size | number;
   alt: string;
 };
