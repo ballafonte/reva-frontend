@@ -4,7 +4,7 @@ import { ButtonProps } from './Button.types';
 
 export const Button = (props: ButtonProps) => {
   const {
-    variant,
+    variant = 'contained',
     fullWidth,
     isLoading,
     children,
