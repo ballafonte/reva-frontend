@@ -8,10 +8,10 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField,
-  Button,
   Box,
 } from '@mui/material';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
 import {
   addJurisdictionSchema,
   type AddJurisdictionFormData,
@@ -66,7 +66,7 @@ export function AddJurisdictionDialog({
               name="name"
               control={control}
               render={({ field }) => (
-                <TextField
+                <Input
                   {...field}
                   label="Name"
                   fullWidth
@@ -79,7 +79,7 @@ export function AddJurisdictionDialog({
               name="nameAbbreviation"
               control={control}
               render={({ field }) => (
-                <TextField
+                <Input
                   {...field}
                   label="Name Abbreviation"
                   fullWidth
@@ -91,11 +91,17 @@ export function AddJurisdictionDialog({
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} type="button">
+          <Button onClick={onClose} variant="outlined">
             Cancel
           </Button>
-          <Button type="submit" variant="contained" disabled={isPending}>
-            {isPending ? 'Creating...' : 'Create'}
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={isPending}
+            isLoading={isPending}
+            onClick={() => {}}
+          >
+            Create
           </Button>
         </DialogActions>
       </form>

@@ -1,7 +1,8 @@
 'use client';
 
-import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import { AppBar, Toolbar, Typography } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { IconButton } from '@/components/ui/IconButton';
 import { printConsole } from '@common/utils';
 import { useAuthContext } from '@reva-frontend/common';
 import { useRouter } from 'next/navigation';
@@ -34,13 +35,11 @@ export function PortalHeaderBar() {
           {siteName}
         </Typography>
         <IconButton
-          color="inherit"
+          component={LogoutIcon}
           onClick={handleSignOut}
           aria-label="sign out"
           edge="end"
-        >
-          <LogoutIcon />
-        </IconButton>
+        />
       </Toolbar>
     </AppBar>
   );

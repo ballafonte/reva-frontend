@@ -1,4 +1,8 @@
-import { Box, Typography, ListItemButton } from '@mui/material';
+import {
+  Box,
+  Typography,
+  ListItemButton as MuiListItemButton,
+} from '@mui/material';
 import { FONT_WEIGHTS } from '@common/theme';
 import { MenuItemProps } from './MenuItem.types';
 import { menuItemStyles } from './MenuItem.styles';
@@ -56,10 +60,10 @@ export const MenuItem = ({
     </>
   );
 
-  // Use ListItemButton when onClick is provided to get MUI's button effects (ripple, etc.)
+  // Use MuiListItemButton when onClick is provided to get MUI's button effects (ripple, etc.)
   if (onClick) {
     return (
-      <ListItemButton
+      <MuiListItemButton
         onClick={disabled ? undefined : onClick}
         disabled={disabled}
         sx={[
@@ -79,7 +83,7 @@ export const MenuItem = ({
         ]}
       >
         {content}
-      </ListItemButton>
+      </MuiListItemButton>
     );
   }
 

@@ -5,9 +5,9 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Button,
   Typography,
 } from '@mui/material';
+import { Button } from '@/components/ui/Button';
 
 export interface ConfirmDialogProps {
   open: boolean;
@@ -50,16 +50,17 @@ export function ConfirmDialog({
         <Typography>{message}</Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} type="button" disabled={isPending}>
+        <Button onClick={onClose} variant="outlined" disabled={isPending}>
           {cancelText}
         </Button>
         <Button
           onClick={handleConfirm}
           variant="contained"
-          color={confirmColor}
+          context={confirmColor}
           disabled={isPending}
+          isLoading={isPending}
         >
-          {isPending ? 'Processing...' : confirmText}
+          {confirmText}
         </Button>
       </DialogActions>
     </Dialog>

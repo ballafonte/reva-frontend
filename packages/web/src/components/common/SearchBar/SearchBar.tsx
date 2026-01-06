@@ -1,15 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import {
-  TextField,
-  InputAdornment,
-  Button,
-  Box,
-  IconButton,
-} from '@mui/material';
+import { Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { IconButton } from '@/components/ui/IconButton';
 import { useDebouncedValue, DEFAULT_DELAY } from '@reva-frontend/common';
 
 export interface SearchBarProps {
@@ -111,41 +108,33 @@ export function SearchBar({
 
   return (
     <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start' }}>
-      <TextField
+      <Input
         fullWidth
         label={label}
         placeholder={placeholder}
         value={localValue}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-          endAdornment:
-            showClearButton && localValue ? (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={handleClear}
-                  edge="end"
-                  size="small"
-                  aria-label="clear search"
-                >
-                  <ClearIcon />
-                </IconButton>
-              </InputAdornment>
-            ) : undefined,
-        }}
+        prefix={<SearchIcon />}
+        suffix={
+          showClearButton && localValue ? (
+            <IconButton
+              component={ClearIcon}
+              onClick={handleClear}
+              edge="end"
+              size="sm"
+              aria-label="clear search"
+            />
+          ) : undefined
+        }
       />
       {!autoApply && (
         <Button
           variant="contained"
           onClick={handleSearch}
-          startIcon={<SearchIcon />}
           sx={{ minWidth: 100 }}
         >
+          <SearchIcon sx={{ mr: 1 }} />
           Search
         </Button>
       )}

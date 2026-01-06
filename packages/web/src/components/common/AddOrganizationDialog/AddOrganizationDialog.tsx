@@ -8,11 +8,11 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField,
-  Button,
   Box,
   MenuItem,
 } from '@mui/material';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
 import {
   addOrganizationSchema,
   type AddOrganizationFormData,
@@ -78,7 +78,7 @@ export function AddOrganizationDialog({
               name="name"
               control={control}
               render={({ field }) => (
-                <TextField
+                <Input
                   {...field}
                   label="Name"
                   fullWidth
@@ -92,7 +92,7 @@ export function AddOrganizationDialog({
               name="status"
               control={control}
               render={({ field }) => (
-                <TextField
+                <Input
                   {...field}
                   select
                   label="Status"
@@ -110,17 +110,23 @@ export function AddOrganizationDialog({
                       {option.label}
                     </MenuItem>
                   ))}
-                </TextField>
+                </Input>
               )}
             />
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} type="button">
+          <Button onClick={onClose} variant="outlined">
             Cancel
           </Button>
-          <Button type="submit" variant="contained" disabled={isPending}>
-            {isPending ? 'Creating...' : 'Create'}
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={isPending}
+            isLoading={isPending}
+            onClick={() => {}}
+          >
+            Create
           </Button>
         </DialogActions>
       </form>

@@ -5,7 +5,8 @@ import {
   useAlertsContext,
   SeverityContexts,
 } from '@reva-frontend/common';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
+import { Button } from '@/components/ui/Button';
 
 const meta = {
   title: 'Common/AlertsToast',
@@ -40,7 +41,7 @@ const AlertDemo = () => {
       <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
         <Button
           variant="contained"
-          color="success"
+          context="success"
           onClick={() => {
             clearAlerts();
             pushAlert({
@@ -53,7 +54,7 @@ const AlertDemo = () => {
         </Button>
         <Button
           variant="contained"
-          color="info"
+          context="info"
           onClick={() => {
             clearAlerts();
             pushAlert({
@@ -66,7 +67,7 @@ const AlertDemo = () => {
         </Button>
         <Button
           variant="contained"
-          color="warning"
+          context="warning"
           onClick={() => {
             clearAlerts();
             pushAlert({
@@ -79,6 +80,7 @@ const AlertDemo = () => {
         </Button>
         <Button
           variant="contained"
+          context="danger"
           onClick={() => {
             clearAlerts();
             pushAlert({

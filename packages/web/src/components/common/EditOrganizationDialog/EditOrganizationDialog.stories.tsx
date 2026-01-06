@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { Button } from '@mui/material';
+import { Button } from '@/components/ui/Button';
 import { EditOrganizationDialog } from './EditOrganizationDialog';
 
 const meta = {

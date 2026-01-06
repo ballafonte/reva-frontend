@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { Button } from '@mui/material';
+import { Button } from '@/components/ui/Button';
 import { ConfirmDialog } from './ConfirmDialog';
 
 const meta = {
@@ -22,6 +22,7 @@ const DefaultComponent = () => {
       <Button
         variant="contained"
         onClick={() => setOpen(true)}
+        context="danger"
         sx={{ bgcolor: 'error.main', color: 'error.contrastText' }}
       >
         Delete Item

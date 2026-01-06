@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { Box, Typography, TextField, Button, Paper } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Link } from '@/components/ui/Link';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { Panel } from '@/components/ui/Panel';
 import { signUpSchema, type SignUpFormData } from './SignUpForm.schema';
 import {
   useAlertsContext,
@@ -55,8 +58,8 @@ export function SignUpForm() {
   };
 
   return (
-    <Paper
-      elevation={3}
+    <Panel
+      variant="outlined"
       sx={{
         padding: 4,
         display: 'flex',
@@ -77,7 +80,7 @@ export function SignUpForm() {
           name="email"
           control={control}
           render={({ field }) => (
-            <TextField
+            <Input
               {...field}
               margin="normal"
               required
@@ -96,7 +99,7 @@ export function SignUpForm() {
           name="password"
           control={control}
           render={({ field }) => (
-            <TextField
+            <Input
               {...field}
               margin="normal"
               required
@@ -115,7 +118,7 @@ export function SignUpForm() {
           name="confirmPassword"
           control={control}
           render={({ field }) => (
-            <TextField
+            <Input
               {...field}
               margin="normal"
               required
@@ -136,8 +139,10 @@ export function SignUpForm() {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
           disabled={isLoading}
+          isLoading={isLoading}
+          onClick={() => {}}
         >
-          {isLoading ? 'Signing up...' : 'Sign Up'}
+          Sign Up
         </Button>
         <Box sx={{ textAlign: 'center', mt: 2 }}>
           <Typography variant="body2">
@@ -145,6 +150,6 @@ export function SignUpForm() {
           </Typography>
         </Box>
       </Box>
-    </Paper>
+    </Panel>
   );
 }

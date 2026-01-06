@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Typography, TextField, Button, Paper } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Link } from '@/components/ui/Link';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { Panel } from '@/components/ui/Panel';
 import { signInSchema, type SignInFormData } from './SignInForm.schema';
 import {
   useAlertsContext,
@@ -54,8 +57,8 @@ export function SignInForm() {
   };
 
   return (
-    <Paper
-      elevation={3}
+    <Panel
+      variant="outlined"
       sx={{
         padding: 4,
         display: 'flex',
@@ -76,7 +79,7 @@ export function SignInForm() {
           name="email"
           control={control}
           render={({ field }) => (
-            <TextField
+            <Input
               {...field}
               margin="normal"
               required
@@ -95,7 +98,7 @@ export function SignInForm() {
           name="password"
           control={control}
           render={({ field }) => (
-            <TextField
+            <Input
               {...field}
               margin="normal"
               required
@@ -116,8 +119,10 @@ export function SignInForm() {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
           disabled={isLoading}
+          isLoading={isLoading}
+          onClick={() => {}}
         >
-          {isLoading ? 'Signing in...' : 'Sign In'}
+          Sign In
         </Button>
         <Box sx={{ textAlign: 'center', mt: 2 }}>
           <Typography variant="body2">
@@ -125,6 +130,6 @@ export function SignInForm() {
           </Typography>
         </Box>
       </Box>
-    </Paper>
+    </Panel>
   );
 }

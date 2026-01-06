@@ -1,5 +1,7 @@
-import { Link, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { COLORS } from '@common/theme';
+import { Link } from '@/components/ui/Link';
+import { Button } from '@/components/ui/Button';
 import { BreadcrumbsProps } from './Breadcrumbs.types';
 
 export const Breadcrumbs = ({ items, separator = '>' }: BreadcrumbsProps) => {
@@ -22,10 +24,9 @@ export const Breadcrumbs = ({ items, separator = '>' }: BreadcrumbsProps) => {
 
           return (
             <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
-              {item.href || item.onClick ? (
+              {item.href ? (
                 <Link
                   href={item.href}
-                  onClick={item.onClick}
                   sx={{
                     color: COLORS.GRAY_600,
                     textDecoration: 'none',
@@ -36,6 +37,24 @@ export const Breadcrumbs = ({ items, separator = '>' }: BreadcrumbsProps) => {
                 >
                   {content}
                 </Link>
+              ) : item.onClick ? (
+                <Button
+                  onClick={item.onClick}
+                  variant="text"
+                  sx={{
+                    color: COLORS.GRAY_600,
+                    textDecoration: 'none',
+                    textTransform: 'none',
+                    minWidth: 'auto',
+                    padding: 0,
+                    '&:hover': {
+                      textDecoration: 'underline',
+                      backgroundColor: 'transparent',
+                    },
+                  }}
+                >
+                  {content}
+                </Button>
               ) : (
                 content
               )}
