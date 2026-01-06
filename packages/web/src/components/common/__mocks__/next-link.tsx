@@ -13,4 +13,3 @@ export default function Link({ href, children, ...props }: LinkProps) {
     </a>
   );
 }
-
