@@ -119,11 +119,12 @@ export function SearchBar({
         suffix={
           showClearButton && localValue ? (
             <IconButton
-              component={ClearIcon}
-              onClick={handleClear}
-              edge="end"
-              size="sm"
               aria-label="clear search"
+              component={ClearIcon}
+              edge="end"
+              onClick={handleClear}
+              size="sm"
+              variant="ghost"
             />
           ) : undefined
         }
