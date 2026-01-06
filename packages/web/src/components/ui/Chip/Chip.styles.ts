@@ -12,8 +12,8 @@ export const chipStyles = ({
     CONTEXT_COLORS[context as ContextType] || CONTEXT_COLORS.primary;
   const padding =
     size === 'small'
-      ? `${WHITESPACE.xsm}px ${WHITESPACE.sm}px`
-      : `${WHITESPACE.sm}px ${WHITESPACE.md}px`;
+      ? `${WHITESPACE.xsm}px ${WHITESPACE.xsm}px`
+      : `${WHITESPACE.sm}px ${WHITESPACE.sm}px`;
   const fontSize = size === 'small' ? '12px' : '14px';
 
   if (variant === 'outlined') {

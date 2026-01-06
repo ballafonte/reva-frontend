@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { Info as InfoIcon, Cancel as CancelIcon } from '@mui/icons-material';
-import { Chip } from './Chip';
 import { Box } from '@mui/material';
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 import { IconButton } from '../IconButton';
 import { IconWrapper } from '../IconWrapper';
-import { fn } from '@storybook/test';
+import { Chip } from './Chip';
 
 const meta = {
   title: 'UI/Chip',
@@ -14,6 +14,7 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
+    size: { control: 'radio', options: ['small', 'medium'] },
     prefix: { control: false },
     suffix: { control: false },
   },

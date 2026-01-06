@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
-import { palette } from './palette';
 import { ButtonMuiConfig } from '@/components/ui/Button';
+import { ChipMuiConfig } from '@/components/ui/Chip';
 import {
   AppBarMuiConfig,
   CardMuiConfig,
@@ -10,6 +10,7 @@ import {
   PaperMuiConfig,
   PopoverMuiConfig,
 } from './components';
+import { palette } from './palette';
 
 export const theme = createTheme({
   palette,
@@ -39,6 +40,7 @@ export const theme = createTheme({
     MuiAppBar: AppBarMuiConfig,
     MuiButton: ButtonMuiConfig,
     MuiCard: CardMuiConfig,
+    MuiChip: ChipMuiConfig,
     MuiDialog: DialogMuiConfig,
     MuiDrawer: DrawerMuiConfig,
     MuiMenu: MenuMuiConfig,

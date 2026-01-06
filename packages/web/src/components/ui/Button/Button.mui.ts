@@ -1,4 +1,4 @@
-import { Components, CSSObject } from '@mui/material';
+import { Components, type CSSObject } from '@mui/material';
 import { SEVERITY_COLORS, SeverityContexts } from '@reva-frontend/common';
 
 export const ButtonMuiConfig = {
@@ -12,7 +12,8 @@ export const ButtonMuiConfig = {
 
       // Add subtle shadow for contained buttons
       if (ownerState.variant === 'contained') {
-        baseStyles.boxShadow = '0 1px 1px rgba(0, 0, 0, 0.5)';
+        baseStyles.boxShadow =
+          'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px';
       }
 
       // Use a darker color for plain buttons when using outlined or ghost variants
