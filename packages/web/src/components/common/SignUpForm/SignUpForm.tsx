@@ -4,15 +4,8 @@ import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Paper,
-  Link as MuiLink,
-} from '@mui/material';
-import Link from 'next/link';
+import { Box, Typography, TextField, Button, Paper } from '@mui/material';
+import { Link } from '@/components/ui/Link';
 import { signUpSchema, type SignUpFormData } from './SignUpForm.schema';
 import {
   useAlertsContext,
@@ -148,10 +141,7 @@ export function SignUpForm() {
         </Button>
         <Box sx={{ textAlign: 'center', mt: 2 }}>
           <Typography variant="body2">
-            Already have an account?{' '}
-            <MuiLink component={Link} href="/sign-in">
-              Sign in
-            </MuiLink>
+            Already have an account? <Link href="/sign-in">Sign in</Link>
           </Typography>
         </Box>
       </Box>
