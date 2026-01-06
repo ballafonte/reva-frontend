@@ -6,9 +6,7 @@ export const iconWrapperStyles = ({
   size = 'sm',
 }: Pick<IconWrapperProps, 'size'>): SxProps<Theme> => {
   const baseStyles: SxProps<Theme> = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: 'inherit',
   };
 
   if (typeof size === 'string' && size in SIZE) {

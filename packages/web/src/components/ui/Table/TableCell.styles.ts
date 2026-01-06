@@ -1,18 +1,51 @@
-import { COLORS, ELEMENT_COLORS, WHITESPACE } from '@common/theme';
+import {
+  COLORS,
+  CONTEXT_COLORS,
+  ELEMENT_COLORS,
+  WHITESPACE,
+  ContextType,
+} from '@common/theme';
 import { css } from '@emotion/react';
 import { TableCellProps } from './TableCell.types';
 
-export const tableCellStyles = ({ variant }: TableCellProps) => {
+export const tableCellStyles = ({
+  variant,
+  context,
+  transparent = false,
+}: TableCellProps) => {
   const isHeader = variant === 'head';
+  const contextColor = context
+    ? CONTEXT_COLORS[context as ContextType]
+    : undefined;
+  const borderColor = contextColor ? contextColor.base : ELEMENT_COLORS.BORDER;
+
+  // When transparent is true, use transparent backgrounds
+  const headerBackgroundColor = transparent
+    ? 'transparent'
+    : contextColor
+      ? contextColor.base
+      : COLORS.GRAY_100;
+
+  // When transparent is true and context exists, use context.text; otherwise use contrast or default
+  const headerTextColor = transparent
+    ? contextColor
+      ? contextColor.text
+      : COLORS.GRAY_600
+    : contextColor
+      ? contextColor.contrast
+      : COLORS.GRAY_600;
 
   return css`
-    padding: ${WHITESPACE.sm}px ${WHITESPACE.md}px;
-    border-bottom: 1px solid ${ELEMENT_COLORS.BORDER};
+    padding: ${WHITESPACE.sm + 4}px ${WHITESPACE.md + 4}px;
+    border-bottom: ${isHeader
+      ? `1px solid ${borderColor}`
+      : `1px dotted ${borderColor}`};
+    background-color: ${transparent ? 'transparent' : undefined};
     ${isHeader &&
     css`
-      background-color: ${COLORS.GRAY_100};
+      background-color: ${headerBackgroundColor};
       font-weight: 600;
-      color: ${COLORS.GRAY_900};
+      color: ${headerTextColor};
     `}
   `;
 };

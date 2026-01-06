@@ -1,9 +1,16 @@
+import { WHITESPACE } from '@common/theme';
 import {
+  Box,
   Table as MuiTable,
   TableBody,
   TableContainer,
+  TableFooter,
   TableHead,
 } from '@mui/material';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
+import { IconWrapper } from '../IconWrapper';
 import { TableCell } from './TableCell';
 import { TableRow } from './TableRow';
 import { tableStyles } from './Table.styles';
@@ -16,7 +23,10 @@ export const Table = <T extends Record<string, any>>(props: TableProps<T>) => {
     sortBy,
     sortDirection = false,
     onSort,
+    footer,
+    context,
     stickyHeader = false,
+    transparent = false,
     ...rest
   } = props;
   const styles = tableStyles();
@@ -28,7 +38,12 @@ export const Table = <T extends Record<string, any>>(props: TableProps<T>) => {
   };
 
   return (
-    <TableContainer>
+    <TableContainer
+      sx={{
+        borderRadius: `${WHITESPACE.sm}px`,
+        overflow: 'hidden',
+      }}
+    >
       <MuiTable {...rest} sx={styles} stickyHeader={stickyHeader}>
         <TableHead>
           <TableRow>
@@ -38,22 +53,37 @@ export const Table = <T extends Record<string, any>>(props: TableProps<T>) => {
                 variant="head"
                 align={column.align || 'left'}
                 style={{ width: column.width }}
+                context={context}
+                transparent={transparent}
               >
-                {column.label}
-                {column.sortable && (
-                  <span
-                    onClick={() => handleSort(column.id)}
-                    style={{ cursor: 'pointer', marginLeft: '4px' }}
-                  >
-                    {sortBy === column.id
-                      ? sortDirection === 'asc'
-                        ? '↑'
-                        : sortDirection === 'desc'
-                          ? '↓'
-                          : '⇅'
-                      : '⇅'}
-                  </span>
-                )}
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    gap: 1,
+                  }}
+                >
+                  {column.label}
+                  {column.sortable && (
+                    <span
+                      onClick={() => handleSort(column.id)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {sortBy === column.id ? (
+                        sortDirection === 'asc' ? (
+                          <IconWrapper component={ExpandLess} size="xsm" />
+                        ) : sortDirection === 'desc' ? (
+                          <IconWrapper component={ExpandMore} size="xsm" />
+                        ) : (
+                          <IconWrapper component={UnfoldMoreIcon} size="xsm" />
+                        )
+                      ) : (
+                        <IconWrapper component={UnfoldMoreIcon} size="xsm" />
+                      )}
+                    </span>
+                  )}
+                </Box>
               </TableCell>
             ))}
           </TableRow>
@@ -71,6 +101,8 @@ export const Table = <T extends Record<string, any>>(props: TableProps<T>) => {
                     key={column.id}
                     variant="body"
                     align={column.align || 'left'}
+                    context={context}
+                    transparent={transparent}
                   >
                     {content}
                   </TableCell>
@@ -79,6 +111,7 @@ export const Table = <T extends Record<string, any>>(props: TableProps<T>) => {
             </TableRow>
           ))}
         </TableBody>
+        {footer && <TableFooter>{footer}</TableFooter>}
       </MuiTable>
     </TableContainer>
   );
