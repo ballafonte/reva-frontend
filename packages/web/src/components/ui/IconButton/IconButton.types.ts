@@ -1,7 +1,10 @@
 import { ContextType, Size, WhitespaceSize } from '@common/theme';
 import { IconButtonProps as MuiIconButtonProps } from '@mui/material';
 
-export type IconButtonProps = Omit<MuiIconButtonProps, 'size' | 'children' | 'color'> & {
+export type IconButtonProps = Omit<
+  MuiIconButtonProps,
+  'size' | 'children' | 'color'
+> & {
   onClick: () => void;
   component: any; // Icon component from @mui/icons-material
   size?: Size | number;

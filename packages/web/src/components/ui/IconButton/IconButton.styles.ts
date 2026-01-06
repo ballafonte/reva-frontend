@@ -1,4 +1,11 @@
-import { COLORS, ContextType, SIZE, Size, WHITESPACE, WhitespaceSize } from '@common/theme';
+import {
+  COLORS,
+  ContextType,
+  SIZE,
+  Size,
+  WHITESPACE,
+  WhitespaceSize,
+} from '@common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { IconButtonProps } from './IconButton.types';
 
@@ -8,24 +15,27 @@ export const iconButtonStyles = ({
   padding = 'xsm',
   variant = 'ghost',
   context,
-}: Pick<IconButtonProps, 'size' | 'circular' | 'padding' | 'variant' | 'context'>): SxProps<Theme> => {
+}: Pick<
+  IconButtonProps,
+  'size' | 'circular' | 'padding' | 'variant' | 'context'
+>): SxProps<Theme> => {
   const paddingValue = WHITESPACE[padding as WhitespaceSize];
 
-  const baseStyles: SxProps<Theme> = {
+  const baseStyles: SxProps<Theme> & Record<string, any> = {
     borderRadius: circular ? '50%' : `${WHITESPACE.sm}px`,
     padding: `${paddingValue}px`,
   };
 
   // Apply variant-specific styles
   if (variant === 'contained') {
-    baseStyles.backgroundColor = (theme) => {
+    baseStyles.backgroundColor = (theme: Theme) => {
       const paletteColor =
         context && context in theme.palette
           ? (theme.palette as any)[context]
           : theme.palette.primary;
       return paletteColor?.main || theme.palette.primary.main;
     };
-    baseStyles.color = (theme) => {
+    baseStyles.color = (theme: Theme) => {
       const paletteColor =
         context && context in theme.palette
           ? (theme.palette as any)[context]
@@ -33,7 +43,7 @@ export const iconButtonStyles = ({
       return paletteColor?.contrastText || theme.palette.primary.contrastText;
     };
     baseStyles['&:hover'] = {
-      backgroundColor: (theme) => {
+      backgroundColor: (theme: Theme) => {
         const paletteColor =
           context && context in theme.palette
             ? (theme.palette as any)[context]
@@ -42,7 +52,7 @@ export const iconButtonStyles = ({
       },
     };
     baseStyles['&:active'] = {
-      backgroundColor: (theme) => {
+      backgroundColor: (theme: Theme) => {
         const paletteColor =
           context && context in theme.palette
             ? (theme.palette as any)[context]
@@ -51,7 +61,7 @@ export const iconButtonStyles = ({
       },
     };
   } else if (variant === 'outlined') {
-    baseStyles.border = (theme) => {
+    baseStyles.border = (theme: Theme) => {
       const paletteColor =
         context && context in theme.palette
           ? (theme.palette as any)[context]
@@ -59,7 +69,7 @@ export const iconButtonStyles = ({
       return `1px solid ${paletteColor?.main || theme.palette.primary.main}`;
     };
     baseStyles.backgroundColor = 'transparent';
-    baseStyles.color = (theme) => {
+    baseStyles.color = (theme: Theme) => {
       const paletteColor =
         context && context in theme.palette
           ? (theme.palette as any)[context]
@@ -67,7 +77,7 @@ export const iconButtonStyles = ({
       return paletteColor?.main || theme.palette.primary.main;
     };
     baseStyles['&:hover'] = {
-      backgroundColor: (theme) => {
+      backgroundColor: (theme: Theme) => {
         const paletteColor =
           context && context in theme.palette
             ? (theme.palette as any)[context]
@@ -77,7 +87,7 @@ export const iconButtonStyles = ({
           ? `${mainColor}14`
           : `${mainColor}08`;
       },
-      borderColor: (theme) => {
+      borderColor: (theme: Theme) => {
         const paletteColor =
           context && context in theme.palette
             ? (theme.palette as any)[context]
@@ -86,7 +96,7 @@ export const iconButtonStyles = ({
       },
     };
     baseStyles['&:active'] = {
-      backgroundColor: (theme) => {
+      backgroundColor: (theme: Theme) => {
         const paletteColor =
           context && context in theme.palette
             ? (theme.palette as any)[context]
@@ -99,7 +109,7 @@ export const iconButtonStyles = ({
     };
   } else if (variant === 'text') {
     baseStyles.backgroundColor = 'transparent';
-    baseStyles.color = (theme) => {
+    baseStyles.color = (theme: Theme) => {
       const paletteColor =
         context && context in theme.palette
           ? (theme.palette as any)[context]
@@ -107,7 +117,7 @@ export const iconButtonStyles = ({
       return paletteColor?.main || theme.palette.primary.main;
     };
     baseStyles['&:hover'] = {
-      backgroundColor: (theme) => {
+      backgroundColor: (theme: Theme) => {
         const paletteColor =
           context && context in theme.palette
             ? (theme.palette as any)[context]
@@ -119,7 +129,7 @@ export const iconButtonStyles = ({
       },
     };
     baseStyles['&:active'] = {
-      backgroundColor: (theme) => {
+      backgroundColor: (theme: Theme) => {
         const paletteColor =
           context && context in theme.palette
             ? (theme.palette as any)[context]
