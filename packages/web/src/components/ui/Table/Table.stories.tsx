@@ -4,7 +4,7 @@ import { TablePagination, TableRow } from '@mui/material';
 import { usePagination } from '@reva-frontend/common';
 import { Table } from './Table';
 import type { TableColumn } from './Table.types';
-import { Contexts } from '@common/theme';
+import { Contexts, ContextType } from '@common/theme';
 
 const contextOptions = ['default', ...Object.values(Contexts)];
 
@@ -16,6 +16,13 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
+    context: {
+      control: 'radio',
+      options: contextOptions,
+    },
+    transparent: {
+      control: 'boolean',
+    },
     columns: {
       control: false,
     },
@@ -30,16 +37,6 @@ const meta = {
     },
     footer: {
       control: false,
-    },
-    context: {
-      control: 'radio',
-      options: contextOptions,
-    },
-    stickyHeader: {
-      control: 'boolean',
-    },
-    transparent: {
-      control: 'boolean',
     },
   },
 } satisfies Meta<typeof Table>;
@@ -74,7 +71,13 @@ export const Default: Story = {
   },
 };
 
-const WithSortingComponent = () => {
+const WithSortingComponent = ({
+  context,
+  transparent,
+}: {
+  context?: ContextType | 'default';
+  transparent?: boolean;
+}) => {
   const [sortBy, setSortBy] = useState<string>('name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc' | false>(
     'asc'
@@ -102,6 +105,8 @@ const WithSortingComponent = () => {
       sortBy={sortBy}
       sortDirection={sortDirection}
       onSort={handleSort}
+      context={context === 'default' ? undefined : (context as ContextType)}
+      transparent={transparent}
     />
   );
 };
@@ -111,7 +116,12 @@ export const WithSorting: Story = {
     columns: [],
     data: [],
   },
-  render: () => <WithSortingComponent />,
+  render: (args) => (
+    <WithSortingComponent
+      context={args.context as ContextType | 'default'}
+      transparent={args.transparent}
+    />
+  ),
 };
 
 export const WithCustomRender: Story = {
@@ -119,7 +129,7 @@ export const WithCustomRender: Story = {
     columns: [],
     data: [],
   },
-  render: () => (
+  render: (args) => (
     <Table
       columns={[
         { id: 'name', label: 'Name' },
@@ -135,11 +145,23 @@ export const WithCustomRender: Story = {
         { id: 'value', label: 'Value', align: 'right' },
       ]}
       data={sampleData}
+      context={
+        (args.context as string | undefined) === 'default'
+          ? undefined
+          : (args.context as ContextType | undefined)
+      }
+      transparent={args.transparent}
     />
   ),
 };
 
-const WithPaginationComponent = () => {
+const WithPaginationComponent = ({
+  context,
+  transparent,
+}: {
+  context?: ContextType | 'default';
+  transparent?: boolean;
+}) => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const { currentItems, currentPage, nextPage, prevPage, firstPage } =
     usePagination(paginatedData, itemsPerPage);
@@ -170,6 +192,8 @@ const WithPaginationComponent = () => {
     <Table
       columns={columns}
       data={currentItems}
+      context={context === 'default' ? undefined : (context as ContextType)}
+      transparent={transparent}
       footer={
         <TableRow>
           <TablePagination
@@ -198,7 +222,12 @@ export const WithPagination: Story = {
     columns: [],
     data: [],
   },
-  render: () => <WithPaginationComponent />,
+  render: (args) => (
+    <WithPaginationComponent
+      context={args.context as ContextType | 'default'}
+      transparent={args.transparent}
+    />
+  ),
 };
 
 // Extended data for sticky header example
@@ -209,10 +238,22 @@ const stickyHeaderData = Array.from({ length: 50 }, (_, i) => ({
   value: (i + 1) * 50,
 }));
 
-const WithStickyHeaderComponent = () => {
+const WithStickyHeaderComponent = ({
+  context,
+  transparent,
+}: {
+  context?: ContextType | 'default';
+  transparent?: boolean;
+}) => {
   return (
     <div style={{ height: '400px', display: 'flex', flexDirection: 'column' }}>
-      <Table columns={columns} data={stickyHeaderData} stickyHeader={true} />
+      <Table
+        columns={columns}
+        data={stickyHeaderData}
+        stickyHeader={true}
+        context={context === 'default' ? undefined : (context as ContextType)}
+        transparent={transparent}
+      />
     </div>
   );
 };
@@ -222,5 +263,10 @@ export const WithStickyHeader: Story = {
     columns: [],
     data: [],
   },
-  render: () => <WithStickyHeaderComponent />,
+  render: (args) => (
+    <WithStickyHeaderComponent
+      context={args.context as ContextType | 'default'}
+      transparent={args.transparent}
+    />
+  ),
 };
