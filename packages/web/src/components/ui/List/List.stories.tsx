@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React, { useState } from 'react';
 import { List } from './List';
 import { ListItem } from './ListItem';
 import { ListItemText } from '@mui/material';
@@ -64,4 +65,52 @@ export const Dense: Story = {
       </ListItem>
     </List>
   ),
+};
+
+const WithListItemButtonDemo = () => {
+  const [selectedIndex, setSelectedIndex] = useState(1);
+
+  const handleClick = (index: number) => {
+    setSelectedIndex(index);
+    console.log(`Clicked item ${index}`);
+  };
+
+  return (
+    <List>
+      <ListItem selected={selectedIndex === 0} onClick={() => handleClick(0)}>
+        <ListItemText
+          primary="Clickable Item 1"
+          secondary="Uses ListItemButton (has onClick)"
+        />
+      </ListItem>
+      <ListItem selected={selectedIndex === 1} onClick={() => handleClick(1)}>
+        <ListItemText
+          primary="Clickable Item 2 (Selected)"
+          secondary="Uses ListItemButton (has onClick and selected)"
+        />
+      </ListItem>
+      <ListItem selected={selectedIndex === 2} onClick={() => handleClick(2)}>
+        <ListItemText
+          primary="Clickable Item 3"
+          secondary="Uses ListItemButton (has onClick)"
+        />
+      </ListItem>
+      <ListItem selected>
+        <ListItemText
+          primary="Selected Item (No onClick)"
+          secondary="Uses ListItemButton (has selected prop only)"
+        />
+      </ListItem>
+      <ListItem>
+        <ListItemText
+          primary="Regular Item"
+          secondary="Uses regular ListItem (no onClick or selected)"
+        />
+      </ListItem>
+    </List>
+  );
+};
+
+export const WithListItemButton: Story = {
+  render: () => <WithListItemButtonDemo />,
 };
