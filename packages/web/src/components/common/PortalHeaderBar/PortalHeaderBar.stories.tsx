@@ -10,6 +10,9 @@ const meta = {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
+  args: {
+    isAuthenticated: true,
+  } as any,
   argTypes: {
     isAuthenticated: {
       control: 'boolean',
@@ -22,7 +25,7 @@ const meta = {
   decorators: [
     (Story, context) => (
       <MockAuthProvider
-        isAuthenticated={(context.args as any).isAuthenticated ?? false}
+        isAuthenticated={(context.args as any).isAuthenticated ?? true}
       >
         <Story />
       </MockAuthProvider>
