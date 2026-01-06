@@ -5,11 +5,13 @@ export type SidebarItem = {
   label: string;
   path: string;
   icon: React.ReactNode;
+  selected?: boolean;
 };
 
 export type SidebarProps = {
   context?: ContextType;
   // variant?: MenuItemProps['variant'];
-  onClick?: (key: string) => void;
+  onClick?: (path: string) => void;
   menuItems?: SidebarItem[];
+  selectedPath?: string;
 };

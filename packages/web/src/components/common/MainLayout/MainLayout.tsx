@@ -1,18 +1,20 @@
 'use client';
 
 import { Box } from '@mui/material';
-import { usePathname } from 'next/navigation';
-import { Sidebar } from '../Sidebar/Sidebar';
 import { useAuthContext } from '@reva-frontend/common';
+import { usePathname, useRouter } from 'next/navigation';
+import { Sidebar } from '../Sidebar/Sidebar';
+import type { MainLayoutProps } from './MainLayout.types';
 
 const DRAWER_WIDTH = 240;
 
 // Routes that should not have the sidebar layout
 const AUTH_ROUTES = ['/sign-in', '/sign-up'];
 
-export function MainLayout({ children }: { children: React.ReactNode }) {
+export function MainLayout({ children, sidebarMenuItems }: MainLayoutProps) {
   const { isAuthenticated } = useAuthContext();
   const pathname = usePathname();
+  const router = useRouter();
 
   // Don't apply sidebar layout to auth pages
   const isAuthRoute = AUTH_ROUTES.includes(pathname || '');
@@ -22,9 +24,17 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
     return <>{children}</>;
   }
 
+  const handleSidebarClick = (path: string) => {
+    router.push(path);
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
-      <Sidebar />
+      <Sidebar
+        menuItems={sidebarMenuItems}
+        selectedPath={pathname}
+        onClick={handleSidebarClick}
+      />
       <Box
         component="main"
         sx={{
