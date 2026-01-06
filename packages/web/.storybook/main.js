@@ -3,7 +3,10 @@ const webpack = require('webpack');
 
 /** @type {import('storybook').StorybookConfig} */
 const config = {
-  stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: [
+    '../.storybook/**/*.@(mdx|stories.@(js|jsx|mjs|ts|tsx))',
+    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+  ],
   addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],
   framework: {
     name: '@storybook/react-webpack5',

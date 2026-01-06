@@ -6,14 +6,6 @@ import '@/theme/globals.css';
 
 /** @type {import('@storybook/react').Preview} */
 const preview = {
-  parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-  },
   decorators: [
     (Story) => (
       <ThemeProvider theme={theme}>
@@ -22,6 +14,19 @@ const preview = {
       </ThemeProvider>
     ),
   ],
+  options: {
+    storySort: {
+      order: ['Welcome', '*'],
+    },
+  },
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
+    },
+  },
 };
 
 export default preview;
