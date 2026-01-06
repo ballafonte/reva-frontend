@@ -1,5 +1,5 @@
-import { ContextType } from '@reva-frontend/common';
-// import { MenuItemProps } from '../Menu';
+import type { ContextType } from '@reva-frontend/common';
+import type { MenuItemProps } from '../Menu';
 
 export type SidebarItem = {
   label: string;
@@ -10,8 +10,8 @@ export type SidebarItem = {
 
 export type SidebarProps = {
   context?: ContextType;
-  // variant?: MenuItemProps['variant'];
-  onClick?: (path: string) => void;
   menuItems?: SidebarItem[];
+  onClick?: (path: string) => void;
   selectedPath?: string;
+  variant?: MenuItemProps['variant'];
 };

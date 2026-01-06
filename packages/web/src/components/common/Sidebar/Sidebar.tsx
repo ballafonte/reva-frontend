@@ -6,10 +6,11 @@ import { SidebarProps } from './Sidebar.types';
 const DRAWER_WIDTH = 240;
 
 export function Sidebar({
-  menuItems = [],
   context = 'primary',
-  selectedPath,
+  menuItems = [],
   onClick,
+  selectedPath,
+  variant = 'contained',
 }: SidebarProps) {
   const handleClick = (path: string) => {
     onClick?.(path);
@@ -38,7 +39,7 @@ export function Sidebar({
               prefix={item.icon}
               selected={isActive}
               onClick={() => handleClick(item.path)}
-              variant={!isActive ? 'ghost' : 'contained'}
+              variant={!isActive ? 'ghost' : variant}
               context={!isActive ? 'plain' : context}
             />
           );
