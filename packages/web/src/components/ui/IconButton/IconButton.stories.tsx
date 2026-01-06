@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { SIZE, WHITESPACE } from '@common/theme';
+import { Contexts, SIZE, WHITESPACE } from '@common/theme';
 import { IconButton } from './IconButton';
 import { Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -12,6 +12,7 @@ const sizeOptions = Object.keys(SIZE) as Array<keyof typeof SIZE>;
 const whitespaceOptions = Object.keys(WHITESPACE) as Array<
   keyof typeof WHITESPACE
 >;
+const contextOptions = Object.values(Contexts);
 
 const meta = {
   title: 'UI/IconButton',
@@ -46,6 +47,14 @@ const meta = {
     },
     circular: {
       control: 'boolean',
+    },
+    context: {
+      control: 'select',
+      options: contextOptions,
+    },
+    variant: {
+      control: 'select',
+      options: ['contained', 'outlined', 'ghost', 'text'],
     },
     component: {
       control: false,
@@ -142,9 +151,128 @@ export const Colored: Story = {
   },
   render: () => (
     <Box sx={{ display: 'flex', gap: 2 }}>
-      <IconButton onClick={fn()} component={SearchIcon} color="primary" />
-      <IconButton onClick={fn()} component={CloseIcon} color="secondary" />
-      <IconButton onClick={fn()} component={CloseIcon} color="default" />
+      <IconButton onClick={fn()} component={SearchIcon} context="primary" />
+      <IconButton onClick={fn()} component={CloseIcon} context="secondary" />
+      <IconButton onClick={fn()} component={CloseIcon} context="tertiary" />
+    </Box>
+  ),
+};
+
+export const Variants: Story = {
+  args: {
+    onClick: fn(),
+    component: SearchIcon,
+  },
+  render: () => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+        <Box sx={{ minWidth: '100px', fontSize: '12px' }}>Contained:</Box>
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="contained"
+          context="primary"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="contained"
+          context="secondary"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="contained"
+          context="success"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="contained"
+          context="danger"
+        />
+      </Box>
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+        <Box sx={{ minWidth: '100px', fontSize: '12px' }}>Outlined:</Box>
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="outlined"
+          context="primary"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="outlined"
+          context="secondary"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="outlined"
+          context="success"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="outlined"
+          context="danger"
+        />
+      </Box>
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+        <Box sx={{ minWidth: '100px', fontSize: '12px' }}>Ghost:</Box>
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="ghost"
+          context="primary"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="ghost"
+          context="secondary"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="ghost"
+          context="success"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="ghost"
+          context="danger"
+        />
+      </Box>
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+        <Box sx={{ minWidth: '100px', fontSize: '12px' }}>Text:</Box>
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="text"
+          context="primary"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="text"
+          context="secondary"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="text"
+          context="success"
+        />
+        <IconButton
+          onClick={fn()}
+          component={SearchIcon}
+          variant="text"
+          context="danger"
+        />
+      </Box>
     </Box>
   ),
 };

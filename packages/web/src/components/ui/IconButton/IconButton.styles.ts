@@ -1,4 +1,4 @@
-import { COLORS, SIZE, Size, WHITESPACE, WhitespaceSize } from '@common/theme';
+import { COLORS, ContextType, SIZE, Size, WHITESPACE, WhitespaceSize } from '@common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { IconButtonProps } from './IconButton.types';
 
@@ -6,19 +6,140 @@ export const iconButtonStyles = ({
   size = 'sm',
   circular = false,
   padding = 'xsm',
-}: Pick<IconButtonProps, 'size' | 'circular' | 'padding'>): SxProps<Theme> => {
+  variant = 'ghost',
+  context,
+}: Pick<IconButtonProps, 'size' | 'circular' | 'padding' | 'variant' | 'context'>): SxProps<Theme> => {
   const paddingValue = WHITESPACE[padding as WhitespaceSize];
 
   const baseStyles: SxProps<Theme> = {
     borderRadius: circular ? '50%' : `${WHITESPACE.sm}px`,
     padding: `${paddingValue}px`,
-    '&:hover': {
-      backgroundColor: COLORS.GRAY_100,
-    },
-    '&:active': {
-      backgroundColor: COLORS.GRAY_200,
-    },
   };
+
+  // Apply variant-specific styles
+  if (variant === 'contained') {
+    baseStyles.backgroundColor = (theme) => {
+      const paletteColor =
+        context && context in theme.palette
+          ? (theme.palette as any)[context]
+          : theme.palette.primary;
+      return paletteColor?.main || theme.palette.primary.main;
+    };
+    baseStyles.color = (theme) => {
+      const paletteColor =
+        context && context in theme.palette
+          ? (theme.palette as any)[context]
+          : theme.palette.primary;
+      return paletteColor?.contrastText || theme.palette.primary.contrastText;
+    };
+    baseStyles['&:hover'] = {
+      backgroundColor: (theme) => {
+        const paletteColor =
+          context && context in theme.palette
+            ? (theme.palette as any)[context]
+            : theme.palette.primary;
+        return paletteColor?.dark || theme.palette.primary.dark;
+      },
+    };
+    baseStyles['&:active'] = {
+      backgroundColor: (theme) => {
+        const paletteColor =
+          context && context in theme.palette
+            ? (theme.palette as any)[context]
+            : theme.palette.primary;
+        return paletteColor?.dark || theme.palette.primary.dark;
+      },
+    };
+  } else if (variant === 'outlined') {
+    baseStyles.border = (theme) => {
+      const paletteColor =
+        context && context in theme.palette
+          ? (theme.palette as any)[context]
+          : theme.palette.primary;
+      return `1px solid ${paletteColor?.main || theme.palette.primary.main}`;
+    };
+    baseStyles.backgroundColor = 'transparent';
+    baseStyles.color = (theme) => {
+      const paletteColor =
+        context && context in theme.palette
+          ? (theme.palette as any)[context]
+          : theme.palette.primary;
+      return paletteColor?.main || theme.palette.primary.main;
+    };
+    baseStyles['&:hover'] = {
+      backgroundColor: (theme) => {
+        const paletteColor =
+          context && context in theme.palette
+            ? (theme.palette as any)[context]
+            : theme.palette.primary;
+        const mainColor = paletteColor?.main || theme.palette.primary.main;
+        return theme.palette.mode === 'dark'
+          ? `${mainColor}14`
+          : `${mainColor}08`;
+      },
+      borderColor: (theme) => {
+        const paletteColor =
+          context && context in theme.palette
+            ? (theme.palette as any)[context]
+            : theme.palette.primary;
+        return paletteColor?.main || theme.palette.primary.main;
+      },
+    };
+    baseStyles['&:active'] = {
+      backgroundColor: (theme) => {
+        const paletteColor =
+          context && context in theme.palette
+            ? (theme.palette as any)[context]
+            : theme.palette.primary;
+        const mainColor = paletteColor?.main || theme.palette.primary.main;
+        return theme.palette.mode === 'dark'
+          ? `${mainColor}1F`
+          : `${mainColor}14`;
+      },
+    };
+  } else if (variant === 'text') {
+    baseStyles.backgroundColor = 'transparent';
+    baseStyles.color = (theme) => {
+      const paletteColor =
+        context && context in theme.palette
+          ? (theme.palette as any)[context]
+          : theme.palette.primary;
+      return paletteColor?.main || theme.palette.primary.main;
+    };
+    baseStyles['&:hover'] = {
+      backgroundColor: (theme) => {
+        const paletteColor =
+          context && context in theme.palette
+            ? (theme.palette as any)[context]
+            : theme.palette.primary;
+        const mainColor = paletteColor?.main || theme.palette.primary.main;
+        return theme.palette.mode === 'dark'
+          ? `${mainColor}14`
+          : `${mainColor}08`;
+      },
+    };
+    baseStyles['&:active'] = {
+      backgroundColor: (theme) => {
+        const paletteColor =
+          context && context in theme.palette
+            ? (theme.palette as any)[context]
+            : theme.palette.primary;
+        const mainColor = paletteColor?.main || theme.palette.primary.main;
+        return theme.palette.mode === 'dark'
+          ? `${mainColor}1F`
+          : `${mainColor}14`;
+      },
+    };
+  } else {
+    // 'ghost' variant (default) - minimal styling
+    baseStyles.backgroundColor = 'transparent';
+    baseStyles['&:hover'] = {
+      backgroundColor: COLORS.GRAY_100,
+    };
+    baseStyles['&:active'] = {
+      backgroundColor: COLORS.GRAY_200,
+    };
+  }
 
   let buttonSize: number;
   if (typeof size === 'string' && size in SIZE) {
