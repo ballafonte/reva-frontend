@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 /** @type {import('storybook').StorybookConfig} */
 const config = {
@@ -26,6 +27,25 @@ const config = {
         '@common': path.resolve(__dirname, '../../common/dist/src'),
       };
     }
+
+    // Replace Next.js modules with mocks for Storybook
+    // This prevents "app router must be mounted" errors
+    const mockNavigationPath = path.resolve(
+      __dirname,
+      '../src/components/common/__mocks__/next-navigation.ts'
+    );
+    const mockLinkPath = path.resolve(
+      __dirname,
+      '../src/components/common/__mocks__/next-link.tsx'
+    );
+
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(
+        /^next\/navigation$/,
+        mockNavigationPath
+      ),
+      new webpack.NormalModuleReplacementPlugin(/^next\/link$/, mockLinkPath)
+    );
 
     // Add support for font files in CSS
     config.module.rules.push({
