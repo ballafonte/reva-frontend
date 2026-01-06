@@ -32,6 +32,32 @@ cd packages/web
 npm run dev
 ```
 
+### Storybook
+
+Storybook is a tool for developing and testing UI components in isolation. It provides a visual development environment where you can view, test, and document components independently of the main application.
+
+#### Running Storybook
+
+Start the Storybook development server:
+
+```bash
+cd packages/web
+npm run storybook
+```
+
+This will start Storybook on `http://localhost:6006` (the browser will not open automatically).
+
+#### Building Storybook
+
+Build a static version of Storybook for deployment:
+
+```bash
+cd packages/web
+npm run build-storybook
+```
+
+The static build will be output to the `storybook-static` directory.
+
 ### Type Checking
 
 Check for TypeScript errors across all packages:
