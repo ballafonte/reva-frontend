@@ -28,11 +28,15 @@ export const COMPONENT_FONT_SIZES = {
 export type ComponentFontSizeType = keyof typeof COMPONENT_FONT_SIZES;
 
 export const FONT_WEIGHTS = {
+  thin: 100,
+  extraLight: 200,
   light: 300,
   regular: 400,
   medium: 500,
   semibold: 600,
   bold: 700,
+  extraBold: 800,
+  black: 900,
 } as const;
 
 export type FontWeightType = keyof typeof FONT_WEIGHTS;
