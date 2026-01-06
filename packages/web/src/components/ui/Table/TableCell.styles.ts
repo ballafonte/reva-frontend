@@ -37,15 +37,16 @@ export const tableCellStyles = ({
 
   return css`
     padding: ${WHITESPACE.sm + 4}px ${WHITESPACE.md + 4}px;
-    border-bottom: ${isHeader
-      ? `1px solid ${borderColor}`
-      : `1px dotted ${borderColor}`};
     background-color: ${transparent ? 'transparent' : undefined};
-    ${isHeader &&
-    css`
-      background-color: ${headerBackgroundColor};
-      font-weight: 600;
-      color: ${headerTextColor};
-    `}
+    ${isHeader
+      ? css`
+          background-color: ${headerBackgroundColor};
+          font-weight: 600;
+          color: ${headerTextColor};
+          box-shadow: inset 0 -1px 0 ${borderColor};
+        `
+      : css`
+          border-bottom: 1px dotted ${borderColor};
+        `}
   `;
 };

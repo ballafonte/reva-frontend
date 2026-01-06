@@ -211,7 +211,7 @@ const stickyHeaderData = Array.from({ length: 50 }, (_, i) => ({
 
 const WithStickyHeaderComponent = () => {
   return (
-    <div style={{ height: '400px', overflow: 'auto' }}>
+    <div style={{ height: '400px', display: 'flex', flexDirection: 'column' }}>
       <Table columns={columns} data={stickyHeaderData} stickyHeader={true} />
     </div>
   );

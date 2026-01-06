@@ -41,7 +41,8 @@ export const Table = <T extends Record<string, any>>(props: TableProps<T>) => {
     <TableContainer
       sx={{
         borderRadius: `${WHITESPACE.sm}px`,
-        overflow: 'hidden',
+        overflow: stickyHeader ? 'auto' : 'hidden',
+        ...(stickyHeader && { maxHeight: '100%' }),
       }}
     >
       <MuiTable {...rest} sx={styles} stickyHeader={stickyHeader}>
