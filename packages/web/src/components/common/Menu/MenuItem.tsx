@@ -1,7 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, ListItemButton } from '@mui/material';
+import { FONT_WEIGHTS } from '@common/theme';
 import { MenuItemProps } from './MenuItem.types';
 import { menuItemStyles } from './MenuItem.styles';
 
+/**
+ * TODO: explore refactoring this component to use ListItem component from the @/components/ui/List
+ */
 export const MenuItem = ({
   label,
   prefix,
@@ -10,28 +14,13 @@ export const MenuItem = ({
   selected = false,
   onClick,
   disabled = false,
-  context,
+  context = 'plain',
   size = 'md',
 }: MenuItemProps) => {
   const styles = menuItemStyles({ variant, selected, disabled, context, size });
 
-  return (
-    <Box
-      component={onClick ? 'button' : 'div'}
-      onClick={disabled ? undefined : onClick}
-      sx={[
-        styles,
-        {
-          ...(variant !== 'outlined' && { border: 'none' }),
-          outline: 'none',
-          fontFamily: 'inherit',
-          textAlign: 'left',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-        },
-      ]}
-    >
+  const content = (
+    <>
       {prefix && (
         <Box
           sx={{
@@ -47,7 +36,8 @@ export const MenuItem = ({
         variant="body2"
         sx={{
           flex: 1,
-          fontWeight: selected ? 500 : 400,
+          fontWeight: selected ? FONT_WEIGHTS.bold : 400,
+          color: 'inherit', // Inherit color from parent to respect hover states
         }}
       >
         {label}
@@ -63,6 +53,54 @@ export const MenuItem = ({
           {suffix}
         </Box>
       )}
+    </>
+  );
+
+  // Use ListItemButton when onClick is provided to get MUI's button effects (ripple, etc.)
+  if (onClick) {
+    return (
+      <ListItemButton
+        onClick={disabled ? undefined : onClick}
+        disabled={disabled}
+        sx={[
+          // Base layout styles
+          {
+            ...(variant !== 'outlined' && { border: 'none' }),
+            outline: 'none',
+            fontFamily: 'inherit',
+            textAlign: 'left',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          },
+          // Our custom styles come last to override ListItemButton defaults
+          // The emotion css styles should handle backgroundColor, color, hover states, etc.
+          styles,
+        ]}
+      >
+        {content}
+      </ListItemButton>
+    );
+  }
+
+  // Fallback to Box for non-interactive items
+  return (
+    <Box
+      component="div"
+      sx={[
+        styles,
+        {
+          ...(variant !== 'outlined' && { border: 'none' }),
+          outline: 'none',
+          fontFamily: 'inherit',
+          textAlign: 'left',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        },
+      ]}
+    >
+      {content}
     </Box>
   );
 };

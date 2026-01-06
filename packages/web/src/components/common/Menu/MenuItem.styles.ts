@@ -84,12 +84,15 @@ export const menuItemStyles = ({
 
   const getContainedBackgroundColor = () => {
     if (contextColor && selected) {
-      return getLightContextColor(context);
+      return contextColor.base;
     }
     return selected ? COLORS.BLUE : 'transparent';
   };
 
   const getContainedTextColor = () => {
+    if (contextColor && selected) {
+      return contextColor.contrast;
+    }
     if (contextColor) {
       return contextColor.text;
     }
@@ -112,8 +115,8 @@ export const menuItemStyles = ({
 
   const variantStyles = {
     tile: css`
-      background-color: ${selectedBgColor};
-      color: ${textColor};
+      background-color: ${selectedBgColor} !important;
+      color: ${textColor} !important;
       ${selected
         ? css`
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -122,49 +125,196 @@ export const menuItemStyles = ({
       &:hover {
         ${!disabled
           ? css`
-              background-color: ${selected ? selectedBgColor : COLORS.GRAY_100};
-              color: ${contextColor ? contextColor.text : COLORS.GRAY_700};
+              background-color: ${selected
+                ? selectedBgColor
+                : COLORS.GRAY_100} !important;
+              color: ${contextColor
+                ? contextColor.text
+                : COLORS.GRAY_700} !important;
             `
           : ''}
       }
+      &:active {
+        ${!disabled
+          ? css`
+              background-color: ${selected
+                ? selectedBgColor
+                : COLORS.GRAY_100} !important;
+              color: ${contextColor
+                ? contextColor.text
+                : COLORS.GRAY_700} !important;
+            `
+          : ''}
+      }
+      &.Mui-selected {
+        background-color: ${selectedBgColor} !important;
+        color: ${textColor} !important;
+        &:hover {
+          background-color: ${selected
+            ? selectedBgColor
+            : COLORS.GRAY_100} !important;
+          color: ${contextColor
+            ? contextColor.text
+            : COLORS.GRAY_700} !important;
+        }
+        &:active {
+          background-color: ${selected
+            ? selectedBgColor
+            : COLORS.GRAY_100} !important;
+          color: ${contextColor
+            ? contextColor.text
+            : COLORS.GRAY_700} !important;
+        }
+      }
+      &.Mui-focusVisible {
+        background-color: ${selectedBgColor} !important;
+        color: ${textColor} !important;
+      }
     `,
     contained: css`
-      background-color: ${containedBgColor};
-      color: ${containedTextColor};
+      background-color: ${containedBgColor} !important;
+      color: ${containedTextColor} !important;
       &:hover {
         ${!disabled
           ? css`
               background-color: ${selected
                 ? containedBgColor
-                : COLORS.GRAY_100};
-              color: ${contextColor ? contextColor.text : COLORS.GRAY_700};
+                : COLORS.GRAY_100} !important;
+              color: ${contextColor
+                ? contextColor.contrast
+                : COLORS.GRAY_700} !important;
             `
           : ''}
+      }
+      &:active {
+        ${!disabled
+          ? css`
+              background-color: ${selected
+                ? containedBgColor
+                : COLORS.GRAY_100} !important;
+              color: ${contextColor
+                ? contextColor.text
+                : COLORS.GRAY_700} !important;
+            `
+          : ''}
+      }
+      &.Mui-selected {
+        background-color: ${containedBgColor} !important;
+        color: ${containedTextColor} !important;
+        &:hover {
+          background-color: ${selected
+            ? containedBgColor
+            : COLORS.GRAY_100} !important;
+          color: ${contextColor
+            ? contextColor.text
+            : COLORS.GRAY_700} !important;
+        }
+        &:active {
+          background-color: ${selected
+            ? containedBgColor
+            : COLORS.GRAY_100} !important;
+          color: ${contextColor
+            ? contextColor.text
+            : COLORS.GRAY_700} !important;
+        }
+      }
+      &.Mui-focusVisible {
+        background-color: ${containedBgColor} !important;
+        color: ${containedTextColor} !important;
       }
     `,
     outlined: css`
-      background-color: transparent;
+      background-color: transparent !important;
       border: 1px solid ${borderColor};
-      color: ${textColor};
+      color: ${textColor} !important;
       &:hover {
         ${!disabled
           ? css`
-              border-color: ${selected ? borderColor : COLORS.GRAY_400};
-              color: ${contextColor ? contextColor.text : COLORS.GRAY_700};
+              border-color: ${selected
+                ? borderColor
+                : COLORS.GRAY_400} !important;
+              color: ${contextColor
+                ? contextColor.text
+                : COLORS.GRAY_700} !important;
             `
           : ''}
       }
+      &:active {
+        ${!disabled
+          ? css`
+              border-color: ${selected
+                ? borderColor
+                : COLORS.GRAY_400} !important;
+              color: ${contextColor
+                ? contextColor.text
+                : COLORS.GRAY_700} !important;
+            `
+          : ''}
+      }
+      &.Mui-selected {
+        background-color: transparent !important;
+        color: ${textColor} !important;
+        &:hover {
+          border-color: ${borderColor} !important;
+          color: ${contextColor
+            ? contextColor.text
+            : COLORS.GRAY_700} !important;
+        }
+        &:active {
+          border-color: ${borderColor} !important;
+          color: ${contextColor
+            ? contextColor.text
+            : COLORS.GRAY_700} !important;
+        }
+      }
+      &.Mui-focusVisible {
+        background-color: transparent !important;
+        border-color: ${borderColor} !important;
+        color: ${textColor} !important;
+      }
     `,
     ghost: css`
-      background-color: transparent;
-      color: ${textColor};
+      background-color: transparent !important;
+      color: ${textColor} !important;
       &:hover {
         ${!disabled
           ? css`
-              background-color: ${COLORS.GRAY_100};
-              color: ${contextColor ? contextColor.text : COLORS.GRAY_700};
+              background-color: ${COLORS.GRAY_100} !important;
+              color: ${contextColor
+                ? contextColor.text
+                : COLORS.GRAY_700} !important;
             `
           : ''}
+      }
+      &:active {
+        ${!disabled
+          ? css`
+              background-color: ${COLORS.GRAY_100} !important;
+              color: ${contextColor
+                ? contextColor.text
+                : COLORS.GRAY_700} !important;
+            `
+          : ''}
+      }
+      &.Mui-selected {
+        background-color: transparent !important;
+        color: ${textColor} !important;
+        &:hover {
+          background-color: ${COLORS.GRAY_100} !important;
+          color: ${contextColor
+            ? contextColor.text
+            : COLORS.GRAY_700} !important;
+        }
+        &:active {
+          background-color: ${COLORS.GRAY_100} !important;
+          color: ${contextColor
+            ? contextColor.text
+            : COLORS.GRAY_700} !important;
+        }
+      }
+      &.Mui-focusVisible {
+        background-color: transparent !important;
+        color: ${textColor} !important;
       }
     `,
   };

@@ -59,47 +59,52 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     label: 'All Files',
+    onClick: () => {},
     prefix: <FolderIcon />,
+    selected: true,
     suffix: <ExpandMoreIcon />,
     variant: 'tile',
-    selected: true,
   },
 };
 
 export const Tile: Story = {
   args: {
     label: 'All Files',
+    onClick: () => {},
     prefix: <FolderIcon />,
+    selected: true,
     suffix: <ExpandMoreIcon />,
     variant: 'tile',
-    selected: true,
   },
 };
 
 export const Contained: Story = {
   args: {
     label: 'Files',
+    onClick: () => {},
     prefix: <FolderIcon />,
-    variant: 'contained',
     selected: true,
+    variant: 'contained',
   },
 };
 
 export const Outlined: Story = {
   args: {
     label: 'Files',
+    onClick: () => {},
     prefix: <FolderIcon />,
-    variant: 'outlined',
     selected: true,
+    variant: 'outlined',
   },
 };
 
 export const Ghost: Story = {
   args: {
     label: 'Recent',
+    onClick: () => {},
     prefix: <AccessTimeIcon />,
-    variant: 'ghost',
     selected: false,
+    variant: 'ghost',
   },
 };
 
@@ -117,34 +122,39 @@ export const VerticalMenu: Story = {
     >
       <MenuItem
         label="All Files"
+        onClick={() => {}}
         prefix={<FolderIcon />}
         suffix={<ExpandMoreIcon />}
-        variant="tile"
         selected={true}
+        variant="tile"
       />
       <MenuItem
         label="Recent"
+        onClick={() => {}}
         prefix={<AccessTimeIcon />}
-        variant="ghost"
         selected={false}
+        variant="ghost"
       />
       <MenuItem
         label="Favorites"
+        onClick={() => {}}
         prefix={<FavoriteBorderIcon />}
-        variant="ghost"
         selected={false}
+        variant="ghost"
       />
       <MenuItem
         label="Shared"
+        onClick={() => {}}
         prefix={<ShareIcon />}
-        variant="ghost"
         selected={false}
+        variant="ghost"
       />
       <MenuItem
         label="Tags"
+        onClick={() => {}}
         prefix={<LabelIcon />}
-        variant="ghost"
         selected={false}
+        variant="ghost"
       />
       <Box
         sx={{
@@ -156,15 +166,17 @@ export const VerticalMenu: Story = {
       >
         <MenuItem
           label="Settings"
+          onClick={() => {}}
           prefix={<SettingsIcon />}
-          variant="ghost"
           selected={false}
+          variant="ghost"
         />
         <MenuItem
           label="Deleted Files"
+          onClick={() => {}}
           prefix={<DeleteIcon />}
-          variant="ghost"
           selected={false}
+          variant="ghost"
         />
       </Box>
     </Box>
@@ -183,31 +195,31 @@ export const HorizontalMenu: Story = {
     >
       <MenuItem
         label="Files"
-        prefix={<FolderIcon />}
-        variant="tile"
-        selected={true}
         onClick={() => {}}
+        prefix={<FolderIcon />}
+        selected={true}
+        variant="tile"
       />
       <MenuItem
         label="Activity"
-        prefix={<AccessTimeIcon />}
-        variant="ghost"
-        selected={false}
         onClick={() => {}}
+        prefix={<AccessTimeIcon />}
+        selected={false}
+        variant="ghost"
       />
       <MenuItem
         label="Calendar"
-        prefix={<LabelIcon />}
-        variant="ghost"
-        selected={false}
         onClick={() => {}}
+        prefix={<LabelIcon />}
+        selected={false}
+        variant="ghost"
       />
       <MenuItem
         label="Contact"
-        prefix={<SettingsIcon />}
-        variant="ghost"
-        selected={false}
         onClick={() => {}}
+        prefix={<SettingsIcon />}
+        selected={false}
+        variant="ghost"
       />
     </Box>
   ),
@@ -226,24 +238,27 @@ export const WithSuffix: Story = {
     >
       <MenuItem
         label="All Files"
+        onClick={() => {}}
         prefix={<FolderIcon />}
+        selected={true}
         suffix={<ExpandMoreIcon />}
         variant="tile"
-        selected={true}
       />
       <MenuItem
         label="Item with Badge"
+        onClick={() => {}}
         prefix={<FolderIcon />}
+        selected={false}
         suffix={<Box sx={{ fontSize: '12px', color: 'inherit' }}>3</Box>}
         variant="ghost"
-        selected={false}
       />
       <MenuItem
         label="Item with Icon"
+        onClick={() => {}}
         prefix={<FolderIcon />}
+        selected={false}
         suffix={<SettingsIcon />}
         variant="ghost"
-        selected={false}
       />
     </Box>
   ),
@@ -262,23 +277,26 @@ export const Disabled: Story = {
     >
       <MenuItem
         label="Enabled Item"
+        onClick={() => {}}
         prefix={<FolderIcon />}
-        variant="tile"
         selected={true}
+        variant="tile"
       />
       <MenuItem
+        disabled={true}
         label="Disabled Item"
+        onClick={() => {}}
         prefix={<FolderIcon />}
-        variant="tile"
         selected={false}
-        disabled={true}
+        variant="tile"
       />
       <MenuItem
-        label="Disabled Selected"
-        prefix={<FolderIcon />}
-        variant="contained"
-        selected={true}
         disabled={true}
+        label="Disabled Selected"
+        onClick={() => {}}
+        prefix={<FolderIcon />}
+        selected={true}
+        variant="contained"
       />
     </Box>
   ),
@@ -313,6 +331,7 @@ export const WithContext: Story = {
           >
             <MenuItem
               label={`${context} (Selected)`}
+              onClick={() => {}}
               prefix={<FolderIcon />}
               variant="tile"
               selected={true}
@@ -320,10 +339,11 @@ export const WithContext: Story = {
             />
             <MenuItem
               label={`${context} (Unselected)`}
+              onClick={() => {}}
               prefix={<FolderIcon />}
-              variant="tile"
               selected={false}
               context={context}
+              variant="tile"
             />
           </Box>
         ))}
@@ -347,55 +367,55 @@ export const Sizes: Story = {
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <MenuItem
             label="Small Size"
+            onClick={() => {}}
             prefix={<FolderIcon />}
-            variant="tile"
             selected={true}
             size="sm"
-            onClick={() => {}}
+            variant="tile"
           />
           <MenuItem
             label="Small Size (Unselected)"
+            onClick={() => {}}
             prefix={<AccessTimeIcon />}
-            variant="ghost"
             selected={false}
             size="sm"
-            onClick={() => {}}
+            variant="ghost"
           />
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <MenuItem
             label="Medium Size (Default)"
+            onClick={() => {}}
             prefix={<FolderIcon />}
-            variant="tile"
             selected={true}
             size="md"
-            onClick={() => {}}
+            variant="tile"
           />
           <MenuItem
             label="Medium Size (Unselected)"
+            onClick={() => {}}
             prefix={<AccessTimeIcon />}
-            variant="ghost"
             selected={false}
             size="md"
-            onClick={() => {}}
+            variant="ghost"
           />
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <MenuItem
             label="Large Size"
+            onClick={() => {}}
             prefix={<FolderIcon />}
-            variant="tile"
             selected={true}
             size="lg"
-            onClick={() => {}}
+            variant="tile"
           />
           <MenuItem
             label="Large Size (Unselected)"
+            onClick={() => {}}
             prefix={<AccessTimeIcon />}
-            variant="ghost"
             selected={false}
             size="lg"
-            onClick={() => {}}
+            variant="ghost"
           />
         </Box>
       </Box>
@@ -417,24 +437,24 @@ const InteractiveComponent = () => {
     >
       <MenuItem
         label="Files"
-        prefix={<FolderIcon />}
-        variant="tile"
-        selected={selected === 'files'}
         onClick={() => setSelected('files')}
+        prefix={<FolderIcon />}
+        selected={selected === 'files'}
+        variant="tile"
       />
       <MenuItem
         label="Recent"
-        prefix={<AccessTimeIcon />}
-        variant="ghost"
-        selected={selected === 'recent'}
         onClick={() => setSelected('recent')}
+        prefix={<AccessTimeIcon />}
+        selected={selected === 'recent'}
+        variant="ghost"
       />
       <MenuItem
         label="Favorites"
-        prefix={<FavoriteBorderIcon />}
-        variant="ghost"
-        selected={selected === 'favorites'}
         onClick={() => setSelected('favorites')}
+        prefix={<FavoriteBorderIcon />}
+        selected={selected === 'favorites'}
+        variant="ghost"
       />
     </Box>
   );
