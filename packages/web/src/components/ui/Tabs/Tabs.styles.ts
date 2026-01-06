@@ -1,14 +1,12 @@
 import { COLORS } from '@common/theme';
-import { css } from '@emotion/react';
+import { SxProps, Theme } from '@mui/material';
 
-export const tabsStyles = () => {
-  return css`
-    border-bottom: 1px solid ${COLORS.GRAY_300};
-    min-height: auto;
-
-    .MuiTabs-indicator {
-      background-color: ${COLORS.BLUE};
-      height: 2px;
-    }
-  `;
+export const tabsStyles = (): SxProps<Theme> => {
+  return {
+    borderBottom: `1px solid ${COLORS.GRAY_300}`,
+    minHeight: 'auto',
+    '& .MuiTabs-indicator': {
+      display: 'none', // Hide default indicator since we're using borderBottom on Tab
+    },
+  };
 };

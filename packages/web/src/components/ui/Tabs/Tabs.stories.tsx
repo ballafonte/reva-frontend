@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { Contexts, ContextType } from '@common/theme';
 import { Tabs } from './Tabs';
 import { Tab } from './Tab';
 import { Box } from '@mui/material';
+import { TabProps } from './Tab.types';
+
+const contextOptions = Object.values(Contexts);
 
 const meta = {
   title: 'UI/Tabs',
@@ -11,21 +15,42 @@ const meta = {
     layout: 'padded',
   },
   tags: ['autodocs'],
+  argTypes: {
+    // @ts-expect-error - context is a prop for Tab, not Tabs, but we want to control it in Storybook
+    context: {
+      control: 'radio',
+      options: contextOptions,
+      description: 'Context color for the tabs',
+      table: {
+        type: { summary: 'ContextType | undefined' },
+      },
+    },
+  },
 } satisfies Meta<typeof Tabs>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta> & {
+  args?: {
+    context?: ContextType;
+  };
+};
 
-const DefaultTabsComponent = () => {
+const tabs = [
+  { label: 'Files' },
+  { label: 'Activity' },
+  { label: 'Calendar' },
+  { label: 'Contact' },
+] as const satisfies TabProps[];
+
+const DefaultTabsComponent = ({ tabs: tabsProps }: { tabs: TabProps[] }) => {
   const [value, setValue] = useState(0);
 
   return (
     <Box>
       <Tabs value={value} onChange={(e, newValue) => setValue(newValue)}>
-        <Tab label="Files" />
-        <Tab label="Activity" />
-        <Tab label="Calendar" />
-        <Tab label="Contact" />
+        {tabsProps.map((tab) => (
+          <Tab key={tab.label} {...tab} />
+        ))}
       </Tabs>
       <Box sx={{ p: 2 }}>
         {value === 0 && <div>Files content</div>}
@@ -38,5 +63,30 @@ const DefaultTabsComponent = () => {
 };
 
 export const Default: Story = {
-  render: () => <DefaultTabsComponent />,
+  args: {
+    context: undefined,
+  } as { context?: ContextType },
+  render: (args) => (
+    <DefaultTabsComponent
+      tabs={tabs.map((tab) => ({
+        ...tab,
+        context: (args as { context?: ContextType }).context,
+      }))}
+    />
+  ),
+};
+
+export const WithDifferentColors: Story = {
+  args: {
+    context: undefined,
+  } as { context?: ContextType },
+  render: () => (
+    <DefaultTabsComponent
+      tabs={tabs.map((tab, index) => ({
+        ...tab,
+        context:
+          Object.values(Contexts)[index % Object.values(Contexts).length],
+      }))}
+    />
+  ),
 };
