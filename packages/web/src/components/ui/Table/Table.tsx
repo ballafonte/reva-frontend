@@ -47,45 +47,59 @@ export const Table = <T extends Record<string, any>>(props: TableProps<T>) => {
       <MuiTable {...rest} sx={styles} stickyHeader={stickyHeader}>
         <TableHead>
           <TableRow>
-            {columns.map((column) => (
-              <TableCell
-                key={column.id}
-                variant="head"
-                align={column.align || 'left'}
-                style={{ width: column.width }}
-                context={context}
-                transparent={transparent}
-              >
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                    gap: 1,
-                  }}
+            {columns.map((column) => {
+              const align = column.align || 'left';
+              const justifyContent =
+                align === 'center'
+                  ? 'center'
+                  : align === 'right'
+                    ? 'flex-end'
+                    : 'flex-start';
+
+              return (
+                <TableCell
+                  key={column.id}
+                  variant="head"
+                  align={align}
+                  style={{ width: column.width }}
+                  context={context}
+                  transparent={transparent}
                 >
-                  {column.label}
-                  {column.sortable && (
-                    <span
-                      onClick={() => handleSort(column.id)}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      {sortBy === column.id ? (
-                        sortDirection === 'asc' ? (
-                          <IconWrapper component={ExpandLess} size="xsm" />
-                        ) : sortDirection === 'desc' ? (
-                          <IconWrapper component={ExpandMore} size="xsm" />
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent,
+                      cursor: 'pointer',
+                      gap: 1,
+                    }}
+                  >
+                    {column.label}
+                    {column.sortable && (
+                      <span
+                        onClick={() => handleSort(column.id)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {sortBy === column.id ? (
+                          sortDirection === 'asc' ? (
+                            <IconWrapper component={ExpandLess} size="xsm" />
+                          ) : sortDirection === 'desc' ? (
+                            <IconWrapper component={ExpandMore} size="xsm" />
+                          ) : (
+                            <IconWrapper
+                              component={UnfoldMoreIcon}
+                              size="xsm"
+                            />
+                          )
                         ) : (
                           <IconWrapper component={UnfoldMoreIcon} size="xsm" />
-                        )
-                      ) : (
-                        <IconWrapper component={UnfoldMoreIcon} size="xsm" />
-                      )}
-                    </span>
-                  )}
-                </Box>
-              </TableCell>
-            ))}
+                        )}
+                      </span>
+                    )}
+                  </Box>
+                </TableCell>
+              );
+            })}
           </TableRow>
         </TableHead>
         <TableBody>
