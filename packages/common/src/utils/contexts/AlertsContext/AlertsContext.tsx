@@ -12,12 +12,14 @@ export interface AlertsContextType {
   alerts: Alert[];
   pushAlert: (_: Partial<Alert>) => void;
   dismissAlert: (_: Alert['id']) => void;
+  clearAlerts: () => void;
 }
 
 export const AlertsContext = createContext<AlertsContextType>({
   alerts: [],
   pushAlert: () => undefined,
   dismissAlert: () => undefined,
+  clearAlerts: () => undefined,
 });
 
 /**

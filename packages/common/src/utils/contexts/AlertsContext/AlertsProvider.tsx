@@ -41,6 +41,10 @@ export const AlertsProvider: React.FC<AlertsProviderProps> = ({
     setAlerts([...alerts]);
   }, [alerts]);
 
+  const clearAlerts = () => {
+    setAlerts([]);
+  };
+
   // Shift the alerts array once every few seconds
   useEffect(() => {
     clearInterval(shiftInterval);
@@ -58,6 +62,7 @@ export const AlertsProvider: React.FC<AlertsProviderProps> = ({
         alerts,
         pushAlert,
         dismissAlert,
+        clearAlerts,
       }}
     >
       {children}
