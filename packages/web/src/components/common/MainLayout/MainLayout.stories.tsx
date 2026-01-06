@@ -25,7 +25,7 @@ type Story = StoryObj<typeof MainLayout>;
 export const Default: Story = {
   render: () => (
     <MainLayout>
-      <Box sx={{ p: 3 }}>
+      <Box sx={{ p: 3, minHeight: 250 }}>
         <Typography variant="h4">Main Content</Typography>
         <Typography variant="body1">
           This is the main content area. The sidebar will appear when
