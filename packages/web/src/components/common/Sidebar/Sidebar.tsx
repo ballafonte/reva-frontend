@@ -1,23 +1,15 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-  Box,
-} from '@mui/material';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import BusinessIcon from '@mui/icons-material/Business';
-
+import { Drawer, Toolbar, Box } from '@mui/material';
+import { usePathname, useRouter } from 'next/navigation';
+import { MenuItem } from '@/components/common';
+import { SidebarProps } from './Sidebar.types';
 const DRAWER_WIDTH = 240;
 
-const menuItems = [
+const defaultMenuItems = [
   {
     label: 'Jurisdictions',
     path: '/jurisdictions',
@@ -35,12 +27,19 @@ const menuItems = [
   },
 ];
 
-export function Sidebar() {
+export function Sidebar(props: SidebarProps) {
+  const {
+    menuItems = defaultMenuItems,
+    context = 'primary',
+    // variant = 'ghost',
+    onClick,
+  } = props;
   const pathname = usePathname();
   const router = useRouter();
 
   const handleNavigation = (path: string) => {
     router.push(path);
+    onClick?.(path);
   };
 
   return (
@@ -56,23 +55,21 @@ export function Sidebar() {
       }}
     >
       <Toolbar />
-      <Box sx={{ overflow: 'auto' }}>
-        <List>
-          {menuItems.map((item) => {
-            const isActive = pathname === item.path;
-            return (
-              <ListItem key={item.path} disablePadding>
-                <ListItemButton
-                  selected={isActive}
-                  onClick={() => handleNavigation(item.path)}
-                >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.label} />
-                </ListItemButton>
-              </ListItem>
-            );
-          })}
-        </List>
+      <Box sx={{ overflow: 'auto', p: 1 }}>
+        {menuItems.map((item) => {
+          const isActive = pathname === item.path;
+          return (
+            <MenuItem
+              key={item.path}
+              label={item.label}
+              prefix={item.icon}
+              selected={isActive}
+              onClick={() => handleNavigation(item.path)}
+              variant={!isActive ? 'ghost' : 'contained'}
+              context={!isActive ? 'plain' : context}
+            />
+          );
+        })}
       </Box>
     </Drawer>
   );
