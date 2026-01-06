@@ -1,7 +1,7 @@
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import BusinessIcon from '@mui/icons-material/Business';
-import { AlertsToast, MainLayout, PortalHeaderBar } from '@/components/common';
+import { AlertsToast, MainLayout } from '@/components/common';
 import type { MainLayoutProps } from '@/components/common/MainLayout/MainLayout.types';
 import { Providers } from './providers';
 import '@/theme/fonts.css';
@@ -39,7 +39,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <PortalHeaderBar />
           <MainLayout sidebarMenuItems={menuItems}>{children}</MainLayout>
           <AlertsToast />
         </Providers>

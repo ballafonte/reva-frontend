@@ -3,6 +3,7 @@
 import { Box } from '@mui/material';
 import { useAuthContext } from '@reva-frontend/common';
 import { usePathname, useRouter } from 'next/navigation';
+import { PortalHeaderBar } from '../PortalHeaderBar/PortalHeaderBar';
 import { Sidebar } from '../Sidebar/Sidebar';
 import type { MainLayoutProps } from './MainLayout.types';
 
@@ -29,21 +30,24 @@ export function MainLayout({ children, sidebarMenuItems }: MainLayoutProps) {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Sidebar
-        menuItems={sidebarMenuItems}
-        selectedPath={pathname}
-        onClick={handleSidebarClick}
-      />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
-        }}
-      >
-        {children}
+    <>
+      <PortalHeaderBar />
+      <Box sx={{ display: 'flex' }}>
+        <Sidebar
+          menuItems={sidebarMenuItems}
+          selectedPath={pathname}
+          onClick={handleSidebarClick}
+        />
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
+          }}
+        >
+          {children}
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 }
