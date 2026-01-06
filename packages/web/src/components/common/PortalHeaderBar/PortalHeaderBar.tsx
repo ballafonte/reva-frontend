@@ -35,10 +35,12 @@ export function PortalHeaderBar() {
           {siteName}
         </Typography>
         <IconButton
-          component={LogoutIcon}
-          onClick={handleSignOut}
           aria-label="sign out"
+          component={LogoutIcon}
+          context="primary"
           edge="end"
+          onClick={handleSignOut}
+          variant="contained"
         />
       </Toolbar>
     </AppBar>
