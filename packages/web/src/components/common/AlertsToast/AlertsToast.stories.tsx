@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AlertsToast } from './AlertsToast';
-import { AlertsProvider } from '@reva-frontend/common';
-import { Box } from '@mui/material';
+import {
+  AlertsProvider,
+  useAlertsContext,
+  SeverityContexts,
+} from '@reva-frontend/common';
+import { Box, Button, Stack, Typography } from '@mui/material';
 
 const meta = {
   title: 'Common/AlertsToast',
@@ -22,19 +26,76 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const AlertDemo = () => {
+  const { pushAlert, clearAlerts } = useAlertsContext();
+
+  return (
+    <Box sx={{ p: 3, minHeight: 250 }}>
+      <Typography variant="h6" gutterBottom>
+        AlertsToast Demo
+      </Typography>
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+        Click the buttons below to trigger different types of alerts.
+      </Typography>
+      <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => {
+            clearAlerts();
+            pushAlert({
+              message: 'Operation completed successfully!',
+              severity: SeverityContexts.SUCCESS,
+            });
+          }}
+        >
+          Success Alert
+        </Button>
+        <Button
+          variant="contained"
+          color="info"
+          onClick={() => {
+            clearAlerts();
+            pushAlert({
+              message: 'Here is some helpful information.',
+              severity: SeverityContexts.INFO,
+            });
+          }}
+        >
+          Info Alert
+        </Button>
+        <Button
+          variant="contained"
+          color="warning"
+          onClick={() => {
+            clearAlerts();
+            pushAlert({
+              message: 'Warning: Please review this action.',
+              severity: SeverityContexts.WARNING,
+            });
+          }}
+        >
+          Warning Alert
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            clearAlerts();
+            pushAlert({
+              message: 'Error: Something went wrong.',
+              severity: SeverityContexts.DANGER,
+            });
+          }}
+          sx={{ bgcolor: 'error.main', color: 'error.contrastText' }}
+        >
+          Error Alert
+        </Button>
+      </Stack>
+      <AlertsToast />
+    </Box>
+  );
+};
+
 export const Default: Story = {
-  render: () => {
-    // Note: This story requires the AlertsProvider decorator
-    // To see the toast, you would need to trigger an alert from another component
-    // or add a button that uses useAlertsContext
-    return (
-      <Box sx={{ p: 3 }}>
-        <AlertsToast />
-        <p>
-          AlertsToast component is rendered. Use useAlertsContext to trigger
-          alerts.
-        </p>
-      </Box>
-    );
-  },
+  render: () => <AlertDemo />,
 };
