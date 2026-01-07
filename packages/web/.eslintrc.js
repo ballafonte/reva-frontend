@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   extends: ['next/core-web-vitals', 'plugin:@typescript-eslint/recommended'],
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', '@reva-frontend/reva-frontend'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-unused-vars': [
@@ -13,17 +13,13 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
-    'reva-frontend/no-client-import-in-server': 'error',
   },
   overrides: [
     {
-      files: ['**/*.ts', '**/*.tsx'],
-      plugins: {
-        'reva-frontend': {
-          rules: {
-            'no-client-import-in-server': require('../../eslint-rules/no-client-import-in-server'),
-          },
-        },
+      // Only enforce client-only import restriction within Next.js App Router files
+      files: ['src/app/**/*.{ts,tsx}'],
+      rules: {
+        '@reva-frontend/reva-frontend/no-client-import-in-server': 'error',
       },
     },
   ],

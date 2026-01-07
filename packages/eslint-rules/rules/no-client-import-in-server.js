@@ -2,7 +2,7 @@
  * ESLint rule to prevent importing from '@reva-frontend/common/client'
  * in files that don't have 'use client' directive (Server Components)
  */
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
