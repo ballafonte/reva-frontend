@@ -44,6 +44,10 @@ yarn storybook
 
 This will start Storybook on `http://localhost:6006` (the browser will not open automatically).
 
+> **Note:** When using Storybook, you must rebuild the `@reva-frontend/common` package for changes to take effect. See the [Building section](../common/README.md#building) in the common package README for instructions.
+>
+> **Why this is necessary:** Storybook's webpack configuration points to the compiled JavaScript files in `common/dist/src` rather than the TypeScript source files. This differs from the Next.js development server, which is able to use webpack aliases to point directly to `common/src` for hot reload support. When Storybook is configured to use the source files, Babel encounters TypeScript syntax (type annotations, type-only imports, generics, etc.) that it cannot parse without proper TypeScript loader configuration. Rather than maintaining complex webpack rules to handle TypeScript files from the common package, we use the pre-compiled dist output, which requires rebuilding the common package when changes are made.
+
 ### Building Storybook
 
 Build a static version of Storybook for deployment:
