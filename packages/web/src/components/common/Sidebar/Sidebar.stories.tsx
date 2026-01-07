@@ -5,7 +5,9 @@ import { Box } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Sidebar } from './Sidebar';
-import { SidebarItem } from './Sidebar.types';
+import { SidebarItem, SidebarProps } from './Sidebar.types';
+
+const variantOptions = ['tile', 'contained', 'outlined', 'ghost'];
 
 const meta = {
   title: 'Common/Sidebar',
@@ -14,6 +16,45 @@ const meta = {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
+  args: {
+    context: 'primary',
+    containerVariant: 'default',
+    variant: 'contained',
+  },
+  argTypes: {
+    containerVariant: {
+      control: 'radio',
+      options: ['default', 'panel'],
+    },
+    variant: {
+      control: 'select',
+      options: variantOptions,
+    },
+    menuItems: {
+      control: false,
+    },
+    selectedPath: {
+      control: false,
+    },
+    onClick: {
+      control: false,
+    },
+    style: {
+      control: false,
+    },
+    sx: {
+      control: false,
+    },
+    title: {
+      control: false,
+    },
+    withToolbar: {
+      control: false,
+    },
+    zIndex: {
+      control: false,
+    },
+  },
 } satisfies Meta<typeof Sidebar>;
 
 export default meta;
@@ -37,21 +78,17 @@ const defaultMenuItems: SidebarItem[] = [
   },
 ];
 
-const SidebarWrapper = ({
-  initialSelectedPath,
-}: {
-  initialSelectedPath?: string;
-}) => {
-  const [selectedPath, setSelectedPath] = useState<string | undefined>(
-    initialSelectedPath
-  );
+const SidebarWrapper = ({ containerVariant, variant }: SidebarProps) => {
+  const [selectedPath, setSelectedPath] = useState<string | undefined>();
 
   return (
     <Box sx={{ display: 'flex', height: 250 }}>
       <Sidebar
+        containerVariant={containerVariant}
         menuItems={defaultMenuItems}
         selectedPath={selectedPath}
         onClick={(path) => setSelectedPath(path)}
+        variant={variant}
       />
       <Box sx={{ flexGrow: 1, p: 3 }}>
         <p>Main content area - Sidebar is on the left</p>
@@ -62,5 +99,5 @@ const SidebarWrapper = ({
 };
 
 export const Default: Story = {
-  render: () => <SidebarWrapper />,
+  render: (args) => <SidebarWrapper {...args} />,
 };
