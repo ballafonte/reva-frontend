@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "lint": "echo \"no lint in plugin package\"",
     "type-check": "echo \"no type-check in plugin package\""

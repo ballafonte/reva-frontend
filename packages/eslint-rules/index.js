@@ -1,6 +1,7 @@
-import noClientImportInServer from './rules/no-client-import-in-server.js';
+/* eslint-env node */
+var noClientImportInServer = require('./rules/no-client-import-in-server.js');
 
-export default {
+module.exports = {
   rules: {
     'no-client-import-in-server': noClientImportInServer,
   },

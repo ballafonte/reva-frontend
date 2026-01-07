@@ -2,7 +2,8 @@
  * ESLint rule to prevent importing from '@reva-frontend/common/client'
  * in files that don't have 'use client' directive (Server Components)
  */
-export default {
+/* eslint-env node */
+module.exports = {
   meta: {
     type: 'problem',
     docs: {
@@ -17,14 +18,13 @@ export default {
         "Cannot import from '@reva-frontend/common/client' in a Server Component. Add 'use client' directive at the top of the file or use '@reva-frontend/common' instead.",
     },
   },
-
-  create(context) {
-    let hasUseClientDirective = false;
+  create: function (context) {
+    var hasUseClientDirective = false;
 
     return {
-      Program(node) {
+      Program: function (node) {
         // Check if 'use client' directive exists
-        const firstStatement = node.body[0];
+        var firstStatement = node.body[0];
 
         if (
           firstStatement &&
@@ -37,7 +37,7 @@ export default {
         }
       },
 
-      ImportDeclaration(node) {
+      ImportDeclaration: function (node) {
         // Check if this is importing from the client-only package
         if (
           node.source &&
