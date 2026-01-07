@@ -1,8 +1,10 @@
+'use client';
+
 import {
   AuthContext,
   authStore,
   type AuthContextType,
-} from '@reva-frontend/common';
+} from '@reva-frontend/common/client';
 import React, { useEffect, useState } from 'react';
 
 /**
