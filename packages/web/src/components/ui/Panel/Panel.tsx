@@ -4,9 +4,16 @@ import { PanelFooter } from './PanelFooter';
 import { panelStyles } from './Panel.styles';
 import { PanelProps } from './Panel.types';
 
-export const Panel = (props: PanelProps) => {
-  const { variant = 'outlined', header, footer, children, ...rest } = props;
-  const styles = panelStyles({ variant, ...rest });
+export const Panel = ({
+  header,
+  footer,
+  children,
+  padding,
+  sx,
+  variant = 'outlined',
+  ...rest
+}: PanelProps) => {
+  const styles = panelStyles({ padding, sx, variant });
 
   return (
     <Paper {...rest} sx={styles} elevation={0}>

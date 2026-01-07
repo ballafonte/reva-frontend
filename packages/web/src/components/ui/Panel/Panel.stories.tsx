@@ -1,8 +1,11 @@
+import { WHITESPACE } from '@reva-frontend/common';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Panel } from './Panel';
 import { IconButton } from '../IconButton';
 import { Button } from '../Button';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+
+const whitespaceOptions = Object.keys(WHITESPACE);
 
 const meta = {
   title: 'UI/Panel',
@@ -11,10 +14,33 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  args: {
+    variant: 'outlined',
+    padding: 'md',
+  },
   argTypes: {
+    padding: {
+      control: 'select',
+      options: whitespaceOptions,
+    },
     variant: {
       control: 'select',
       options: ['outlined', 'filled'],
+    },
+    component: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+    header: {
+      control: false,
+    },
+    footer: {
+      control: false,
+    },
+    sx: {
+      control: false,
     },
   },
 } satisfies Meta<typeof Panel>;
@@ -111,7 +137,7 @@ export const Nested: Story = {
       title: 'Outer panel',
     },
     children: (
-      <Panel variant="outlined" padding={true} sx={{ mt: 2 }}>
+      <Panel variant="outlined" padding="md" sx={{ mt: 2 }}>
         Inner panel (nested)
       </Panel>
     ),
