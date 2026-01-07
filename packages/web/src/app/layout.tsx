@@ -7,9 +7,11 @@ import { Providers } from './providers';
 import '@/theme/fonts.css';
 import '@/theme/globals.css';
 
+const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'REVA Portal';
+
 export const metadata = {
-  title: 'Reva Frontend',
-  description: 'Reva Frontend Application',
+  title: `${siteName} — Smarter Appeals. Better Outcomes.`,
+  description: `${siteName} combines advocacy expertise with intelligent tools to accelerate appeals, overturn denials, and optimize healthcare revenue.`,
 };
 
 const menuItems: MainLayoutProps['sidebarMenuItems'] = [
