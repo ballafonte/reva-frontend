@@ -1,4 +1,8 @@
-import { CONTEXT_COLORS, WHITESPACE, type ContextType } from '@common/theme';
+import {
+  CONTEXT_COLORS,
+  WHITESPACE,
+  type ContextType,
+} from '@reva-frontend/common/theme';
 import {
   Chip as MuiChip,
   ChipProps as MuiChipProps,

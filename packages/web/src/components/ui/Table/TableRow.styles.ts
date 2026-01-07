@@ -1,4 +1,4 @@
-import { COLORS } from '@common/theme';
+import { COLORS } from '@reva-frontend/common/theme';
 import { css } from '@emotion/react';
 import { TableRowProps } from './TableRow.types';
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Contexts } from '@common/theme';
+import { Contexts } from '@reva-frontend/common/theme';
 import { Divider } from './Divider';
 import { Box, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';

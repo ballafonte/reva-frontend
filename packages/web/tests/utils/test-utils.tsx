@@ -5,7 +5,7 @@ import { render, RenderOptions } from '@testing-library/react';
 import { ReactElement, ReactNode } from 'react';
 import { MockAuthProvider } from './MockAuthProvider';
 import { theme } from '@/theme/mui/theme';
-import { AlertsProvider } from '@reva-frontend/common';
+import { AlertsProvider } from '@reva-frontend/common/client';
 
 // Create a test QueryClient
 const createTestQueryClient = () =>

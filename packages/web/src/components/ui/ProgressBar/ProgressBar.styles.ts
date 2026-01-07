@@ -1,5 +1,9 @@
-import { CONTEXT_COLORS, COLORS, WHITESPACE } from '@common/theme';
-import { ContextType } from '@common/theme';
+import {
+  CONTEXT_COLORS,
+  COLORS,
+  WHITESPACE,
+} from '@reva-frontend/common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { ProgressBarProps } from './ProgressBar.types';
 

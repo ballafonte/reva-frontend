@@ -61,4 +61,3 @@ This package depends on:
 - `fuse.js` - Fuzzy search
 - `moment` - Date manipulation
 - `uuid` - UUID generation
-

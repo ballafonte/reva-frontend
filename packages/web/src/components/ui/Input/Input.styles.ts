@@ -4,7 +4,7 @@ import {
   ELEMENT_COLORS,
   WHITESPACE,
   ContextType,
-} from '@common/theme';
+} from '@reva-frontend/common/theme';
 import { SxProps, Theme } from '@mui/material';
 
 export const inputStyles = ({

@@ -4,7 +4,7 @@ import {
   ContextType,
   getLightContextColor,
   WHITESPACE,
-} from '@common/theme';
+} from '@reva-frontend/common/theme';
 import { css } from '@emotion/react';
 import { theme } from '@/theme/mui/theme';
 import { TimelineNodeProps } from './TimelineNode.types';

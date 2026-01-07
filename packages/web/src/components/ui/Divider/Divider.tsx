@@ -1,5 +1,5 @@
-import { CONTEXT_COLORS, WHITESPACE } from '@common/theme';
-import { ContextType } from '@common/theme';
+import { CONTEXT_COLORS, WHITESPACE } from '@reva-frontend/common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 import React from 'react';
 import { IconWrapper } from '../IconWrapper';
 import { dividerStyles, dividerHorizontalRuleStyles } from './Divider.styles';

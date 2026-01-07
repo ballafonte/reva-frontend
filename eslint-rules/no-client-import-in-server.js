@@ -25,7 +25,7 @@ module.exports = {
       Program(node) {
         // Check if 'use client' directive exists
         const firstStatement = node.body[0];
-        
+
         if (
           firstStatement &&
           firstStatement.type === 'ExpressionStatement' &&
@@ -55,4 +55,3 @@ module.exports = {
     };
   },
 };
-

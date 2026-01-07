@@ -1,4 +1,4 @@
-import { ContextType } from '@common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 import { TableProps as MuiTableProps } from '@mui/material';
 import type { ReactNode } from 'react';
 

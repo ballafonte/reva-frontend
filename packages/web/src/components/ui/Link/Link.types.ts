@@ -1,4 +1,4 @@
-import { ContextType } from '@common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 import { LinkProps as MuiLinkProps } from '@mui/material';
 
 export type LinkProps = {

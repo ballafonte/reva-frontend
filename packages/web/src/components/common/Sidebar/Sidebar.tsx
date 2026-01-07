@@ -1,6 +1,6 @@
 'use client';
 
-import { COMPONENT_LAYERS } from '@common/theme';
+import { COMPONENT_LAYERS } from '@reva-frontend/common/theme';
 import { Drawer, Toolbar, Box, Typography } from '@mui/material';
 import { MenuItem } from '@/components/common';
 import { SidebarProps } from './Sidebar.types';

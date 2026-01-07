@@ -1,5 +1,5 @@
-import { SeverityContexts } from '@common/theme';
-import { getRandomString } from '@common/utils/randomUUID';
+import { SeverityContexts } from '../../../theme';
+import { getRandomString } from '../../randomUUID';
 import type { Alert } from './AlertsContext';
 
 export const DEFAULT_ALERTS_TIMEOUT = 5_000;

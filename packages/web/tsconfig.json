@@ -21,7 +21,10 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@common/*": ["../common/src/*"],
+      "@reva-frontend/common": ["../common/src/index"],
+      "@reva-frontend/common/client": ["../common/src/client"],
+      "@reva-frontend/common/theme": ["../common/src/theme"],
+      "@reva-frontend/common/utils": ["../common/src/utils"],
       "@tests/*": ["./tests/*"]
     }
   },

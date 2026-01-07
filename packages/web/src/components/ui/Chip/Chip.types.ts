@@ -1,4 +1,4 @@
-import { ContextType } from '@common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 import { ReactNode } from 'react';
 
 export type ChipProps = {

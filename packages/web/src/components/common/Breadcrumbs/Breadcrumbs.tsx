@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { COLORS } from '@common/theme';
+import { COLORS } from '@reva-frontend/common/theme';
 import { Link } from '@/components/ui/Link';
 import { Button } from '@/components/ui/Button';
 import { BreadcrumbsProps } from './Breadcrumbs.types';

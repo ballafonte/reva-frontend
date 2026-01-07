@@ -1,4 +1,4 @@
-import { ELEMENT_COLORS, WHITESPACE } from '@common/theme';
+import { ELEMENT_COLORS, WHITESPACE } from '@reva-frontend/common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { ButtonProps } from './Button.types';
 

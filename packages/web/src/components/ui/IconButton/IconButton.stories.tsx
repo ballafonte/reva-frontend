@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { Contexts, SIZE, WHITESPACE } from '@common/theme';
+import { Contexts, SIZE, WHITESPACE } from '@reva-frontend/common/theme';
 import { IconButton } from './IconButton';
 import { Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';

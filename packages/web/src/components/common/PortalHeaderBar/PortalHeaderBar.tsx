@@ -1,7 +1,7 @@
 'use client';
 
-import { COMPONENT_LAYERS, useAuthContext } from '@common/client';
-import { printConsole } from '@common/utils';
+import { COMPONENT_LAYERS, useAuthContext } from '@reva-frontend/common/client';
+import { printConsole } from '@reva-frontend/common/utils';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { IconButton } from '@/components/ui/IconButton';

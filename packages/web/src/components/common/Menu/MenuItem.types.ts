@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ContextType } from '@common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 
 export type MenuItemVariant = 'tile' | 'contained' | 'outlined' | 'ghost';
 

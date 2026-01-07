@@ -1,4 +1,4 @@
-import { ContextType, Size, WhitespaceSize } from '@common/theme';
+import { ContextType, Size, WhitespaceSize } from '@reva-frontend/common/theme';
 import { IconButtonProps as MuiIconButtonProps } from '@mui/material';
 
 export type IconButtonProps = Omit<

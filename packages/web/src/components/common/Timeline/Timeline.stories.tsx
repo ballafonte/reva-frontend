@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box, Typography } from '@mui/material';
-import { Contexts, ContextType } from '@common/theme';
+import { Contexts, ContextType } from '@reva-frontend/common/theme';
 import EditIcon from '@mui/icons-material/Edit';
 import LabelIcon from '@mui/icons-material/Label';
 import { Button, Chip, Image } from '@/components/ui';

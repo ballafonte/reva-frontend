@@ -5,7 +5,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { Contexts } from '@common/theme';
+import { Contexts } from '@reva-frontend/common/theme';
 import { IconButton } from '../IconButton';
 import { Input } from './Input';
 

@@ -1,4 +1,4 @@
-import { authStore, isNullish, printConsole } from '@common/utils';
+import { authStore, isNullish, printConsole } from '../utils';
 import {
   API_STATUS_CODES,
   API_DEFAULT_HEADERS,

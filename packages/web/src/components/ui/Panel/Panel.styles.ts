@@ -1,4 +1,8 @@
-import { COLORS, ELEMENT_COLORS, WHITESPACE } from '@common/theme';
+import {
+  COLORS,
+  ELEMENT_COLORS,
+  WHITESPACE,
+} from '@reva-frontend/common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { PanelProps } from './Panel.types';
 

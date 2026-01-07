@@ -1,4 +1,4 @@
-import { ContextType } from '@common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 import { TabProps as MuiTabProps } from '@mui/material';
 
 export type TabProps = MuiTabProps & {

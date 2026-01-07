@@ -22,12 +22,16 @@ const config = {
     },
   },
   webpackFinal: async (config) => {
+    const commonSrcPath = path.resolve(__dirname, '../../common/dist/src');
     // Add support for TypeScript path aliases
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
         '@': path.resolve(__dirname, '../src'),
-        '@common': path.resolve(__dirname, '../../common/dist/src'),
+        '@reva-frontend/common': commonSrcPath,
+        '@reva-frontend/common/client': path.resolve(commonSrcPath, 'client'),
+        '@reva-frontend/common/theme': path.resolve(commonSrcPath, 'theme'),
+        '@reva-frontend/common/utils': path.resolve(commonSrcPath, 'utils'),
       };
     }
 

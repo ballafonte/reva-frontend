@@ -1,4 +1,4 @@
-import { Size } from '@common/theme';
+import { Size } from '@reva-frontend/common/theme';
 import { SvgIconProps } from '@mui/material';
 
 export type IconWrapperProps = Omit<SvgIconProps, 'fontSize'> & {

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SIZE } from '@common/theme';
+import { SIZE } from '@reva-frontend/common/theme';
 import { Box } from '@mui/material';
 import FolderIcon from '@mui/icons-material/Folder';
 import SearchIcon from '@mui/icons-material/Search';

@@ -1,4 +1,4 @@
-import { Contexts } from '@common/theme';
+import { Contexts } from '@reva-frontend/common/theme';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { Button } from './Button';

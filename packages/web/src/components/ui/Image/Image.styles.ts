@@ -1,4 +1,9 @@
-import { SIZE, Size, WHITESPACE, WhitespaceSize } from '@common/theme';
+import {
+  SIZE,
+  Size,
+  WHITESPACE,
+  WhitespaceSize,
+} from '@reva-frontend/common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { ImageProps } from './Image.types';
 

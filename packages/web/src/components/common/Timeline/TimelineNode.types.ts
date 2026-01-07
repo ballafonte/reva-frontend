@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { BaseTimestampFormat } from '@common/utils/date';
-import { ContextType } from '@common/theme';
+import { BaseTimestampFormat } from '@reva-frontend/common/utils';
+import { ContextType } from '@reva-frontend/common/theme';
 
 export type TimelineOrientation = 'vertical' | 'horizontal';
 

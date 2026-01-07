@@ -1,5 +1,5 @@
 import { ImgHTMLAttributes } from 'react';
-import { Size } from '@common/theme';
+import { Size } from '@reva-frontend/common/theme';
 
 export type ImageVariant = 'square' | 'rounded' | 'circle';
 

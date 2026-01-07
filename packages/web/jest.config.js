@@ -10,7 +10,6 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '^@common/(.*)$': '<rootDir>/../common/src/$1',
     '^@reva-frontend/common$': '<rootDir>/../common/src/index',
     '^@reva-frontend/common/(.*)$': '<rootDir>/../common/src/$1',
     '^@tests/(.*)$': '<rootDir>/tests/$1',

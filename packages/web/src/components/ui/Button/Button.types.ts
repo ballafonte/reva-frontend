@@ -1,4 +1,4 @@
-import { ContextType } from '@common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 import { ButtonProps as MuiButtonProps } from '@mui/material';
 
 export type ButtonProps = Omit<

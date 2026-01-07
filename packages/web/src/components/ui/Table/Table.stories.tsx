@@ -4,7 +4,7 @@ import { TablePagination, TableRow } from '@mui/material';
 import { usePagination } from '@reva-frontend/common/client';
 import { Table } from './Table';
 import type { TableColumn } from './Table.types';
-import { Contexts, ContextType } from '@common/theme';
+import { Contexts, ContextType } from '@reva-frontend/common/theme';
 
 const contextOptions = ['default', ...Object.values(Contexts)];
 

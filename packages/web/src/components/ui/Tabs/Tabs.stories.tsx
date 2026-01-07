@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Contexts, ContextType } from '@common/theme';
+import { Contexts, ContextType } from '@reva-frontend/common/theme';
 import { Tabs } from './Tabs';
 import { Tab } from './Tab';
 import { Box } from '@mui/material';

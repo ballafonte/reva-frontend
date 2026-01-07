@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { COLORS, WHITESPACE } from '@common/theme';
+import { COLORS, WHITESPACE } from '@reva-frontend/common/theme';
 import { TimelineOrientation } from './TimelineNode.types';
 
 export const timelineStyles = (

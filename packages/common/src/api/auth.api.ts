@@ -1,5 +1,5 @@
 import type { paths } from '@revassurance/api/openapi';
-import { authStore, printConsole } from '@common/utils';
+import { authStore, printConsole } from '../utils';
 import { createApiErrorFromResponse } from './api.errors';
 import { callApi, getApiBaseUrl } from './api.utils';
 

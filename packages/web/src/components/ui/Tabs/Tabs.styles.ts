@@ -1,4 +1,4 @@
-import { COLORS } from '@common/theme';
+import { COLORS } from '@reva-frontend/common/theme';
 import { SxProps, Theme } from '@mui/material';
 
 export const tabsStyles = (): SxProps<Theme> => {

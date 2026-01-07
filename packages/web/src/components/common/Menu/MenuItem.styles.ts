@@ -4,7 +4,7 @@ import {
   WHITESPACE,
   ContextType,
   getLightContextColor,
-} from '@common/theme';
+} from '@reva-frontend/common/theme';
 import { css } from '@emotion/react';
 import { MenuItemProps } from './MenuItem.types';
 

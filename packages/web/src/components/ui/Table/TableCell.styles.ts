@@ -4,7 +4,7 @@ import {
   ELEMENT_COLORS,
   WHITESPACE,
   ContextType,
-} from '@common/theme';
+} from '@reva-frontend/common/theme';
 import { css } from '@emotion/react';
 import { TableCellProps } from './TableCell.types';
 

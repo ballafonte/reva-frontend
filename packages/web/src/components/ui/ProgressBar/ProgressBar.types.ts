@@ -1,4 +1,4 @@
-import { ContextType } from '@common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 
 export type ProgressBarProps = {
   value?: number; // 0-100 (optional when variant is indeterminate)

@@ -1,4 +1,4 @@
-import { SIZE, Size } from '@common/theme';
+import { SIZE, Size } from '@reva-frontend/common/theme';
 import { CSSObject, SxProps, Theme } from '@mui/material';
 import { IconWrapperProps } from './IconWrapper.types';
 

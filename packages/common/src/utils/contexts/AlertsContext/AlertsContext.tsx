@@ -1,4 +1,4 @@
-import { SeverityContextType } from '@common/theme';
+import { SeverityContextType } from '../../../theme';
 import { createContext, useContext } from 'react';
 
 export type Alert = {

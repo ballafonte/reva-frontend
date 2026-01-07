@@ -1,5 +1,9 @@
-import { COLORS, CONTEXT_COLORS, WHITESPACE } from '@common/theme';
-import { ContextType } from '@common/theme';
+import {
+  COLORS,
+  CONTEXT_COLORS,
+  WHITESPACE,
+} from '@reva-frontend/common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 
 export const dividerStyles = (
   gapSize: keyof typeof WHITESPACE = 'md'

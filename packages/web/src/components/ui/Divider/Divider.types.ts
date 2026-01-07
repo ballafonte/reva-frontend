@@ -1,4 +1,4 @@
-import { ContextType, WHITESPACE } from '@common/theme';
+import { ContextType, WHITESPACE } from '@reva-frontend/common/theme';
 
 export type DividerProps = {
   color?: ContextType;

@@ -5,7 +5,7 @@ import {
   Typography,
   ListItemButton as MuiListItemButton,
 } from '@mui/material';
-import { FONT_WEIGHTS } from '@common/theme';
+import { FONT_WEIGHTS } from '@reva-frontend/common/theme';
 import { MenuItemProps } from './MenuItem.types';
 import { menuItemStyles } from './MenuItem.styles';
 

@@ -1,4 +1,4 @@
-import { SIZE, WHITESPACE } from '@common/theme';
+import { SIZE, WHITESPACE } from '@reva-frontend/common/theme';
 import { Box } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Image } from './Image';

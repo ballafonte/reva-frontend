@@ -1,5 +1,5 @@
-import { CONTEXT_COLORS, ELEMENT_COLORS } from '@common/theme';
-import { ContextType } from '@common/theme';
+import { CONTEXT_COLORS, ELEMENT_COLORS } from '@reva-frontend/common/theme';
+import { ContextType } from '@reva-frontend/common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { LinkProps } from './Link.types';
 

@@ -10,7 +10,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box } from '@mui/material';
-import { Contexts, ContextType } from '@common/theme';
+import { Contexts, ContextType } from '@reva-frontend/common/theme';
 
 const meta = {
   title: 'Common/MenuItem',

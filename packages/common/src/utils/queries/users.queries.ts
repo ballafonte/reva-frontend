@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { getPlatformAdmins } from '@common/api';
-import type { User } from '@common/types';
+import { getPlatformAdmins } from '../../api';
+import type { User } from '../../types';
 import { QueryConfig } from './queries.types';
 
 /**

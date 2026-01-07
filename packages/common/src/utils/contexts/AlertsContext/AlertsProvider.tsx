@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import type { Alert } from './AlertsContext';
-import { printConsole } from '@common/utils';
-import { AlertsContext } from './AlertsContext';
+import { printConsole } from '../../console';
+import { type Alert, AlertsContext } from './AlertsContext';
 import { formatAlert, DEFAULT_ALERTS_TIMEOUT } from './AlertsContext.utils';
 
 export interface AlertsProviderProps {

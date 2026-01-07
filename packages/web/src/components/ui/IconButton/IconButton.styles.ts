@@ -5,7 +5,7 @@ import {
   Size,
   WHITESPACE,
   WhitespaceSize,
-} from '@common/theme';
+} from '@reva-frontend/common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { IconButtonProps } from './IconButton.types';
 

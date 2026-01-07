@@ -1,4 +1,4 @@
-import { WHITESPACE } from '@common/theme';
+import { WHITESPACE } from '@reva-frontend/common/theme';
 import {
   Box,
   Table as MuiTable,

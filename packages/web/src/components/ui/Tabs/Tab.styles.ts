@@ -1,4 +1,8 @@
-import { COLORS, CONTEXT_COLORS, ContextType } from '@common/theme';
+import {
+  COLORS,
+  CONTEXT_COLORS,
+  ContextType,
+} from '@reva-frontend/common/theme';
 import { SxProps, Theme } from '@mui/material';
 import { TabProps } from './Tab.types';
 
