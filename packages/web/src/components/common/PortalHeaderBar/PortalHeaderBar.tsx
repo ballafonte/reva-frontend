@@ -44,6 +44,7 @@ export function PortalHeaderBar({
           edge="end"
           onClick={handleSignOut}
           variant="contained"
+          size="sm"
         />
       </Toolbar>
     </AppBar>
