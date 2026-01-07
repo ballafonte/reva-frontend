@@ -1,8 +1,9 @@
+import { forwardRef } from 'react';
 import { TextField, InputAdornment } from '@mui/material';
 import { inputStyles } from './Input.styles';
 import { InputProps } from './Input.types';
 
-export const Input = (props: InputProps) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { variant = 'outlined', prefix, suffix, context, ...rest } = props;
   const styles = inputStyles({ context });
 
@@ -18,6 +19,7 @@ export const Input = (props: InputProps) => {
   return (
     <TextField
       {...rest}
+      ref={ref}
       variant={variant}
       sx={styles}
       size="small"
@@ -27,4 +29,6 @@ export const Input = (props: InputProps) => {
       }}
     />
   );
-};
+});
+
+Input.displayName = 'Input';
