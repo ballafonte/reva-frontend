@@ -7,7 +7,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { IconButton } from '@/components/ui/IconButton';
-import { useDebouncedValue, DEFAULT_DELAY } from '@reva-frontend/common';
+import { useDebouncedValue, DEFAULT_DELAY } from '@reva-frontend/common/client';
 
 export interface SearchBarProps {
   /**

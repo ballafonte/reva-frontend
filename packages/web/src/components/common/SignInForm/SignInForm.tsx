@@ -10,12 +10,11 @@ import { Button } from '@/components/ui/Button';
 import { Panel } from '@/components/ui/Panel';
 import { signInSchema, type SignInFormData } from './SignInForm.schema';
 import {
-  useAlertsContext,
-  useAuthContext,
   SeverityContexts,
   ApiError,
   DEFAULT_ERROR_MESSAGE,
 } from '@reva-frontend/common';
+import { useAlertsContext, useAuthContext } from '@reva-frontend/common/client';
 
 export function SignInForm() {
   const { signIn } = useAuthContext();

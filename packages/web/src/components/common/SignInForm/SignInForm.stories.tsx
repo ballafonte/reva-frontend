@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SignInForm } from './SignInForm';
-import { AuthProvider, AlertsProvider } from '@reva-frontend/common';
+import { AuthProvider, AlertsProvider } from '@reva-frontend/common/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';

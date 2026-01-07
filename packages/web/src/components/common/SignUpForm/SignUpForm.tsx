@@ -10,11 +10,8 @@ import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Panel } from '@/components/ui/Panel';
 import { signUpSchema, type SignUpFormData } from './SignUpForm.schema';
-import {
-  useAlertsContext,
-  useAuthContext,
-  SeverityContexts,
-} from '@reva-frontend/common';
+import { SeverityContexts } from '@reva-frontend/common';
+import { useAlertsContext, useAuthContext } from '@reva-frontend/common/client';
 
 export function SignUpForm() {
   const router = useRouter();

@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Typography } from '@mui/material';
 import { formatDateTime } from '@common/utils/date';
 import { TimelineNodeProps } from './TimelineNode.types';

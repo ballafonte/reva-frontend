@@ -1,10 +1,6 @@
 // Export folders
 export * from './auth';
-export * from './contexts';
 export * from './date';
-export * from './hooks';
-export * from './mutations';
-export * from './queries';
 
 // Export files
 export * from './console';

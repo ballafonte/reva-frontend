@@ -16,12 +16,12 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
+import { type User } from '@reva-frontend/common';
 import {
-  type User,
   useDisclosure,
   usePlatformAdminsQuery,
   useSearch,
-} from '@reva-frontend/common';
+} from '@reva-frontend/common/client';
 import { AuthGuard, ConfirmDialog, SearchBar } from '@/components/common';
 
 export default function PlatformAdminsPage() {

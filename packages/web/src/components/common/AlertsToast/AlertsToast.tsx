@@ -1,6 +1,6 @@
 'use client';
 
-import { useAlertsContext } from '@reva-frontend/common';
+import { useAlertsContext } from '@reva-frontend/common/client';
 import { Snackbar, Alert as MuiAlert } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 

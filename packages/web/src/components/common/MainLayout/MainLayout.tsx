@@ -1,7 +1,7 @@
 'use client';
 
 import { Box } from '@mui/material';
-import { useAuthContext } from '@reva-frontend/common';
+import { useAuthContext } from '@reva-frontend/common/client';
 import { usePathname, useRouter } from 'next/navigation';
 import { PortalHeaderBar } from '../PortalHeaderBar/PortalHeaderBar';
 import { Sidebar } from '../Sidebar/Sidebar';

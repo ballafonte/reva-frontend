@@ -1,4 +1,3 @@
-export * from './hooks';
 export * from './colors';
 export * from './images';
 export * from './input';

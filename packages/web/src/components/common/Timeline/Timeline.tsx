@@ -1,3 +1,5 @@
+'use client';
+
 import { Box } from '@mui/material';
 import { TimelineProps } from './Timeline.types';
 import { TimelineNode } from './TimelineNode';

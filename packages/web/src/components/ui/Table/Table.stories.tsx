@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { TablePagination, TableRow } from '@mui/material';
-import { usePagination } from '@reva-frontend/common';
+import { usePagination } from '@reva-frontend/common/client';
 import { Table } from './Table';
 import type { TableColumn } from './Table.types';
 import { Contexts, ContextType } from '@common/theme';

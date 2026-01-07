@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef, useEffect, useMemo } from 'react';
 import NextLinkBase, { LinkProps as NextLinkProps } from 'next/link';
 import { SxProps, Theme, useTheme } from '@mui/material';

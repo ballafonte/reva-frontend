@@ -15,14 +15,14 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
+import { type Jurisdiction } from '@reva-frontend/common';
 import {
   useJurisdictionsQuery,
   useDeleteJurisdictionMutation,
   useUpdateJurisdictionMutation,
   useCreateJurisdictionMutation,
-  type Jurisdiction,
   useDisclosure,
-} from '@reva-frontend/common';
+} from '@reva-frontend/common/client';
 import {
   AuthGuard,
   AddJurisdictionDialog,

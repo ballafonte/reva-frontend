@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AlertsToast } from './AlertsToast';
-import {
-  AlertsProvider,
-  useAlertsContext,
-  SeverityContexts,
-} from '@reva-frontend/common';
+import { SeverityContexts } from '@reva-frontend/common';
+import { AlertsProvider, useAlertsContext } from '@reva-frontend/common/client';
 import { Box, Stack, Typography } from '@mui/material';
 import { Button } from '@/components/ui/Button';
 
