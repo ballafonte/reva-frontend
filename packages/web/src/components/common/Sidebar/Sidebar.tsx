@@ -34,7 +34,7 @@ export function Sidebar({
           </Typography>
         </Toolbar>
       )}
-      {!title && withToolbar && <Toolbar />}
+      {!title && withToolbar && containerVariant === 'default' && <Toolbar />}
       {menuItems.map((item) => {
         const isActive = selectedPath === item.path || item.selected;
         return (
@@ -52,34 +52,43 @@ export function Sidebar({
     </>
   );
 
-  if (containerVariant === 'panel') {
+  if (containerVariant === 'default') {
     return (
-      <Panel
-        padding="xsm"
+      <Drawer
+        variant="permanent"
         style={style}
-        sx={{ ...sx, flexShrink: 0, m: 1, width: DRAWER_WIDTH, zIndex }}
+        sx={{
+          ...sx,
+          flexShrink: 0,
+          width: DRAWER_WIDTH,
+          zIndex,
+          '& .MuiDrawer-paper': {
+            width: DRAWER_WIDTH,
+            boxSizing: 'border-box',
+          },
+        }}
       >
-        {renderChildren()}
-      </Panel>
+        <Box sx={{ overflow: 'auto', p: 1 }}>{renderChildren()}</Box>
+      </Drawer>
     );
   }
 
   return (
-    <Drawer
-      variant="permanent"
+    <Panel
+      padding="lg"
       style={style}
       sx={{
         ...sx,
         flexShrink: 0,
+        m: 2,
+        mt: withToolbar ? 0 : 2,
+        mr: withToolbar ? 2 : 0,
         width: DRAWER_WIDTH,
         zIndex,
-        '& .MuiDrawer-paper': {
-          width: DRAWER_WIDTH,
-          boxSizing: 'border-box',
-        },
       }}
+      variant={containerVariant}
     >
-      <Box sx={{ overflow: 'auto', p: 1 }}>{renderChildren()}</Box>
-    </Drawer>
+      {renderChildren()}
+    </Panel>
   );
 }

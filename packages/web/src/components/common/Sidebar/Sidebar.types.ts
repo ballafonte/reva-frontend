@@ -1,3 +1,4 @@
+import type { PanelProps } from '@/components/ui/Panel';
 import type { SxProps, Theme } from '@mui/material/styles';
 import type { ContextType } from '@reva-frontend/common';
 import type { CSSProperties, ReactNode } from 'react';
@@ -12,7 +13,7 @@ export type SidebarItem = {
 
 export type SidebarProps = {
   context?: ContextType;
-  containerVariant?: 'default' | 'panel';
+  containerVariant?: 'default' | PanelProps['variant'];
   menuItems?: SidebarItem[];
   onClick?: (path: string) => void;
   selectedPath?: string;

@@ -16,6 +16,7 @@ export function MainLayout({
   children,
   headerOnTop = false,
   sidebarMenuItems,
+  variant = 'default',
 }: MainLayoutProps) {
   const { isAuthenticated } = useAuthContext();
   const pathname = usePathname();
@@ -34,10 +35,16 @@ export function MainLayout({
   };
 
   return (
-    <>
-      {headerOnTop && <PortalHeaderBar zIndex={COMPONENT_LAYERS.FLOATS + 1} />}
-      <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {headerOnTop && (
+        <PortalHeaderBar
+          variant={variant}
+          zIndex={COMPONENT_LAYERS.FLOATS + 1}
+        />
+      )}
+      <Box sx={{ display: 'flex', flexGrow: 1 }}>
         <Sidebar
+          containerVariant={variant}
           menuItems={sidebarMenuItems}
           onClick={handleSidebarClick}
           selectedPath={pathname}
@@ -53,10 +60,15 @@ export function MainLayout({
             width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
           }}
         >
-          {!headerOnTop && <PortalHeaderBar zIndex={COMPONENT_LAYERS.FLOATS} />}
+          {!headerOnTop && (
+            <PortalHeaderBar
+              variant={variant}
+              zIndex={COMPONENT_LAYERS.FLOATS}
+            />
+          )}
           {children}
         </Box>
       </Box>
-    </>
+    </Box>
   );
 }

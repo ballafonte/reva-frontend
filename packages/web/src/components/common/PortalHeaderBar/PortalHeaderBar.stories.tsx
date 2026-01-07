@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MockAuthProvider } from '../../../../tests/utils/MockAuthProvider';
 import { PortalHeaderBar } from './PortalHeaderBar';
+import type { PortalHeaderBarProps } from './PortalHeaderBar.types';
 
 const meta = {
   title: 'Common/PortalHeaderBar',
@@ -12,6 +13,8 @@ const meta = {
   tags: ['autodocs'],
   args: {
     isAuthenticated: true,
+    title: 'REVA Story',
+    variant: 'default',
   } as any,
   argTypes: {
     isAuthenticated: {
@@ -20,6 +23,16 @@ const meta = {
       table: {
         category: 'Story Controls',
       },
+    },
+    variant: {
+      control: 'radio',
+      options: ['default', 'outlined', 'filled'],
+    },
+    title: {
+      control: 'text',
+    },
+    zIndex: {
+      control: false,
     },
   } as any,
   decorators: [
@@ -36,10 +49,10 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: () => (
+const PortalHeaderBarWrapper = (props: PortalHeaderBarProps) => {
+  return (
     <>
-      <PortalHeaderBar />
+      <PortalHeaderBar {...props} />
       <Box sx={{ p: 3 }}>
         <Typography variant="h4">Page Content</Typography>
         <Typography variant="body1">
@@ -47,5 +60,9 @@ export const Default: Story = {
         </Typography>
       </Box>
     </>
-  ),
+  );
+};
+
+export const Default: Story = {
+  render: (args) => <PortalHeaderBarWrapper {...args} />,
 };

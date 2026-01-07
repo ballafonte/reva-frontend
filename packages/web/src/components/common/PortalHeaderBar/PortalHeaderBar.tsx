@@ -5,12 +5,14 @@ import { printConsole } from '@reva-frontend/common/utils';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { IconButton } from '@/components/ui/IconButton';
+import { Panel } from '@/components/ui/Panel';
 import { useRouter } from 'next/navigation';
 import { PortalHeaderBarProps } from './PortalHeaderBar.types';
 
 export function PortalHeaderBar({
   position = 'sticky',
   title = process.env.NEXT_PUBLIC_SITE_NAME || 'REVA Portal',
+  variant = 'default',
   zIndex = COMPONENT_LAYERS.FLOATS,
 }: PortalHeaderBarProps) {
   const { isAuthenticated, logout } = useAuthContext();
@@ -31,22 +33,38 @@ export function PortalHeaderBar({
     }
   };
 
+  const renderChildren = () => (
+    <>
+      <Typography variant="h6" component="div" sx={{ flexGrow: 1, mx: 1 }}>
+        {title}
+      </Typography>
+      <IconButton
+        aria-label="sign out"
+        component={LogoutIcon}
+        context="primary"
+        edge={variant === 'default' ? 'end' : undefined}
+        onClick={handleSignOut}
+        variant={variant === 'default' ? 'contained' : 'ghost'}
+        size="sm"
+      />
+    </>
+  );
+
+  if (variant === 'default') {
+    return (
+      <AppBar position={position} sx={{ mb: 3, zIndex }}>
+        <Toolbar>{renderChildren()}</Toolbar>
+      </AppBar>
+    );
+  }
+
   return (
-    <AppBar position={position} sx={{ mb: 3, zIndex }}>
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          {title}
-        </Typography>
-        <IconButton
-          aria-label="sign out"
-          component={LogoutIcon}
-          context="primary"
-          edge="end"
-          onClick={handleSignOut}
-          variant="contained"
-          size="sm"
-        />
-      </Toolbar>
-    </AppBar>
+    <Panel
+      padding="lg"
+      sx={{ display: 'flex', justifyContent: 'space-between', m: 2, zIndex }}
+      variant={variant}
+    >
+      {renderChildren()}
+    </Panel>
   );
 }

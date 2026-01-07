@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Sidebar } from './Sidebar';
-import { SidebarItem, SidebarProps } from './Sidebar.types';
+import type { SidebarItem, SidebarProps } from './Sidebar.types';
 
 const variantOptions = ['tile', 'contained', 'outlined', 'ghost'];
 
@@ -24,7 +24,7 @@ const meta = {
   argTypes: {
     containerVariant: {
       control: 'radio',
-      options: ['default', 'panel'],
+      options: ['default', 'outlined', 'filled'],
     },
     variant: {
       control: 'select',
