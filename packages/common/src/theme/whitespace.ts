@@ -1,3 +1,5 @@
+// import { createSizePxConstants } from './theme.utils';
+
 export const WHITESPACE = {
   none: 0,
   xsm: 4,
@@ -6,6 +8,9 @@ export const WHITESPACE = {
   lg: 16,
   xlg: 20,
 } as const;
+
+// TODO: Revisit using this for sx props in web
+// export const WHITESPACE_PX = createSizePxConstants(WHITESPACE);
 
 export type WhitespaceSize = keyof typeof WHITESPACE;
 
