@@ -47,26 +47,6 @@ export const menuItemStyles = ({
     }
   };
 
-  const sizeStyles = getSizeStyles();
-
-  const baseStyles = css`
-    display: inline-flex;
-    align-items: center;
-    gap: ${sizeStyles.gap};
-    padding: ${sizeStyles.padding};
-    border-radius: ${WHITESPACE.sm}px;
-    cursor: ${disabled ? 'not-allowed' : 'pointer'};
-    transition: all 0.2s ease;
-    user-select: none;
-    min-height: ${sizeStyles.minHeight};
-    box-sizing: border-box;
-    /* Full width for vertical layouts (flex-direction: column) */
-    width: 100%;
-    /* When parent is flex-direction: row, items should fit content */
-    /* This is handled by parent containers using: & > * { width: auto; } */
-    /* Or by setting width: auto on individual items in horizontal layouts */
-  `;
-
   // Determine colors based on context
   const getTextColor = () => {
     if (contextColor) {
@@ -107,11 +87,32 @@ export const menuItemStyles = ({
     return COLORS.GRAY_300;
   };
 
+  const sizeStyles = getSizeStyles();
   const textColor = getTextColor();
   const selectedBgColor = getSelectedBackgroundColor();
   const containedBgColor = getContainedBackgroundColor();
   const containedTextColor = getContainedTextColor();
   const borderColor = getBorderColor();
+
+  const baseStyles = css`
+    align-items: center;
+    border-radius: ${WHITESPACE.sm}px;
+    box-sizing: border-box;
+    cursor: ${disabled ? 'not-allowed' : 'pointer'};
+    display: inline-flex;
+    flex: '0 0 auto';
+    gap: ${sizeStyles.gap};
+    min-height: ${sizeStyles.minHeight};
+    min-width: unset;
+    padding: ${sizeStyles.padding};
+    transition: all 0.2s ease;
+    user-select: none;
+    /* Full width for vertical layouts (flex-direction: column) */
+    width: 100%;
+    /* When parent is flex-direction: row, items should fit content */
+    /* This is handled by parent containers using: & > * { width: auto; } */
+    /* Or by setting width: auto on individual items in horizontal layouts */
+  `;
 
   const variantStyles = {
     tile: css`

@@ -186,10 +186,10 @@ export const VerticalMenu: Story = {
 export const HorizontalMenu: Story = {
   render: () => (
     <Box
+      display="inline-flex"
+      gap={1}
       sx={{
         backgroundColor: '#f5f5f5',
-        display: 'inline-flex',
-        gap: 1,
         padding: 2,
       }}
     >
