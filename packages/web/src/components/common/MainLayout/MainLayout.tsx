@@ -1,7 +1,7 @@
 'use client';
 
 import { Box } from '@mui/material';
-import { useAuthContext } from '@reva-frontend/common/client';
+import { COMPONENT_LAYERS, useAuthContext } from '@reva-frontend/common/client';
 import { usePathname, useRouter } from 'next/navigation';
 import { PortalHeaderBar } from '../PortalHeaderBar/PortalHeaderBar';
 import { Sidebar } from '../Sidebar/Sidebar';
@@ -12,7 +12,11 @@ const DRAWER_WIDTH = 240;
 // Routes that should not have the sidebar layout
 const AUTH_ROUTES = ['/sign-in', '/sign-up'];
 
-export function MainLayout({ children, sidebarMenuItems }: MainLayoutProps) {
+export function MainLayout({
+  children,
+  headerOnTop = false,
+  sidebarMenuItems,
+}: MainLayoutProps) {
   const { isAuthenticated } = useAuthContext();
   const pathname = usePathname();
   const router = useRouter();
@@ -31,12 +35,16 @@ export function MainLayout({ children, sidebarMenuItems }: MainLayoutProps) {
 
   return (
     <>
-      <PortalHeaderBar />
+      {headerOnTop && <PortalHeaderBar zIndex={COMPONENT_LAYERS.FLOATS + 1} />}
       <Box sx={{ display: 'flex' }}>
         <Sidebar
           menuItems={sidebarMenuItems}
-          selectedPath={pathname}
           onClick={handleSidebarClick}
+          selectedPath={pathname}
+          withToolbar={headerOnTop}
+          zIndex={
+            headerOnTop ? COMPONENT_LAYERS.FLOATS : COMPONENT_LAYERS.FLOATS + 1
+          }
         />
         <Box
           component="main"
@@ -45,6 +53,7 @@ export function MainLayout({ children, sidebarMenuItems }: MainLayoutProps) {
             width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
           }}
         >
+          {!headerOnTop && <PortalHeaderBar zIndex={COMPONENT_LAYERS.FLOATS} />}
           {children}
         </Box>
       </Box>

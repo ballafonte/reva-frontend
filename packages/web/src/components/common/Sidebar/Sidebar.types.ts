@@ -1,4 +1,5 @@
 import type { ContextType } from '@reva-frontend/common';
+import type { ReactNode } from 'react';
 import type { MenuItemProps } from '../Menu';
 
 export type SidebarItem = {
@@ -13,5 +14,8 @@ export type SidebarProps = {
   menuItems?: SidebarItem[];
   onClick?: (path: string) => void;
   selectedPath?: string;
+  title?: ReactNode;
   variant?: MenuItemProps['variant'];
+  withToolbar?: boolean;
+  zIndex?: number;
 };

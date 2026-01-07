@@ -34,11 +34,19 @@ const meta = {
   tags: ['autodocs'],
   args: {
     isAuthenticated: true,
+    headerOnTop: false,
   } as any,
   argTypes: {
     isAuthenticated: {
       control: 'boolean',
       description: 'Simulate authentication state',
+      table: {
+        category: 'Story Controls',
+      },
+    },
+    headerOnTop: {
+      control: 'boolean',
+      description: 'Show the header on top of the sidebar',
       table: {
         category: 'Story Controls',
       },
@@ -59,8 +67,11 @@ export default meta;
 type Story = StoryObj<typeof MainLayout>;
 
 export const Default: Story = {
-  render: () => (
-    <MainLayout sidebarMenuItems={defaultMenuItems}>
+  render: (args) => (
+    <MainLayout
+      headerOnTop={args.headerOnTop}
+      sidebarMenuItems={defaultMenuItems}
+    >
       <Box sx={{ p: 3, minHeight: 250 }}>
         <Typography variant="h4">Main Content</Typography>
         <Typography variant="body1">

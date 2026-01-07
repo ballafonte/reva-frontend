@@ -1,13 +1,18 @@
 'use client';
 
-import { AppBar, Toolbar, Typography } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { IconButton } from '@/components/ui/IconButton';
+import { COMPONENT_LAYERS, useAuthContext } from '@common/client';
 import { printConsole } from '@common/utils';
-import { useAuthContext } from '@reva-frontend/common/client';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { AppBar, Toolbar, Typography } from '@mui/material';
+import { IconButton } from '@/components/ui/IconButton';
 import { useRouter } from 'next/navigation';
+import { PortalHeaderBarProps } from './PortalHeaderBar.types';
 
-export function PortalHeaderBar() {
+export function PortalHeaderBar({
+  position = 'sticky',
+  title = process.env.NEXT_PUBLIC_SITE_NAME || 'REVA Portal',
+  zIndex = COMPONENT_LAYERS.FLOATS,
+}: PortalHeaderBarProps) {
   const { isAuthenticated, logout } = useAuthContext();
   const router = useRouter();
 
@@ -26,13 +31,11 @@ export function PortalHeaderBar() {
     }
   };
 
-  const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'REVA Portal';
-
   return (
-    <AppBar position="static" sx={{ mb: 3 }}>
+    <AppBar position={position} sx={{ mb: 3, zIndex }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          {siteName}
+          {title}
         </Typography>
         <IconButton
           aria-label="sign out"
