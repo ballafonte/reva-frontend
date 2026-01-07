@@ -4,14 +4,23 @@ import { theme } from '../src/theme/mui/theme';
 import '@/theme/fonts.css';
 import '@/theme/globals.css';
 
+const canvasStyles = `
+  .sb-show-main {
+    background-color: #E1E3EA !important;
+  }
+`;
+
 /** @type {import('@storybook/react').Preview} */
 const preview = {
   decorators: [
     (Story) => (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Story />
-      </ThemeProvider>
+      <>
+        <style>{canvasStyles}</style>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Story />
+        </ThemeProvider>
+      </>
     ),
   ],
   options: {
