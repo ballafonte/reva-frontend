@@ -39,7 +39,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <MainLayout sidebarMenuItems={menuItems}>{children}</MainLayout>
+          <MainLayout headerOnTop sidebarMenuItems={menuItems} variant="filled">
+            {children}
+          </MainLayout>
           <AlertsToast />
         </Providers>
       </body>
