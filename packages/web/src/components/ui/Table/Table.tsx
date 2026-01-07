@@ -79,21 +79,22 @@ export const Table = <T extends Record<string, any>>(props: TableProps<T>) => {
                     {column.sortable && (
                       <span
                         onClick={() => handleSort(column.id)}
-                        style={{ cursor: 'pointer' }}
+                        style={{
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
                       >
                         {sortBy === column.id ? (
                           sortDirection === 'asc' ? (
-                            <IconWrapper component={ExpandLess} size="xsm" />
+                            <IconWrapper component={ExpandLess} size={16} />
                           ) : sortDirection === 'desc' ? (
-                            <IconWrapper component={ExpandMore} size="xsm" />
+                            <IconWrapper component={ExpandMore} size={16} />
                           ) : (
-                            <IconWrapper
-                              component={UnfoldMoreIcon}
-                              size="xsm"
-                            />
+                            <IconWrapper component={UnfoldMoreIcon} size={16} />
                           )
                         ) : (
-                          <IconWrapper component={UnfoldMoreIcon} size="xsm" />
+                          <IconWrapper component={UnfoldMoreIcon} size={16} />
                         )}
                       </span>
                     )}

@@ -1,4 +1,4 @@
-import { CONTEXT_COLORS, type ContextType } from '@common/theme';
+import { CONTEXT_COLORS, WHITESPACE, type ContextType } from '@common/theme';
 import {
   Chip as MuiChip,
   ChipProps as MuiChipProps,
@@ -48,16 +48,16 @@ export const Chip = (props: ChipProps) => {
   const customLabel = (
     <Box
       component="span"
-      sx={{
-        display: 'inline-flex',
+      style={{
+        display: 'flex',
         alignItems: 'center',
-        gap: '4px',
+        gap: WHITESPACE.sm,
       }}
     >
       {prefix && (
         <Box
           component="span"
-          sx={{
+          style={{
             display: 'inline-flex',
             alignItems: 'center',
           }}
@@ -69,7 +69,7 @@ export const Chip = (props: ChipProps) => {
       {suffix && (
         <Box
           component="span"
-          sx={{
+          style={{
             display: 'inline-flex',
             alignItems: 'center',
           }}

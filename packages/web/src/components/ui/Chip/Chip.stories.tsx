@@ -23,14 +23,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const ChipPrefix = () => <IconWrapper component={InfoIcon} size="xsm" />;
+const ChipPrefix = () => <IconWrapper component={InfoIcon} size="sm" />;
 
 const ChipSuffix = () => (
   <IconButton
     onClick={fn()}
     component={CancelIcon}
     padding="none"
-    size="xsm"
+    size="sm"
     circular
   />
 );

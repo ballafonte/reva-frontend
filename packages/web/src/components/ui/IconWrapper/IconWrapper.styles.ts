@@ -1,13 +1,11 @@
 import { SIZE, Size } from '@common/theme';
-import { SxProps, Theme } from '@mui/material';
+import { CSSObject, SxProps, Theme } from '@mui/material';
 import { IconWrapperProps } from './IconWrapper.types';
 
 export const iconWrapperStyles = ({
   size = 'sm',
 }: Pick<IconWrapperProps, 'size'>): SxProps<Theme> => {
-  const baseStyles: SxProps<Theme> = {
-    display: 'inherit',
-  };
+  const baseStyles: CSSObject = {};
 
   if (typeof size === 'string' && size in SIZE) {
     // It's a SIZE token (e.g., 'md', 'sm', etc.)
