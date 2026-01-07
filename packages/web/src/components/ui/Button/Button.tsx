@@ -10,6 +10,7 @@ export const Button = (props: ButtonProps) => {
     children,
     disabled,
     onClick,
+    sx,
     ...rest
   } = props;
 
@@ -24,7 +25,7 @@ export const Button = (props: ButtonProps) => {
     muiVariant = variant;
   }
 
-  const styles = buttonStyles({ ...props, muiVariant });
+  const styles = buttonStyles({ ...props, muiVariant, sx });
 
   // Don't allow fullWidth for text variant (link-like buttons should be inline)
   const shouldUseFullWidth = variant === 'text' ? false : fullWidth;

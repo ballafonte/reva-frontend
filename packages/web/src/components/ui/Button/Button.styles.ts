@@ -8,6 +8,7 @@ export const buttonStyles = ({
   context,
   isLoading,
   muiVariant,
+  sx,
 }: ButtonProps & {
   muiVariant?: 'contained' | 'outlined' | 'text';
 }): SxProps<Theme> => {
@@ -52,6 +53,7 @@ export const buttonStyles = ({
 
   const baseStyles: SxProps<Theme> = {
     borderRadius: `${borderRadius}px`,
+    ...sx,
   };
 
   // Apply active state styles when loading
