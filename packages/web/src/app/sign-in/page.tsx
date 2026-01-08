@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { Container, Box, CircularProgress } from '@mui/material';
-import { SignInForm } from '@/components/common';
-import { authStore } from '@reva-frontend/common';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Box, Container } from '@mui/material';
+import { ActivityIndicator, SignInForm } from '@/components/common';
+import { authStore, SIZE } from '@reva-frontend/common';
 import { useAuthContext } from '@reva-frontend/common/client';
 
 export default function SignInPage() {
@@ -39,18 +39,15 @@ export default function SignInPage() {
   if (isLoading || isAuthenticated) {
     return (
       <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '50vh',
+        <ActivityIndicator
+          containerProps={{
+            sx: {
+              margin: 'auto',
+              minHeight: '100vh',
+            },
           }}
-        >
-          <CircularProgress />
-        </Box>
+          size={SIZE.xlg * 4}
+        />
       </Container>
     );
   }

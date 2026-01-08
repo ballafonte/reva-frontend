@@ -16,13 +16,18 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
-import { type User } from '@reva-frontend/common';
+import { SIZE, type User } from '@reva-frontend/common';
 import {
   useDisclosure,
   usePlatformAdminsQuery,
   useSearch,
 } from '@reva-frontend/common/client';
-import { AuthGuard, ConfirmDialog, SearchBar } from '@/components/common';
+import {
+  ActivityIndicator,
+  AuthGuard,
+  ConfirmDialog,
+  SearchBar,
+} from '@/components/common';
 
 export default function PlatformAdminsPage() {
   const searchParams = useSearchParams();
@@ -105,7 +110,21 @@ export default function PlatformAdminsPage() {
               autoApply={true}
             />
           </Box>
-          {isLoading && <Typography>Loading platform admins...</Typography>}
+          {isLoading && (
+            <ActivityIndicator
+              containerProps={{
+                sx: {
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  my: 5,
+                  maxWidth: '100%',
+                  width: '100%',
+                },
+              }}
+              size={SIZE.xlg * 4}
+            />
+          )}
           {error && (
             <Typography color="danger">
               Error loading platform admins:{' '}

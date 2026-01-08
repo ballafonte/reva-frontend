@@ -15,7 +15,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
-import { type Jurisdiction } from '@reva-frontend/common';
+import { SIZE, type Jurisdiction } from '@reva-frontend/common';
 import {
   useJurisdictionsQuery,
   useDeleteJurisdictionMutation,
@@ -24,8 +24,9 @@ import {
   useDisclosure,
 } from '@reva-frontend/common/client';
 import {
-  AuthGuard,
+  ActivityIndicator,
   AddJurisdictionDialog,
+  AuthGuard,
   ConfirmDialog,
   EditJurisdictionDialog,
   SearchBar,
@@ -162,7 +163,21 @@ export default function JurisdictionsPage() {
               autoApply={true}
             />
           </Box>
-          {isLoading && <Typography>Loading jurisdictions...</Typography>}
+          {isLoading && (
+            <ActivityIndicator
+              containerProps={{
+                sx: {
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  my: 5,
+                  maxWidth: '100%',
+                  width: '100%',
+                },
+              }}
+              size={SIZE.xlg * 4}
+            />
+          )}
           {error && (
             <Typography color="danger">
               Error loading jurisdictions:{' '}

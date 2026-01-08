@@ -16,7 +16,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
-import { type Organization } from '@reva-frontend/common';
+import { SIZE, type Organization } from '@reva-frontend/common';
 import {
   useDisclosure,
   useOrganizationsQuery,
@@ -25,6 +25,7 @@ import {
   useCreateOrganizationMutation,
 } from '@reva-frontend/common/client';
 import {
+  ActivityIndicator,
   AddOrganizationDialog,
   AuthGuard,
   ConfirmDialog,
@@ -192,7 +193,21 @@ export default function OrganizationsPage() {
               autoApply={true}
             />
           </Box>
-          {isLoading && <Typography>Loading organizations...</Typography>}
+          {isLoading && (
+            <ActivityIndicator
+              containerProps={{
+                sx: {
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  my: 5,
+                  maxWidth: '100%',
+                  width: '100%',
+                },
+              }}
+              size={SIZE.xlg * 4}
+            />
+          )}
           {error && (
             <Typography color="danger">
               Error loading organizations:{' '}
