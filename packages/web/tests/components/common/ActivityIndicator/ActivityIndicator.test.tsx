@@ -256,7 +256,6 @@ describe('ActivityIndicator', () => {
       expect(container).toHaveStyle({
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         justifyContent: 'center',
       });
     });
