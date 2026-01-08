@@ -3,7 +3,7 @@ import {
   DEFAULT_DELAY,
   useDebouncedCallback,
   useDebouncedValue,
-} from '@common/utils/hooks/useDebounce';
+} from '../../../src/utils/hooks/useDebounce';
 
 describe('useDebouncedValue', () => {
   beforeEach(() => {

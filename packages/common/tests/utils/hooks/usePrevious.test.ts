@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { usePrevious } from '@common/utils/hooks/usePrevious';
+import { usePrevious } from '../../../src/utils/hooks/usePrevious';
 
 describe('usePrevious', () => {
   it('should return undefined initially', () => {

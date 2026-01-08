@@ -1,4 +1,4 @@
-import { decrypt, encrypt } from '@common/utils/encryption';
+import { decrypt, encrypt } from '../../src/utils/encryption';
 
 describe('encryption', () => {
   const password = 'test-password-123';

@@ -1,4 +1,4 @@
-import { isNullish } from '@common/utils/typeGuards';
+import { isNullish } from '../../src/utils/typeGuards';
 
 describe('isNullish', () => {
   it('should return true for null', () => {

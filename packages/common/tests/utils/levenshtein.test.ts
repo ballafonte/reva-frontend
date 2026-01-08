@@ -2,7 +2,7 @@ import {
   getLevenshteinDistance,
   sortByFirstCharAndLevenshteinDistance,
   sortByLevenshteinDistance,
-} from '@common/utils/levenshtein';
+} from '../../src/utils/levenshtein';
 
 describe('getLevenshteinDistance', () => {
   it('should return 0 for identical strings', () => {

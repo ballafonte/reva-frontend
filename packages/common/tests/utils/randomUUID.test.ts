@@ -2,7 +2,7 @@ import {
   getRandomNumber,
   getRandomString,
   randomUUID,
-} from '@common/utils/randomUUID';
+} from '../../src/utils/randomUUID';
 
 describe('randomUUID', () => {
   it('should generate a valid UUID format', () => {

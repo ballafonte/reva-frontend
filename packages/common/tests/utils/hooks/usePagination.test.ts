@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
-import { usePagination } from '@common/utils/hooks/usePagination';
+import { usePagination } from '../../../src/utils/hooks/usePagination';
 
 describe('usePagination', () => {
   it('should throw error for itemsPerPage less than 1', () => {

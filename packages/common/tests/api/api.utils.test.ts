@@ -6,12 +6,12 @@ import {
   parseApiResponse,
   resetApiBaseUrl,
   setApiBaseUrl,
-} from '@common/api/api.utils';
-import * as authApi from '@common/api/auth.api';
+} from '../../src/api/api.utils';
+import * as authApi from '../../src/api/auth.api';
 
-// Mock @common/utils with authStore
-jest.mock('@common/utils', () => {
-  const actual = jest.requireActual('@common/utils');
+// Mock utils with authStore - mock the index file that api.utils.ts imports from
+jest.mock('../../src/utils/index', () => {
+  const actual = jest.requireActual('../../src/utils/index');
   return {
     ...actual,
     authStore: {
@@ -23,7 +23,7 @@ jest.mock('@common/utils', () => {
 });
 
 // Mock auth.api
-jest.mock('@common/api/auth.api', () => ({
+jest.mock('../../src/api/auth.api', () => ({
   refreshToken: jest.fn(),
 }));
 
@@ -141,7 +141,7 @@ describe('parseApiResponse', () => {
 });
 
 // Get the mocked authStore
-import { authStore } from '@common/utils';
+import { authStore } from '../../src/utils';
 
 describe('executeApiRequest', () => {
   beforeEach(() => {

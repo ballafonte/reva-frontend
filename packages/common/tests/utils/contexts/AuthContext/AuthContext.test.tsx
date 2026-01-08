@@ -1,14 +1,14 @@
 import React from 'react';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { AuthProvider } from '@common/utils/contexts/AuthContext/AuthProvider';
-import { useAuthContext } from '@common/utils/contexts/AuthContext/AuthContext';
-import * as authApi from '@common/api/auth.api';
-import { authStore } from '@common/utils/auth/authStore';
+import { AuthProvider } from '../../../../src/utils/contexts/AuthContext/AuthProvider';
+import { useAuthContext } from '../../../../src/utils/contexts/AuthContext/AuthContext';
+import * as authApi from '../../../../src/api/auth.api';
+import { authStore } from '../../../../src/utils/auth/authStore';
 
 // Mock auth API
-jest.mock('@common/api/auth.api');
-jest.mock('@common/utils/auth/authStore', () => ({
+jest.mock('../../../../src/api/auth.api');
+jest.mock('../../../../src/utils/auth/authStore', () => ({
   authStore: {
     getToken: jest.fn(),
     setToken: jest.fn(),
@@ -17,7 +17,7 @@ jest.mock('@common/utils/auth/authStore', () => ({
 }));
 
 // Mock console
-jest.mock('@common/utils/console', () => ({
+jest.mock('../../../../src/utils/console', () => ({
   printConsole: jest.fn(),
 }));
 

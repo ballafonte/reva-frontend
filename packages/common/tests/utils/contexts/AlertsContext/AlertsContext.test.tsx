@@ -1,12 +1,12 @@
 import React from 'react';
 import { act, renderHook, waitFor } from '@testing-library/react';
-import { AlertsProvider } from '@common/utils/contexts/AlertsContext/AlertsProvider';
-import { useAlertsContext } from '@common/utils/contexts/AlertsContext/AlertsContext';
-import { SeverityContexts } from '@common/theme/theme.types';
+import { AlertsProvider } from '../../../../src/utils/contexts/AlertsContext/AlertsProvider';
+import { useAlertsContext } from '../../../../src/utils/contexts/AlertsContext/AlertsContext';
+import { SeverityContexts } from '../../../../src/theme/theme.types';
 
-// Mock printConsole
-jest.mock('@common/utils', () => ({
-  ...jest.requireActual('@common/utils'),
+// Mock printConsole - path from test file location to console module
+jest.mock('../../../../src/utils/console', () => ({
+  ...jest.requireActual('../../../../src/utils/console'),
   printConsole: jest.fn(),
 }));
 
@@ -51,7 +51,7 @@ describe('AlertsContext', () => {
   });
 
   it('should not push alert without message', () => {
-    const { printConsole } = jest.requireMock('@common/utils');
+    const { printConsole } = jest.requireMock('../../../../src/utils/console');
     const { result } = renderHook(() => useAlertsContext(), { wrapper });
 
     act(() => {

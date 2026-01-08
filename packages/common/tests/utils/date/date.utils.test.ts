@@ -15,7 +15,7 @@ import {
   formatTime,
   getFromNowFormat,
   isLessThan24Hours,
-} from '@common/utils/date/date.utils';
+} from '../../../src/utils/date/date.utils';
 
 describe('ensureUtcString', () => {
   it('should append Z if no timezone info present', () => {

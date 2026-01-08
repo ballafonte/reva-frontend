@@ -1,4 +1,4 @@
-import { dfs } from '@common/utils/dfs';
+import { dfs } from '../../src/utils/dfs';
 
 describe('dfs', () => {
   interface TreeNode {

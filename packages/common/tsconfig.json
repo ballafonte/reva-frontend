@@ -7,11 +7,7 @@
     "declarationMap": true,
     "composite": true,
     "noEmit": false,
-    "baseUrl": ".",
-    "paths": {
-      "@common/*": ["src/*"],
-      "@tests/*": ["tests/*"]
-    }
+    "baseUrl": "."
   },
   "include": ["src/**/*", "tests/**/*"],
   "exclude": ["node_modules", "dist"]

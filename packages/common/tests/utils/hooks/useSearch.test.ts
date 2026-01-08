@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { useSearch } from '@common/utils/hooks/useSearch';
+import { useSearch } from '../../../src/utils/hooks/useSearch';
 
 describe('useSearch', () => {
   const items = [
