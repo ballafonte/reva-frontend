@@ -1,3 +1,4 @@
+export * from './ActivityIndicator/ActivityIndicator';
 export * from './AddJurisdictionDialog/AddJurisdictionDialog';
 export * from './AddOrganizationDialog/AddOrganizationDialog';
 export * from './AlertsToast/AlertsToast';
