@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SIZE } from '@reva-frontend/common/theme';
+import { Contexts, SIZE } from '@reva-frontend/common/theme';
 import { Box } from '@mui/material';
 import FolderIcon from '@mui/icons-material/Folder';
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
 import { IconWrapper } from './IconWrapper';
+
+const contextOptions = Object.values(Contexts);
 
 const sizeOptions = Object.keys(SIZE) as Array<keyof typeof SIZE>;
 
@@ -16,6 +18,10 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
+    context: {
+      control: 'radio',
+      options: contextOptions,
+    },
     size: {
       control: 'select',
       options: [...sizeOptions, 'custom'],
@@ -75,12 +81,12 @@ export const DifferentIcons: Story = {
   ),
 };
 
-export const WithColor: Story = {
+export const WithContext: Story = {
   render: () => (
     <Box sx={{ display: 'flex', gap: 2 }}>
-      <IconWrapper component={FolderIcon} color="primary" />
-      <IconWrapper component={SearchIcon} color="secondary" />
-      <IconWrapper component={HomeIcon} color="success" />
+      {contextOptions.map((context) => (
+        <IconWrapper key={context} component={HomeIcon} context={context} />
+      ))}
     </Box>
   ),
 };
