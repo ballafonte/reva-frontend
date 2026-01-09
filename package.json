@@ -10,7 +10,10 @@
     "type-check": "yarn workspaces run type-check",
     "lint": "yarn workspaces run lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "test:common": "cd packages/common && yarn test",
+    "test:web": "cd packages/web && yarn test",
+    "test": "yarn test:common && yarn test:web"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.0.0",
