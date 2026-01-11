@@ -1,6 +1,7 @@
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import BusinessIcon from '@mui/icons-material/Business';
+import PeopleIcon from '@mui/icons-material/People';
 import { AlertsToast, MainLayout } from '@/components/common';
 import type { MainLayoutProps } from '@/components/common/MainLayout/MainLayout.types';
 import { Providers } from './providers';
@@ -24,6 +25,11 @@ const menuItems: MainLayoutProps['sidebarMenuItems'] = [
     label: 'Organizations',
     path: '/organizations',
     icon: <BusinessIcon />,
+  },
+  {
+    label: 'Users',
+    path: '/users',
+    icon: <PeopleIcon />,
   },
   {
     label: 'Platform Admins',

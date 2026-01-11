@@ -15,3 +15,5 @@ export * from './Sidebar/Sidebar';
 export * from './SignInForm/SignInForm';
 export * from './SignUpForm/SignUpForm';
 export * from './Timeline';
+export * from './UserDetails/UserDetails';
+export * from './UsersList/UsersList';
