@@ -89,6 +89,12 @@ export default function Home() {
                   onClick={() => scrollToSection('pricing')}
                   variant="ghost"
                 />
+                <MenuItem
+                  context="primary"
+                  label="Sign In"
+                  onClick={() => router.push('/sign-in')}
+                  variant="ghost"
+                />
               </Box>
               <Button
                 variant="contained"
