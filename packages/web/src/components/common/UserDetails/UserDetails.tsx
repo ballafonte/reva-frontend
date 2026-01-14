@@ -19,7 +19,7 @@ export const UserDetails = ({ user }: UserDetailsProps) => {
   const { color, label } = useUserStatus(user.status);
 
   return (
-    <Paper sx={{ p: 3, mb: 3 }}>
+    <Paper sx={{ mb: 3 }}>
       <Typography variant="h6" gutterBottom>
         User Information
       </Typography>

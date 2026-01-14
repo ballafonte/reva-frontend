@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
-  Container,
   Typography,
   Box,
   List,
@@ -29,6 +28,7 @@ import {
   AuthGuard,
   ConfirmDialog,
   EditJurisdictionDialog,
+  PageContainer,
   SearchBar,
 } from '@/components/common';
 
@@ -139,12 +139,10 @@ export default function JurisdictionsPage() {
 
   return (
     <AuthGuard>
-      <Container maxWidth="md">
-        <Box sx={{ my: 4 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-            <Typography variant="h4" component="h1">
-              Jurisdictions
-            </Typography>
+      <PageContainer
+        headerProps={{
+          title: 'Jurisdictions',
+          suffix: (
             <IconButton
               aria-label="add jurisdiction"
               onClick={handleCreateClick}
@@ -153,103 +151,102 @@ export default function JurisdictionsPage() {
             >
               <AddIcon />
             </IconButton>
-          </Box>
-          <Box sx={{ mb: 3 }}>
-            <SearchBar
-              value={searchText || ''}
-              onChange={handleSearchChange}
-              placeholder="Search jurisdictions by name or abbreviation..."
-              label="Search Jurisdictions"
-              autoApply={true}
-            />
-          </Box>
-          {isLoading && (
-            <ActivityIndicator
-              containerProps={{
-                sx: {
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  my: 5,
-                  maxWidth: '100%',
-                  width: '100%',
-                },
-              }}
-              size={SIZE.xlg * 4}
-            />
-          )}
-          {error && (
-            <Typography color="danger">
-              Error loading jurisdictions:{' '}
-              {error instanceof Error ? error.message : 'Unknown error'}
-            </Typography>
-          )}
-          {jurisdictions && (
-            <List>
-              {jurisdictions.map((jurisdiction: Jurisdiction) => (
-                <ListItem key={jurisdiction.id || jurisdiction.name}>
-                  <ListItemText
-                    primary={jurisdiction.name || 'Unnamed Jurisdiction'}
-                    secondary={
-                      jurisdiction.nameAbbreviation || 'No abbreviation'
-                    }
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      edge="end"
-                      aria-label="edit"
-                      onClick={() => handleEditClick(jurisdiction)}
-                      sx={{ mr: 1 }}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() =>
-                        jurisdiction.id && handleDeleteClick(jurisdiction.id)
-                      }
-                      color="danger"
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
-          )}
+          ),
+        }}
+      >
+        <Box sx={{ mb: 1 }}>
+          <SearchBar
+            value={searchText || ''}
+            onChange={handleSearchChange}
+            placeholder="Search jurisdictions by name or abbreviation..."
+            label="Search Jurisdictions"
+            autoApply={true}
+          />
         </Box>
+        {isLoading && (
+          <ActivityIndicator
+            containerProps={{
+              sx: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                my: 5,
+                maxWidth: '100%',
+                width: '100%',
+              },
+            }}
+            size={SIZE.xlg * 4}
+          />
+        )}
+        {error && (
+          <Typography color="danger">
+            Error loading jurisdictions:{' '}
+            {error instanceof Error ? error.message : 'Unknown error'}
+          </Typography>
+        )}
+        {jurisdictions && (
+          <List>
+            {jurisdictions.map((jurisdiction: Jurisdiction) => (
+              <ListItem key={jurisdiction.id || jurisdiction.name}>
+                <ListItemText
+                  primary={jurisdiction.name || 'Unnamed Jurisdiction'}
+                  secondary={jurisdiction.nameAbbreviation || 'No abbreviation'}
+                />
+                <ListItemSecondaryAction>
+                  <IconButton
+                    edge="end"
+                    aria-label="edit"
+                    onClick={() => handleEditClick(jurisdiction)}
+                    sx={{ mr: 1 }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() =>
+                      jurisdiction.id && handleDeleteClick(jurisdiction.id)
+                    }
+                    color="danger"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </PageContainer>
 
-        <EditJurisdictionDialog
-          open={editDisclosure.open}
-          onClose={handleEditClose}
-          onSubmit={handleEditSubmit}
-          initialData={{
-            name: editingJurisdiction?.name || '',
-            nameAbbreviation: editingJurisdiction?.nameAbbreviation || '',
-          }}
-          isPending={updateMutation.isPending}
-        />
+      <EditJurisdictionDialog
+        open={editDisclosure.open}
+        onClose={handleEditClose}
+        onSubmit={handleEditSubmit}
+        initialData={{
+          name: editingJurisdiction?.name || '',
+          nameAbbreviation: editingJurisdiction?.nameAbbreviation || '',
+        }}
+        isPending={updateMutation.isPending}
+      />
 
-        <AddJurisdictionDialog
-          open={createDisclosure.open}
-          onClose={handleCreateClose}
-          onSubmit={handleCreateSubmit}
-          isPending={createMutation.isPending}
-        />
+      <AddJurisdictionDialog
+        open={createDisclosure.open}
+        onClose={handleCreateClose}
+        onSubmit={handleCreateSubmit}
+        isPending={createMutation.isPending}
+      />
 
-        <ConfirmDialog
-          open={deleteDisclosure.open}
-          onClose={handleDeleteClose}
-          onConfirm={handleDeleteConfirm}
-          title="Delete Jurisdiction"
-          message="Are you sure you want to delete this jurisdiction?"
-          confirmText="Delete"
-          cancelText="Cancel"
-          confirmColor="danger"
-          isPending={deleteMutation.isPending}
-        />
-      </Container>
+      <ConfirmDialog
+        open={deleteDisclosure.open}
+        onClose={handleDeleteClose}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Jurisdiction"
+        message="Are you sure you want to delete this jurisdiction?"
+        confirmText="Delete"
+        cancelText="Cancel"
+        confirmColor="danger"
+        isPending={deleteMutation.isPending}
+      />
     </AuthGuard>
   );
 }

@@ -9,6 +9,8 @@ export * from './EditJurisdictionDialog/EditJurisdictionDialog';
 export * from './EditOrganizationDialog/EditOrganizationDialog';
 export * from './MainLayout/MainLayout';
 export * from './Menu';
+export * from './Page/PageContainer';
+export * from './Page/PageHeader';
 export * from './PortalHeaderBar/PortalHeaderBar';
 export * from './SearchBar/SearchBar';
 export * from './Sidebar/Sidebar';

@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Container, Typography, Box } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import { SIZE, type User } from '@reva-frontend/common';
 import { useUsersQuery, useSearch } from '@reva-frontend/common/client';
 import {
@@ -9,6 +9,7 @@ import {
   AuthGuard,
   UsersList,
   SearchBar,
+  PageContainer,
 } from '@/components/common';
 
 export default function UsersPage() {
@@ -39,46 +40,41 @@ export default function UsersPage() {
 
   return (
     <AuthGuard>
-      <Container maxWidth="md">
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" sx={{ mb: 3 }}>
-            Users
-          </Typography>
-          <Box sx={{ mb: 3 }}>
-            <SearchBar
-              value={searchText || ''}
-              onChange={handleSearchChange}
-              placeholder="Search users by email or status..."
-              label="Search Users"
-              autoApply={true}
-            />
-          </Box>
-          {isLoading && (
-            <ActivityIndicator
-              containerProps={{
-                sx: {
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  my: 5,
-                  maxWidth: '100%',
-                  width: '100%',
-                },
-              }}
-              size={SIZE.xlg * 4}
-            />
-          )}
-          {error && (
-            <Typography color="error">
-              Error loading users:{' '}
-              {error instanceof Error ? error.message : 'Unknown error'}
-            </Typography>
-          )}
-          {filteredUsers && (
-            <UsersList users={filteredUsers} onUserClick={handleUserClick} />
-          )}
+      <PageContainer headerProps={{ title: 'Users' }}>
+        <Box sx={{ mb: 1 }}>
+          <SearchBar
+            value={searchText || ''}
+            onChange={handleSearchChange}
+            placeholder="Search users by email or status..."
+            label="Search Users"
+            autoApply={true}
+          />
         </Box>
-      </Container>
+        {isLoading && (
+          <ActivityIndicator
+            containerProps={{
+              sx: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                my: 5,
+                maxWidth: '100%',
+                width: '100%',
+              },
+            }}
+            size={SIZE.xlg * 4}
+          />
+        )}
+        {error && (
+          <Typography color="error">
+            Error loading users:{' '}
+            {error instanceof Error ? error.message : 'Unknown error'}
+          </Typography>
+        )}
+        {filteredUsers && (
+          <UsersList users={filteredUsers} onUserClick={handleUserClick} />
+        )}
+      </PageContainer>
     </AuthGuard>
   );
 }

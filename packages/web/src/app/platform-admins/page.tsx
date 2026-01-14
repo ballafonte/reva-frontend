@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
-  Container,
   Typography,
   Box,
   List,
@@ -26,6 +25,7 @@ import {
   ActivityIndicator,
   AuthGuard,
   ConfirmDialog,
+  PageContainer,
   SearchBar,
 } from '@/components/common';
 
@@ -86,12 +86,10 @@ export default function PlatformAdminsPage() {
 
   return (
     <AuthGuard>
-      <Container maxWidth="md">
-        <Box sx={{ my: 4 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-            <Typography variant="h4" component="h1">
-              Platform Admins
-            </Typography>
+      <PageContainer
+        headerProps={{
+          title: 'Platform Admins',
+          suffix: (
             <IconButton
               aria-label="add platform admin"
               onClick={handleCreateClick}
@@ -100,109 +98,110 @@ export default function PlatformAdminsPage() {
             >
               <AddIcon />
             </IconButton>
-          </Box>
-          <Box sx={{ mb: 3 }}>
-            <SearchBar
-              value={searchText || ''}
-              onChange={handleSearchChange}
-              placeholder="Search platform admins by email or status..."
-              label="Search Platform Admins"
-              autoApply={true}
-            />
-          </Box>
-          {isLoading && (
-            <ActivityIndicator
-              containerProps={{
-                sx: {
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  my: 5,
-                  maxWidth: '100%',
-                  width: '100%',
-                },
-              }}
-              size={SIZE.xlg * 4}
-            />
-          )}
-          {error && (
-            <Typography color="danger">
-              Error loading platform admins:{' '}
-              {error instanceof Error ? error.message : 'Unknown error'}
-            </Typography>
-          )}
-          {filteredPlatformAdmins && (
-            <List>
-              {filteredPlatformAdmins.map((admin: User) => (
-                <ListItem key={admin.id}>
-                  <ListItemText
-                    primary={admin.email || 'No email'}
-                    secondary={
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          gap: 1,
-                          alignItems: 'center',
-                          mt: 0.5,
-                        }}
-                      >
-                        <Chip
-                          label={admin.status || 'Unknown'}
-                          size="small"
-                          color={
-                            admin.status === 'ACTIVE'
-                              ? 'success'
-                              : admin.status === 'INACTIVE'
-                                ? 'default'
-                                : 'warning'
-                          }
-                        />
-                        {admin.platformAdminStatus?.isSuperAdmin && (
-                          <Chip
-                            label="Super Admin"
-                            size="small"
-                            color="primary"
-                          />
-                        )}
-                      </Box>
-                    }
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      edge="end"
-                      aria-label="edit"
-                      onClick={() => handleEditClick(admin)}
-                      sx={{ mr: 1 }}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() => admin.id && handleDeleteClick(admin.id)}
-                      color="danger"
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
-          )}
+          ),
+        }}
+      >
+        <Box sx={{ mb: 1 }}>
+          <SearchBar
+            value={searchText || ''}
+            onChange={handleSearchChange}
+            placeholder="Search platform admins by email or status..."
+            label="Search Platform Admins"
+            autoApply={true}
+          />
         </Box>
+        {isLoading && (
+          <ActivityIndicator
+            containerProps={{
+              sx: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                my: 5,
+                maxWidth: '100%',
+                width: '100%',
+              },
+            }}
+            size={SIZE.xlg * 4}
+          />
+        )}
+        {error && (
+          <Typography color="danger">
+            Error loading platform admins:{' '}
+            {error instanceof Error ? error.message : 'Unknown error'}
+          </Typography>
+        )}
+        {filteredPlatformAdmins && (
+          <List>
+            {filteredPlatformAdmins.map((admin: User) => (
+              <ListItem key={admin.id}>
+                <ListItemText
+                  primary={admin.email || 'No email'}
+                  secondary={
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        gap: 1,
+                        alignItems: 'center',
+                        mt: 0.5,
+                      }}
+                    >
+                      <Chip
+                        label={admin.status || 'Unknown'}
+                        size="small"
+                        color={
+                          admin.status === 'ACTIVE'
+                            ? 'success'
+                            : admin.status === 'INACTIVE'
+                              ? 'default'
+                              : 'warning'
+                        }
+                      />
+                      {admin.platformAdminStatus?.isSuperAdmin && (
+                        <Chip
+                          label="Super Admin"
+                          size="small"
+                          color="primary"
+                        />
+                      )}
+                    </Box>
+                  }
+                />
+                <ListItemSecondaryAction>
+                  <IconButton
+                    edge="end"
+                    aria-label="edit"
+                    onClick={() => handleEditClick(admin)}
+                    sx={{ mr: 1 }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => admin.id && handleDeleteClick(admin.id)}
+                    color="danger"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </PageContainer>
 
-        <ConfirmDialog
-          open={deleteDisclosure.open}
-          onClose={handleDeleteClose}
-          onConfirm={handleDeleteConfirm}
-          title="Delete Platform Admin"
-          message="Are you sure you want to delete this platform admin?"
-          confirmText="Delete"
-          cancelText="Cancel"
-          confirmColor="danger"
-          isPending={false}
-        />
-      </Container>
+      <ConfirmDialog
+        open={deleteDisclosure.open}
+        onClose={handleDeleteClose}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Platform Admin"
+        message="Are you sure you want to delete this platform admin?"
+        confirmText="Delete"
+        cancelText="Cancel"
+        confirmColor="danger"
+        isPending={false}
+      />
     </AuthGuard>
   );
 }

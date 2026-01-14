@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
-  Container,
   Typography,
   Box,
   List,
@@ -30,6 +29,7 @@ import {
   AuthGuard,
   ConfirmDialog,
   EditOrganizationDialog,
+  PageContainer,
   SearchBar,
 } from '@/components/common';
 
@@ -169,12 +169,10 @@ export default function OrganizationsPage() {
 
   return (
     <AuthGuard>
-      <Container maxWidth="md">
-        <Box sx={{ my: 4 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-            <Typography variant="h4" component="h1">
-              Organizations
-            </Typography>
+      <PageContainer
+        headerProps={{
+          title: 'Organizations',
+          suffix: (
             <IconButton
               aria-label="add organization"
               onClick={handleCreateClick}
@@ -183,117 +181,118 @@ export default function OrganizationsPage() {
             >
               <AddIcon />
             </IconButton>
-          </Box>
-          <Box sx={{ mb: 3 }}>
-            <SearchBar
-              value={searchText || ''}
-              onChange={handleSearchChange}
-              placeholder="Search organizations by name or status..."
-              label="Search Organizations"
-              autoApply={true}
-            />
-          </Box>
-          {isLoading && (
-            <ActivityIndicator
-              containerProps={{
-                sx: {
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  my: 5,
-                  maxWidth: '100%',
-                  width: '100%',
-                },
-              }}
-              size={SIZE.xlg * 4}
-            />
-          )}
-          {error && (
-            <Typography color="danger">
-              Error loading organizations:{' '}
-              {error instanceof Error ? error.message : 'Unknown error'}
-            </Typography>
-          )}
-          {organizations && (
-            <List>
-              {organizations.map((organization: Organization) => (
-                <ListItem key={organization.id}>
-                  <ListItemText
-                    primary={organization.name || 'No name'}
-                    secondary={
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          gap: 1,
-                          alignItems: 'center',
-                          mt: 0.5,
-                        }}
-                      >
-                        <Chip
-                          label={organization.status || 'Unknown'}
-                          size="small"
-                          color={getStatusColor(organization.status)}
-                        />
-                      </Box>
-                    }
-                    secondaryTypographyProps={{ component: 'div' }}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      edge="end"
-                      aria-label="edit"
-                      onClick={() => handleEditClick(organization)}
-                      sx={{ mr: 1 }}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() =>
-                        organization.id && handleDeleteClick(organization.id)
-                      }
-                      color="danger"
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
-          )}
+          ),
+        }}
+      >
+        <Box sx={{ mb: 1 }}>
+          <SearchBar
+            value={searchText || ''}
+            onChange={handleSearchChange}
+            placeholder="Search organizations by name or status..."
+            label="Search Organizations"
+            autoApply={true}
+          />
         </Box>
+        {isLoading && (
+          <ActivityIndicator
+            containerProps={{
+              sx: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                my: 5,
+                maxWidth: '100%',
+                width: '100%',
+              },
+            }}
+            size={SIZE.xlg * 4}
+          />
+        )}
+        {error && (
+          <Typography color="danger">
+            Error loading organizations:{' '}
+            {error instanceof Error ? error.message : 'Unknown error'}
+          </Typography>
+        )}
+        {organizations && (
+          <List>
+            {organizations.map((organization: Organization) => (
+              <ListItem key={organization.id}>
+                <ListItemText
+                  primary={organization.name || 'No name'}
+                  secondary={
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        gap: 1,
+                        alignItems: 'center',
+                        mt: 0.5,
+                      }}
+                    >
+                      <Chip
+                        label={organization.status || 'Unknown'}
+                        size="small"
+                        color={getStatusColor(organization.status)}
+                      />
+                    </Box>
+                  }
+                  secondaryTypographyProps={{ component: 'div' }}
+                />
+                <ListItemSecondaryAction>
+                  <IconButton
+                    edge="end"
+                    aria-label="edit"
+                    onClick={() => handleEditClick(organization)}
+                    sx={{ mr: 1 }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() =>
+                      organization.id && handleDeleteClick(organization.id)
+                    }
+                    color="danger"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </PageContainer>
 
-        <EditOrganizationDialog
-          open={editDisclosure.open}
-          onClose={handleEditClose}
-          onSubmit={handleEditSubmit}
-          initialData={{
-            name: editingOrganization?.name || '',
-            status: editingOrganization?.status,
-          }}
-          isPending={updateMutation.isPending}
-        />
+      <EditOrganizationDialog
+        open={editDisclosure.open}
+        onClose={handleEditClose}
+        onSubmit={handleEditSubmit}
+        initialData={{
+          name: editingOrganization?.name || '',
+          status: editingOrganization?.status,
+        }}
+        isPending={updateMutation.isPending}
+      />
 
-        <AddOrganizationDialog
-          open={createDisclosure.open}
-          onClose={handleCreateClose}
-          onSubmit={handleCreateSubmit}
-          isPending={createMutation.isPending}
-        />
+      <AddOrganizationDialog
+        open={createDisclosure.open}
+        onClose={handleCreateClose}
+        onSubmit={handleCreateSubmit}
+        isPending={createMutation.isPending}
+      />
 
-        <ConfirmDialog
-          open={deleteDisclosure.open}
-          onClose={handleDeleteClose}
-          onConfirm={handleDeleteConfirm}
-          title="Delete Organization"
-          message="Are you sure you want to delete this organization?"
-          confirmText="Delete"
-          cancelText="Cancel"
-          confirmColor="danger"
-          isPending={deleteMutation.isPending}
-        />
-      </Container>
+      <ConfirmDialog
+        open={deleteDisclosure.open}
+        onClose={handleDeleteClose}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Organization"
+        message="Are you sure you want to delete this organization?"
+        confirmText="Delete"
+        cancelText="Cancel"
+        confirmColor="danger"
+        isPending={deleteMutation.isPending}
+      />
     </AuthGuard>
   );
 }
