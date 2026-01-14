@@ -263,7 +263,12 @@ export const callApi = async <T = void, U = void, V = never>(
       if (!refreshInFlight) {
         refreshInFlight = refreshToken()
           .catch((error) => {
-            // If refresh fails, clear auth state
+            // If refresh fails, set flag for inactivity sign-out modal
+            // This happens when refresh token expires due to inactivity
+            if (typeof sessionStorage !== 'undefined') {
+              sessionStorage.setItem('inactivitySignOut', 'true');
+            }
+            // Clear auth state
             authStore.clear();
             throw error;
           })
@@ -289,7 +294,12 @@ export const callApi = async <T = void, U = void, V = never>(
         );
         return formattedResponse;
       } catch (refreshError) {
-        // Refresh failed, clear auth and throw
+        // Refresh failed, set flag for inactivity sign-out modal
+        // This happens when refresh token expires due to inactivity
+        if (typeof sessionStorage !== 'undefined') {
+          sessionStorage.setItem('inactivitySignOut', 'true');
+        }
+        // Clear auth and throw
         authStore.clear();
         throw await handleApiError(refreshError, { endpoint, init }, failureCb);
       }

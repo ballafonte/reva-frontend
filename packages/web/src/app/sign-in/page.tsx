@@ -1,9 +1,13 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Box, Container } from '@mui/material';
-import { ActivityIndicator, SignInForm } from '@/components/common';
+import {
+  ActivityIndicator,
+  InactivitySignOutDialog,
+  SignInForm,
+} from '@/components/common';
 import { authStore, SIZE } from '@reva-frontend/common';
 import { useAuthContext } from '@reva-frontend/common/client';
 
@@ -13,6 +17,19 @@ export default function SignInPage() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const hasRedirected = useRef(false);
+  const [showInactivityModal, setShowInactivityModal] = useState(false);
+
+  // Check for inactivity sign-out flag and show modal
+  useEffect(() => {
+    if (typeof sessionStorage !== 'undefined') {
+      const inactivitySignOut = sessionStorage.getItem('inactivitySignOut');
+      if (inactivitySignOut === 'true') {
+        setShowInactivityModal(true);
+        // Clear the flag after showing modal
+        sessionStorage.removeItem('inactivitySignOut');
+      }
+    }
+  }, []);
 
   // Redirect authenticated users away from sign-in page
   useEffect(() => {
@@ -53,17 +70,23 @@ export default function SignInPage() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          minHeight: '100vh',
-        }}
-      >
-        <SignInForm />
-      </Box>
-    </Container>
+    <>
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            minHeight: '100vh',
+          }}
+        >
+          <SignInForm />
+        </Box>
+      </Container>
+      <InactivitySignOutDialog
+        open={showInactivityModal}
+        onClose={() => setShowInactivityModal(false)}
+      />
+    </>
   );
 }

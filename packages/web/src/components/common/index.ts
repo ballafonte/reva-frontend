@@ -7,6 +7,7 @@ export * from './Breadcrumbs/Breadcrumbs';
 export * from './ConfirmDialog/ConfirmDialog';
 export * from './EditJurisdictionDialog/EditJurisdictionDialog';
 export * from './EditOrganizationDialog/EditOrganizationDialog';
+export * from './InactivitySignOutDialog/InactivitySignOutDialog';
 export * from './MainLayout/MainLayout';
 export * from './Menu';
 export * from './Page/PageContainer';
