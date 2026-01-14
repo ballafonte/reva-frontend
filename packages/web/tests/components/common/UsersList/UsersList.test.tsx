@@ -68,10 +68,27 @@ describe('UsersList', () => {
   it('should call onUserClick when a user is clicked', () => {
     render(<UsersList users={mockUsers} onUserClick={mockOnUserClick} />);
 
-    const user1Item = screen.getByText('user1@example.com').closest('li');
-    expect(user1Item).toBeInTheDocument();
+    const user1Text = screen.getByText('user1@example.com');
+    // Material-UI ListItem with button prop renders as a clickable div/span
+    // Navigate up the DOM tree to find the clickable parent
+    let clickableElement: HTMLElement | null = user1Text.parentElement;
+    while (
+      clickableElement &&
+      !clickableElement.onclick &&
+      clickableElement.parentElement
+    ) {
+      clickableElement = clickableElement.parentElement;
+    }
+    // If we didn't find an element with onclick, the ListItem itself should be clickable
+    // Find the parent that has a role="button" or is a direct child of the List
+    if (!clickableElement?.onclick) {
+      clickableElement = user1Text.closest(
+        '[class*="MuiListItem"]'
+      ) as HTMLElement;
+    }
+    expect(clickableElement).toBeInTheDocument();
 
-    fireEvent.click(user1Item!);
+    fireEvent.click(clickableElement!);
 
     expect(mockOnUserClick).toHaveBeenCalledTimes(1);
     expect(mockOnUserClick).toHaveBeenCalledWith('user-1');
