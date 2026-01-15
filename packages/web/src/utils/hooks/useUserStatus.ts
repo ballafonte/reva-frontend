@@ -14,9 +14,7 @@ interface UseUserStatusResult {
  * @param status The user status string
  * @returns Object with color and formatted label
  */
-export const useUserStatus = (
-  status?: string | null
-): UseUserStatusResult => {
+export const useUserStatus = (status?: string | null): UseUserStatusResult => {
   return useMemo(() => {
     const normalizedStatus = status?.toUpperCase() as UserStatus | undefined;
 

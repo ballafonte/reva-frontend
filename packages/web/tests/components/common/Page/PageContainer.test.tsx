@@ -53,12 +53,14 @@ describe('PageContainer', () => {
 
   it('should render header with suffix when provided', () => {
     const suffix = (
-      <IconButton aria-label="add item" component={AddIcon} onClick={() => {}} />
+      <IconButton
+        aria-label="add item"
+        component={AddIcon}
+        onClick={() => {}}
+      />
     );
     render(
-      <PageContainer
-        headerProps={{ title: 'Test Page', suffix }}
-      >
+      <PageContainer headerProps={{ title: 'Test Page', suffix }}>
         <div>Page Content</div>
       </PageContainer>
     );
@@ -103,12 +105,14 @@ describe('PageContainer', () => {
 
   it('should render complete page structure with header and content', () => {
     const suffix = (
-      <IconButton aria-label="add item" component={AddIcon} onClick={() => {}} />
+      <IconButton
+        aria-label="add item"
+        component={AddIcon}
+        onClick={() => {}}
+      />
     );
     render(
-      <PageContainer
-        headerProps={{ title: 'Users', suffix }}
-      >
+      <PageContainer headerProps={{ title: 'Users', suffix }}>
         <div>User list content</div>
       </PageContainer>
     );

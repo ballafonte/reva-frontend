@@ -156,9 +156,7 @@ describe('users.api', () => {
         new Error(errorMessage)
       );
 
-      await expect(revokeSession({ sessionId })).rejects.toThrow(
-        errorMessage
-      );
+      await expect(revokeSession({ sessionId })).rejects.toThrow(errorMessage);
     });
   });
 

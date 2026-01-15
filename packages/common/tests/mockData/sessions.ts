@@ -12,7 +12,8 @@ export const session1 = {
 export const session2 = {
   id: 'session-2-uuid-1234-5678-90cd',
   ipAddress: '192.168.1.101',
-  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+  userAgent:
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
   lastActivity: '2025-01-15T11:00:00.000Z',
   createdAt: '2025-01-14T09:00:00.000Z',
   isCurrent: false,

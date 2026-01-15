@@ -1,6 +1,5 @@
 import {
   COLORS,
-  ContextType,
   SIZE,
   Size,
   WHITESPACE,

@@ -4,7 +4,6 @@ import {
   getUsers,
   getUserSessions,
   getUserById,
-  type GetUserByIdParams,
 } from '../../api';
 import type { User, Session } from '../../types';
 import { QueryConfig } from './queries.types';
@@ -35,9 +34,7 @@ export const useUsersQuery = (queryConfig?: QueryConfig<User[]>) => {
 /**
  * Query hook for fetching all active sessions for the authenticated user
  */
-export const useUserSessionsQuery = (
-  queryConfig?: QueryConfig<Session[]>
-) => {
+export const useUserSessionsQuery = (queryConfig?: QueryConfig<Session[]>) => {
   return useQuery<Session[]>({
     ...queryConfig,
     queryKey: ['userSessions'],

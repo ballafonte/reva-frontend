@@ -174,7 +174,7 @@ describe('users.queries', () => {
       });
 
       expect(result.current.data).toEqual(user);
-      expect(usersApi.getUserById).toHaveBeenCalledWith({ id: userId });
+      expect(usersApi.getUserById).toHaveBeenCalledWith({ userId });
     });
 
     it('should not fetch when id is not provided', () => {

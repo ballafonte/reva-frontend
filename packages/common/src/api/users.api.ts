@@ -117,8 +117,6 @@ export const getUsers = async (): Promise<GetUsersResponse> => {
   );
 };
 
-type Session = components['schemas']['Session'];
-
 export type GetUserSessionsResponse =
   paths['/users/sessions']['get']['responses']['200']['content']['application/json'];
 

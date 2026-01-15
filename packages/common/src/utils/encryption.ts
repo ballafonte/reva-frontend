@@ -47,6 +47,13 @@ export const decrypt = (transitmessage: string, password: string): string => {
     mode: CryptoJS.mode.CBC,
     hasher: CryptoJS.algo.SHA256,
   });
-  const message = decrypted.toString(CryptoJS.enc.Utf8);
-  return message;
+
+  try {
+    const message = decrypted.toString(CryptoJS.enc.Utf8);
+    // If decryption failed (wrong password), toString returns empty string
+    return message;
+  } catch (error) {
+    // Handle malformed UTF-8 data when wrong password is used
+    return '';
+  }
 };

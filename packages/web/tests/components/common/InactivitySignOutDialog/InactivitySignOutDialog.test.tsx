@@ -62,7 +62,7 @@ describe('InactivitySignOutDialog', () => {
     // Since simulating the exact MUI backdrop click behavior is complex in unit tests,
     // we'll verify that the component's handler correctly processes the backdropClick reason
     // by directly accessing the Dialog component and calling its onClose handler
-    
+
     const dialog = screen.getByRole('dialog');
     expect(dialog).toBeInTheDocument();
 
@@ -76,12 +76,12 @@ describe('InactivitySignOutDialog', () => {
     // We can test this by finding the Dialog element and triggering its onClose
     // Since we can't easily access the Dialog's internal props, we'll test the behavior
     // by verifying the component structure and that it accepts the correct signature
-    
+
     // For a proper test, we verify that clicking outside triggers close
     // MUI Dialog's backdrop is the presentation container's backdrop element
     // Let's try to find and click it
     const backdrop = presentation?.querySelector('.MuiBackdrop-root');
-    
+
     if (backdrop) {
       fireEvent.click(backdrop);
       expect(mockOnClose).toHaveBeenCalledTimes(1);

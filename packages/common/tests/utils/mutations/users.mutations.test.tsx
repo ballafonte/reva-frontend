@@ -43,12 +43,9 @@ describe('users.mutations', () => {
       );
 
       const { Wrapper, queryClient } = createWrapper();
-      const { result } = renderHook(
-        () => useRevokeAllOtherSessionsMutation(),
-        {
-          wrapper: Wrapper,
-        }
-      );
+      const { result } = renderHook(() => useRevokeAllOtherSessionsMutation(), {
+        wrapper: Wrapper,
+      });
 
       result.current.mutate();
 
@@ -69,12 +66,9 @@ describe('users.mutations', () => {
       // Pre-populate the cache
       queryClient.setQueryData(['userSessions'], []);
 
-      const { result } = renderHook(
-        () => useRevokeAllOtherSessionsMutation(),
-        {
-          wrapper: Wrapper,
-        }
-      );
+      const { result } = renderHook(() => useRevokeAllOtherSessionsMutation(), {
+        wrapper: Wrapper,
+      });
 
       result.current.mutate();
 
@@ -94,12 +88,9 @@ describe('users.mutations', () => {
       );
 
       const { Wrapper } = createWrapper();
-      const { result } = renderHook(
-        () => useRevokeAllOtherSessionsMutation(),
-        {
-          wrapper: Wrapper,
-        }
-      );
+      const { result } = renderHook(() => useRevokeAllOtherSessionsMutation(), {
+        wrapper: Wrapper,
+      });
 
       result.current.mutate();
 

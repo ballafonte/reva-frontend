@@ -8,7 +8,9 @@ import SignInPage from '@/app/sign-in/page';
 
 // Mock next/navigation - using the same pattern as other tests
 jest.mock('next/navigation', () => {
-  const actual = jest.requireActual('@/components/common/__mocks__/next-navigation');
+  const actual = jest.requireActual(
+    '@/components/common/__mocks__/next-navigation'
+  );
   return {
     ...actual,
     usePathname: () => '/sign-in',

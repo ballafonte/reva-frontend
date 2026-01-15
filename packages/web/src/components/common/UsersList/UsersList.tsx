@@ -11,11 +11,7 @@ export const UsersList = ({ users, onUserClick }: UsersListProps) => {
   return (
     <List>
       {users.map((user: User) => (
-        <UserListItem
-          key={user.id}
-          user={user}
-          onUserClick={onUserClick}
-        />
+        <UserListItem key={user.id} user={user} onUserClick={onUserClick} />
       ))}
     </List>
   );

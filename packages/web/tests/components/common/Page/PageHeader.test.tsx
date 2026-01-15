@@ -32,7 +32,11 @@ describe('PageHeader', () => {
 
   it('should render suffix when provided', () => {
     const suffix = (
-      <IconButton aria-label="add item" component={AddIcon} onClick={() => {}} />
+      <IconButton
+        aria-label="add item"
+        component={AddIcon}
+        onClick={() => {}}
+      />
     );
     render(<PageHeader title="Test Page" suffix={suffix} />);
 
@@ -42,7 +46,11 @@ describe('PageHeader', () => {
   it('should render both back button and suffix', () => {
     const handleBackClick = jest.fn();
     const suffix = (
-      <IconButton aria-label="add item" component={AddIcon} onClick={() => {}} />
+      <IconButton
+        aria-label="add item"
+        component={AddIcon}
+        onClick={() => {}}
+      />
     );
     render(
       <PageHeader
